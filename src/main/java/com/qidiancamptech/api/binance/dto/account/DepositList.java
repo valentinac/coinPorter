@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
+
 public final class DepositList extends WapiResponse<List<BinanceDeposit>> {
 
   private final BinanceDeposit[] depositList;
@@ -17,6 +18,7 @@ public final class DepositList extends WapiResponse<List<BinanceDeposit>> {
     super(success, msg);
     this.depositList = depositList;
   }
+
 
   @Override
   public List<BinanceDeposit> getData() {
