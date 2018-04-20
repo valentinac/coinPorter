@@ -1,6 +1,6 @@
 package com.qidiancamptech.api.gate;
 
-import org.knowm.xchange.gateio.dto.marketdata.*;
+
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
