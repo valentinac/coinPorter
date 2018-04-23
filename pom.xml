@@ -8,7 +8,9 @@
     <modules>
         <module>core</module>
         <module>exchange-api</module>
+        <module>members</module>
         <module>porter</module>
+        <module>admin</module>
     </modules>
     <name>coinPorter</name>
     <url>http://maven.apache.org</url>
