@@ -18,7 +18,6 @@ import com.qcloud.cos.ClientConfig;
 import com.qcloud.cos.request.UploadFileRequest;
 import com.qcloud.cos.sign.Credentials;
 import com.qidiancamp.common.exception.RRException;
-
 import java.io.IOException;
 import java.io.InputStream;
 import net.sf.json.JSONObject;

@@ -19,7 +19,6 @@ import com.qiniu.http.Response;
 import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
-
 import java.io.IOException;
 import java.io.InputStream;
 import org.apache.commons.io.IOUtils;

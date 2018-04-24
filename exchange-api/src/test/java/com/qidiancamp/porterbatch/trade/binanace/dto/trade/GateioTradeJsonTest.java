@@ -1,17 +1,16 @@
 package com.qidiancamp.porterbatch.trade.binanace.dto.trade;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.assertj.core.api.Assertions;
-import org.junit.Test;
-import org.knowm.xchange.currency.CurrencyPair;
-import org.knowm.xchange.gateio.dto.GateioOrderType;
+import static org.assertj.core.api.Assertions.assertThat;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.assertj.core.api.Assertions;
+import org.junit.Test;
+import org.knowm.xchange.currency.CurrencyPair;
+import org.knowm.xchange.gateio.dto.GateioOrderType;
 
 public class GateioTradeJsonTest {
 
@@ -19,7 +18,8 @@ public class GateioTradeJsonTest {
   public void testDeserializeOrderList() throws IOException {
 
     // Read in the JSON from the example resources
-    InputStream is = GateioTradeJsonTest.class.getResourceAsStream("/trade/example-order-list-data.json");
+    InputStream is =
+        GateioTradeJsonTest.class.getResourceAsStream("/trade/example-order-list-data.json");
 
     // Use Jackson to parse it
     ObjectMapper mapper = new ObjectMapper();
@@ -42,7 +42,8 @@ public class GateioTradeJsonTest {
   public void testDeserializeOrderResult() throws IOException {
 
     // Read in the JSON from the example resources
-    InputStream is = GateioTradeJsonTest.class.getResourceAsStream("/trade/example-order-result-data.json");
+    InputStream is =
+        GateioTradeJsonTest.class.getResourceAsStream("/trade/example-order-result-data.json");
 
     // Use Jackson to parse it
     ObjectMapper mapper = new ObjectMapper();
@@ -57,7 +58,8 @@ public class GateioTradeJsonTest {
   public void testDeserializeOrderStatus() throws IOException {
 
     // Read in the JSON from the example resources
-    InputStream is = GateioTradeJsonTest.class.getResourceAsStream("/trade/example-order-status-data.json");
+    InputStream is =
+        GateioTradeJsonTest.class.getResourceAsStream("/trade/example-order-status-data.json");
 
     // Use Jackson to parse it
     ObjectMapper mapper = new ObjectMapper();

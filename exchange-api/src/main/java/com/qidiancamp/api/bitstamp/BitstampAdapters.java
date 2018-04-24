@@ -1,5 +1,13 @@
 package com.qidiancamp.api.bitstamp;
 
+import static java.math.BigDecimal.ZERO;
+
+import java.math.BigDecimal;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import org.knowm.xchange.bitstamp.dto.account.BitstampBalance;
 import org.knowm.xchange.bitstamp.dto.marketdata.BitstampOrderBook;
 import org.knowm.xchange.bitstamp.dto.marketdata.BitstampTicker;
@@ -24,26 +32,11 @@ import org.knowm.xchange.dto.trade.UserTrades;
 import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.utils.DateUtils;
 
-import java.math.BigDecimal;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import static java.math.BigDecimal.ZERO;
-
-/**
- * Various adapters for converting from Bitstamp DTOs to XChange DTOs
- */
+/** Various adapters for converting from Bitstamp DTOs to XChange DTOs */
 public final class BitstampAdapters {
 
-  /**
-   * private Constructor
-   */
-  private BitstampAdapters() {
-
-  }
+  /** private Constructor */
+  private BitstampAdapters() {}
 
   /**
    * Adapts a BitstampBalance to an AccountInfo
@@ -56,9 +49,18 @@ public final class BitstampAdapters {
 
     // Adapt to XChange DTOs
     List<Balance> balances = new ArrayList<>();
-    for (org.knowm.xchange.bitstamp.dto.account.BitstampBalance.Balance b : bitstampBalance.getBalances()) {
-      Balance xchangeBalance = new Balance(new Currency(b.getCurrency().toUpperCase()), b.getBalance(), b.getAvailable(),
-          b.getReserved(), ZERO, ZERO, b.getBalance().subtract(b.getAvailable()).subtract(b.getReserved()), ZERO);
+    for (org.knowm.xchange.bitstamp.dto.account.BitstampBalance.Balance b :
+        bitstampBalance.getBalances()) {
+      Balance xchangeBalance =
+          new Balance(
+              new Currency(b.getCurrency().toUpperCase()),
+              b.getBalance(),
+              b.getAvailable(),
+              b.getReserved(),
+              ZERO,
+              ZERO,
+              b.getBalance().subtract(b.getAvailable()).subtract(b.getReserved()),
+              ZERO);
       balances.add(xchangeBalance);
     }
     return new AccountInfo(userName, bitstampBalance.getFee(), new Wallet(balances));
@@ -71,25 +73,32 @@ public final class BitstampAdapters {
    * @param timeScale polled order books provide a timestamp in seconds, stream in ms
    * @return The XChange OrderBook
    */
-  public static OrderBook adaptOrderBook(BitstampOrderBook bitstampOrderBook, CurrencyPair currencyPair) {
-    List<LimitOrder> asks = createOrders(currencyPair, Order.OrderType.ASK, bitstampOrderBook.getAsks());
-    List<LimitOrder> bids = createOrders(currencyPair, Order.OrderType.BID, bitstampOrderBook.getBids());
+  public static OrderBook adaptOrderBook(
+      BitstampOrderBook bitstampOrderBook, CurrencyPair currencyPair) {
+    List<LimitOrder> asks =
+        createOrders(currencyPair, Order.OrderType.ASK, bitstampOrderBook.getAsks());
+    List<LimitOrder> bids =
+        createOrders(currencyPair, Order.OrderType.BID, bitstampOrderBook.getBids());
     return new OrderBook(bitstampOrderBook.getTimestamp(), asks, bids);
   }
 
-  public static List<LimitOrder> createOrders(CurrencyPair currencyPair, Order.OrderType orderType, List<List<BigDecimal>> orders) {
+  public static List<LimitOrder> createOrders(
+      CurrencyPair currencyPair, Order.OrderType orderType, List<List<BigDecimal>> orders) {
 
     List<LimitOrder> limitOrders = new ArrayList<>();
     for (List<BigDecimal> ask : orders) {
-      checkArgument(ask.size() == 2, "Expected a pair (price, amount) but got {0} elements.", ask.size());
+      checkArgument(
+          ask.size() == 2, "Expected a pair (price, amount) but got {0} elements.", ask.size());
       limitOrders.add(createOrder(currencyPair, ask, orderType));
     }
     return limitOrders;
   }
 
-  public static LimitOrder createOrder(CurrencyPair currencyPair, List<BigDecimal> priceAndAmount, Order.OrderType orderType) {
+  public static LimitOrder createOrder(
+      CurrencyPair currencyPair, List<BigDecimal> priceAndAmount, Order.OrderType orderType) {
 
-    return new LimitOrder(orderType, priceAndAmount.get(1), currencyPair, "", null, priceAndAmount.get(0));
+    return new LimitOrder(
+        orderType, priceAndAmount.get(1), currencyPair, "", null, priceAndAmount.get(0));
   }
 
   public static void checkArgument(boolean argument, String msgPattern, Object... msgArgs) {
@@ -133,7 +142,10 @@ public final class BitstampAdapters {
 
     OrderType orderType = tx.getType() == 0 ? OrderType.BID : OrderType.ASK;
     final String tradeId = String.valueOf(tx.getTid());
-    Date date = DateUtils.fromMillisUtc(tx.getDate() * timeScale);// polled order books provide a timestamp in seconds, stream in ms
+    Date date =
+        DateUtils.fromMillisUtc(
+            tx.getDate()
+                * timeScale); // polled order books provide a timestamp in seconds, stream in ms
     return new Trade(orderType, tx.getAmount(), currencyPair, tx.getPrice(), date, tradeId);
   }
 
@@ -155,9 +167,17 @@ public final class BitstampAdapters {
     BigDecimal volume = bitstampTicker.getVolume();
     Date timestamp = new Date(bitstampTicker.getTimestamp() * 1000L);
 
-    return new Ticker.Builder().currencyPair(currencyPair).last(last).bid(bid).ask(ask).high(high).low(low).vwap(vwap).volume(volume)
-        .timestamp(timestamp).build();
-
+    return new Ticker.Builder()
+        .currencyPair(currencyPair)
+        .last(last)
+        .bid(bid)
+        .ask(ask)
+        .high(high)
+        .low(low)
+        .vwap(vwap)
+        .volume(volume)
+        .timestamp(timestamp)
+        .build();
   }
 
   /**
@@ -171,7 +191,10 @@ public final class BitstampAdapters {
     List<UserTrade> trades = new ArrayList<>();
     long lastTradeId = 0;
     for (BitstampUserTransaction t : bitstampUserTransactions) {
-      if (!t.getType().equals(BitstampUserTransaction.TransactionType.trade)) { // skip account deposits and withdrawals.
+      if (!t.getType()
+          .equals(
+              BitstampUserTransaction.TransactionType
+                  .trade)) { // skip account deposits and withdrawals.
         continue;
       }
       final OrderType orderType;
@@ -185,32 +208,56 @@ public final class BitstampAdapters {
       if (tradeId > lastTradeId) {
         lastTradeId = tradeId;
       }
-      final CurrencyPair pair = new CurrencyPair(t.getBaseCurrency().toUpperCase(), t.getCounterCurrency().toUpperCase());
-      UserTrade trade = new UserTrade(orderType, t.getBaseAmount().abs(), pair, t.getPrice().abs(), t.getDatetime()
-          , Long.toString(tradeId), Long.toString(t.getOrderId()), t.getFee(), new Currency(t.getFeeCurrency().toUpperCase()));
+      final CurrencyPair pair =
+          new CurrencyPair(t.getBaseCurrency().toUpperCase(), t.getCounterCurrency().toUpperCase());
+      UserTrade trade =
+          new UserTrade(
+              orderType,
+              t.getBaseAmount().abs(),
+              pair,
+              t.getPrice().abs(),
+              t.getDatetime(),
+              Long.toString(tradeId),
+              Long.toString(t.getOrderId()),
+              t.getFee(),
+              new Currency(t.getFeeCurrency().toUpperCase()));
       trades.add(trade);
     }
     return new UserTrades(trades, lastTradeId, TradeSortType.SortByID);
   }
 
-  public static Map.Entry<String, BigDecimal> findNonzeroAmount(BitstampUserTransaction transaction) throws ExchangeException {
+  public static Map.Entry<String, BigDecimal> findNonzeroAmount(BitstampUserTransaction transaction)
+      throws ExchangeException {
     for (Map.Entry<String, BigDecimal> entry : transaction.getAmounts().entrySet()) {
       if (entry.getValue().abs().compareTo(new BigDecimal(1e-6)) == 1) {
         return entry;
       }
     }
-    throw new ExchangeException("Could not find non-zero amount in transaction (id: " + transaction.getId() + ")");
+    throw new ExchangeException(
+        "Could not find non-zero amount in transaction (id: " + transaction.getId() + ")");
   }
 
-  public static List<FundingRecord> adaptFundingHistory(List<BitstampUserTransaction> userTransactions) {
+  public static List<FundingRecord> adaptFundingHistory(
+      List<BitstampUserTransaction> userTransactions) {
     List<FundingRecord> fundingRecords = new ArrayList<>();
     for (BitstampUserTransaction trans : userTransactions) {
       if (trans.isDeposit() || trans.isWithdrawal()) {
-        FundingRecord.Type type = trans.isDeposit() ? FundingRecord.Type.DEPOSIT : FundingRecord.Type.WITHDRAWAL;
+        FundingRecord.Type type =
+            trans.isDeposit() ? FundingRecord.Type.DEPOSIT : FundingRecord.Type.WITHDRAWAL;
         Map.Entry<String, BigDecimal> amount = BitstampAdapters.findNonzeroAmount(trans);
-        FundingRecord record = new FundingRecord(null, trans.getDatetime(),
-            Currency.getInstance(amount.getKey()), amount.getValue().abs(),
-            String.valueOf(trans.getId()), null, type, FundingRecord.Status.COMPLETE, null, trans.getFee(), null);
+        FundingRecord record =
+            new FundingRecord(
+                null,
+                trans.getDatetime(),
+                Currency.getInstance(amount.getKey()),
+                amount.getValue().abs(),
+                String.valueOf(trans.getId()),
+                null,
+                type,
+                FundingRecord.Status.COMPLETE,
+                null,
+                trans.getFee(),
+                null);
         fundingRecords.add(record);
       }
     }

@@ -1,16 +1,15 @@
 package com.qidiancamp.api.gate;
 
-
 import com.qidiancamp.BaseExchange;
 import com.qidiancamp.Exchange;
-import si.mazi.rescu.SynchronizedValueFactory;
-
 import java.io.IOException;
 import java.util.Map;
+import si.mazi.rescu.SynchronizedValueFactory;
 
 public class GateioExchange extends BaseExchange implements Exchange {
 
-  private SynchronizedValueFactory<Long> nonceFactory = new AtomicLongIncrementalTime2013NonceFactory();
+  private SynchronizedValueFactory<Long> nonceFactory =
+      new AtomicLongIncrementalTime2013NonceFactory();
 
   @Override
   protected void initServices() {
@@ -22,7 +21,8 @@ public class GateioExchange extends BaseExchange implements Exchange {
   @Override
   public ExchangeSpecification getDefaultExchangeSpecification() {
 
-    ExchangeSpecification exchangeSpecification = new ExchangeSpecification(this.getClass().getCanonicalName());
+    ExchangeSpecification exchangeSpecification =
+        new ExchangeSpecification(this.getClass().getCanonicalName());
     exchangeSpecification.setSslUri("https://data.gate.io");
     exchangeSpecification.setHost("gate.io");
     exchangeSpecification.setExchangeName("Gateio");
@@ -39,7 +39,8 @@ public class GateioExchange extends BaseExchange implements Exchange {
   @Override
   public void remoteInit() throws IOException {
 
-    Map<CurrencyPair, GateioMarketInfo> currencyPair2BTERMarketInfoMap = ((GateioMarketDataServiceRaw) marketDataService).getBTERMarketInfo();
+    Map<CurrencyPair, GateioMarketInfo> currencyPair2BTERMarketInfoMap =
+        ((GateioMarketDataServiceRaw) marketDataService).getBTERMarketInfo();
     exchangeMetaData = GateioAdapters.adaptToExchangeMetaData(currencyPair2BTERMarketInfoMap);
   }
 }

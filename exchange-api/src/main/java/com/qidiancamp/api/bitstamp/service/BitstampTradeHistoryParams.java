@@ -7,7 +7,10 @@ import com.qidiancamp.service.trade.params.TradeHistoryParamPaging;
 import com.qidiancamp.service.trade.params.TradeHistoryParamsSorted;
 
 public class BitstampTradeHistoryParams
-    implements TradeHistoryParamCurrencyPair, TradeHistoryParamsSorted, TradeHistoryParamOffset, TradeHistoryParamPaging {
+    implements TradeHistoryParamCurrencyPair,
+        TradeHistoryParamsSorted,
+        TradeHistoryParamOffset,
+        TradeHistoryParamPaging {
   private CurrencyPair currencyPair;
   private Order order;
   private Integer offset;

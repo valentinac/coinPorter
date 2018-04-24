@@ -2,9 +2,7 @@ package com.qidiancamp.api.binance.dto.trade;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Created by cyril on 11-Oct-17.
- */
+/** Created by cyril on 11-Oct-17. */
 public class BinanceListenKey {
 
   private String listenKey;

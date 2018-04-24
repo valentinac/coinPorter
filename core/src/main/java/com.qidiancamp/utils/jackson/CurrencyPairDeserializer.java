@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.qidiancamp.currency.Currency;
 import com.qidiancamp.currency.CurrencyPair;
-
 import java.io.IOException;
 
 public class CurrencyPairDeserializer extends JsonDeserializer<CurrencyPair> {

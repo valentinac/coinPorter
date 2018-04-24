@@ -1,9 +1,8 @@
 package com.qidiancamp.dto.account;
 
+import com.qidiancamp.currency.Currency;
 import java.io.Serializable;
 import java.math.BigDecimal;
-
-import com.qidiancamp.currency.Currency;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

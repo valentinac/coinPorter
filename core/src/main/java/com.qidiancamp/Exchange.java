@@ -1,15 +1,13 @@
 package com.qidiancamp;
 
-import java.io.IOException;
-import java.util.List;
-
 import com.qidiancamp.currency.CurrencyPair;
 import com.qidiancamp.dto.meta.ExchangeMetaData;
 import com.qidiancamp.exceptions.ExchangeException;
 import com.qidiancamp.service.account.AccountService;
 import com.qidiancamp.service.marketdata.MarketDataService;
 import com.qidiancamp.service.trade.TradeService;
-import com.qidiancamp.ExchangeSpecification;
+import java.io.IOException;
+import java.util.List;
 import si.mazi.rescu.SynchronizedValueFactory;
 
 /**
@@ -61,7 +59,7 @@ public interface Exchange {
   /**
    * Applies any exchange specific parameters
    *
-   * @param exchangeSpecification The {@link ExchangeSpecification}
+   * @param exchangeSpecification The {@link com.qidiancamp.ExchangeSpecification}
    */
   void applySpecification(ExchangeSpecification exchangeSpecification);
 
@@ -79,7 +77,7 @@ public interface Exchange {
    * An trade service typically provides access to trading functionality
    *
    * <p>Typically access is restricted by a secret API key and/or username password authentication
-   * which are usually provided in the {@link ExchangeSpecification}
+   * which are usually provided in the {@link com.qidiancamp.ExchangeSpecification}
    *
    * @return The exchange's trade service
    */
@@ -89,7 +87,7 @@ public interface Exchange {
    * An account service typically provides access to the user's private exchange data
    *
    * <p>Typically access is restricted by a secret API key and/or username password authentication
-   * which are usually provided in the {@link ExchangeSpecification}
+   * which are usually provided in the {@link com.qidiancamp.ExchangeSpecification}
    *
    * @return The exchange's account service
    */

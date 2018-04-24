@@ -7,13 +7,11 @@ import com.qidiancamp.dto.marketdata.OrderBook;
 import com.qidiancamp.dto.marketdata.Ticker;
 import com.qidiancamp.dto.marketdata.Trades;
 import com.qidiancamp.service.marketdata.MarketDataService;
-
 import java.io.IOException;
 
-/**
- * @author Matija Mazi
- */
-public class BitstampMarketDataService extends BitstampMarketDataServiceRaw implements MarketDataService {
+/** @author Matija Mazi */
+public class BitstampMarketDataService extends BitstampMarketDataServiceRaw
+    implements MarketDataService {
 
   public BitstampMarketDataService(Exchange exchange) {
     super(exchange);
@@ -34,5 +32,4 @@ public class BitstampMarketDataService extends BitstampMarketDataServiceRaw impl
     BitstampTime time = args.length > 0 ? (BitstampTime) args[0] : null;
     return BitstampAdapters.adaptTrades(getTransactions(currencyPair, time), currencyPair);
   }
-
 }

@@ -13,10 +13,9 @@
  */
 package com.qidiancamp.modules.sys.controller;
 
-import com.qidiancamp.common.utils.R;
-import com.qidiancamp.modules.sys.shiro.ShiroUtils;
 import com.qidiancamp.common.annotation.SysLog;
 import com.qidiancamp.common.utils.PageUtils;
+import com.qidiancamp.common.utils.R;
 import com.qidiancamp.common.validator.Assert;
 import com.qidiancamp.common.validator.ValidatorUtils;
 import com.qidiancamp.common.validator.group.AddGroup;
@@ -24,7 +23,7 @@ import com.qidiancamp.common.validator.group.UpdateGroup;
 import com.qidiancamp.modules.sys.entity.SysUserEntity;
 import com.qidiancamp.modules.sys.service.SysUserRoleService;
 import com.qidiancamp.modules.sys.service.SysUserService;
-
+import com.qidiancamp.modules.sys.shiro.ShiroUtils;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;

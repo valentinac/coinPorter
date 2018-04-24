@@ -15,7 +15,6 @@ package com.qidiancamp.common.utils;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.qidiancamp.common.xss.SQLFilter;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.apache.commons.lang.StringUtils;

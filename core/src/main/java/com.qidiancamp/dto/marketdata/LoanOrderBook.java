@@ -2,7 +2,6 @@ package com.qidiancamp.dto.marketdata;
 
 import com.qidiancamp.dto.trade.FixedRateLoanOrder;
 import com.qidiancamp.dto.trade.FloatingRateLoanOrder;
-
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Date;

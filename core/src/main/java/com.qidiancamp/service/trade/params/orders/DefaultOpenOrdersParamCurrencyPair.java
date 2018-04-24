@@ -1,9 +1,9 @@
 package com.qidiancamp.service.trade.params.orders;
 
-import java.util.ArrayList;
-import java.util.List;
 import com.qidiancamp.Exchange;
 import com.qidiancamp.currency.CurrencyPair;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DefaultOpenOrdersParamCurrencyPair implements OpenOrdersParamCurrencyPair {
 

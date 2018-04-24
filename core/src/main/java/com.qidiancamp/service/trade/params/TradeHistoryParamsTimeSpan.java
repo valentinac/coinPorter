@@ -1,7 +1,7 @@
 package com.qidiancamp.service.trade.params;
 
-import java.util.Date;
 import com.qidiancamp.service.trade.TradeService;
+import java.util.Date;
 
 /**
  * Parameters type for {@link TradeService#getTradeHistory(TradeHistoryParams)} with start and end

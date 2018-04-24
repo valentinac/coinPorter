@@ -1,7 +1,6 @@
 package com.qidiancamp.api.binance.dto.marketdata;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -24,39 +23,34 @@ public final class BinanceTicker24h {
   public final BigDecimal quoteVolume;
   public final long openTime;
   public final long closeTime;
-  /**
-   * First tradeId
-   */
+  /** First tradeId */
   public final long firstId;
-  /**
-   * Last tradeId
-   */
+  /** Last tradeId */
   public final long lastId;
-  /**
-   * Trade count
-   */
+  /** Trade count */
   public final long count;
 
-  public BinanceTicker24h(@JsonProperty("priceChange") BigDecimal priceChange
-      , @JsonProperty("priceChangePercent") BigDecimal priceChangePercent
-      , @JsonProperty("weightedAvgPrice") BigDecimal weightedAvgPrice
-      , @JsonProperty("prevClosePrice") BigDecimal prevClosePrice
-      , @JsonProperty("lastPrice") BigDecimal lastPrice
-      , @JsonProperty("lastQty") BigDecimal lastQty
-      , @JsonProperty("bidPrice") BigDecimal bidPrice
-      , @JsonProperty("bidQty") BigDecimal bidQty
-      , @JsonProperty("askPrice") BigDecimal askPrice
-      , @JsonProperty("askQty") BigDecimal askQty
-      , @JsonProperty("openPrice") BigDecimal openPrice
-      , @JsonProperty("highPrice") BigDecimal highPrice
-      , @JsonProperty("lowPrice") BigDecimal lowPrice
-      , @JsonProperty("volume") BigDecimal volume
-      , @JsonProperty("quoteVolume") BigDecimal quoteVolume
-      , @JsonProperty("openTime") long openTime
-      , @JsonProperty("closeTime") long closeTime
-      , @JsonProperty("firstId") long firstId
-      , @JsonProperty("lastId") long lastId
-      , @JsonProperty("count") long count) {
+  public BinanceTicker24h(
+      @JsonProperty("priceChange") BigDecimal priceChange,
+      @JsonProperty("priceChangePercent") BigDecimal priceChangePercent,
+      @JsonProperty("weightedAvgPrice") BigDecimal weightedAvgPrice,
+      @JsonProperty("prevClosePrice") BigDecimal prevClosePrice,
+      @JsonProperty("lastPrice") BigDecimal lastPrice,
+      @JsonProperty("lastQty") BigDecimal lastQty,
+      @JsonProperty("bidPrice") BigDecimal bidPrice,
+      @JsonProperty("bidQty") BigDecimal bidQty,
+      @JsonProperty("askPrice") BigDecimal askPrice,
+      @JsonProperty("askQty") BigDecimal askQty,
+      @JsonProperty("openPrice") BigDecimal openPrice,
+      @JsonProperty("highPrice") BigDecimal highPrice,
+      @JsonProperty("lowPrice") BigDecimal lowPrice,
+      @JsonProperty("volume") BigDecimal volume,
+      @JsonProperty("quoteVolume") BigDecimal quoteVolume,
+      @JsonProperty("openTime") long openTime,
+      @JsonProperty("closeTime") long closeTime,
+      @JsonProperty("firstId") long firstId,
+      @JsonProperty("lastId") long lastId,
+      @JsonProperty("count") long count) {
     this.priceChange = priceChange;
     this.priceChangePercent = priceChangePercent;
     this.weightedAvgPrice = weightedAvgPrice;

@@ -3,7 +3,6 @@ package com.qidiancamp.dto.marketdata;
 import com.qidiancamp.currency.CurrencyPair;
 import com.qidiancamp.dto.Order;
 import com.qidiancamp.dto.trade.LimitOrder;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -119,9 +118,9 @@ public final class OrderBook implements Serializable {
     return bids;
   }
 
-  public List<LimitOrder> getOrders(OrderType type) {
+  public List<LimitOrder> getOrders(Order.OrderType type) {
 
-    return type == OrderType.ASK ? asks : bids;
+    return type == Order.OrderType.ASK ? asks : bids;
   }
 
   /**

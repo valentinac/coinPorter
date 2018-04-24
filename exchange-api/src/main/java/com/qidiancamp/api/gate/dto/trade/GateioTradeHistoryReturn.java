@@ -1,13 +1,12 @@
 package com.qidiancamp.api.gate.dto.trade;
 
 import com.fasterxml.jackson.annotation.*;
-import org.knowm.xchange.gateio.dto.GateioBaseResponse;
-
-import javax.annotation.Generated;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.Generated;
+import org.knowm.xchange.gateio.dto.GateioBaseResponse;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Generated("org.jsonschema2pojo")
@@ -16,14 +15,18 @@ public class GateioTradeHistoryReturn extends GateioBaseResponse {
 
   @JsonProperty("result")
   private Boolean result;
+
   @JsonProperty("trades")
   private List<GateioTrade> trades = new ArrayList<GateioTrade>();
+
   @JsonProperty("msg")
   private String msg;
-  @JsonIgnore
-  private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-  protected GateioTradeHistoryReturn(@JsonProperty("result") boolean result, @JsonProperty("trades") List<GateioTrade> trades,
+  @JsonIgnore private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+  protected GateioTradeHistoryReturn(
+      @JsonProperty("result") boolean result,
+      @JsonProperty("trades") List<GateioTrade> trades,
       @JsonProperty("msg") String message) {
 
     super(result, message);
@@ -77,5 +80,4 @@ public class GateioTradeHistoryReturn extends GateioBaseResponse {
 
     this.additionalProperties.put(name, value);
   }
-
 }

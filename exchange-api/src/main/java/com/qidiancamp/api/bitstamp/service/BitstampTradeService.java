@@ -1,5 +1,7 @@
 package com.qidiancamp.api.bitstamp.service;
 
+import static com.qidiancamp.dto.Order.OrderType.BID;
+
 import com.qidiancamp.Exchange;
 import com.qidiancamp.api.bitstamp.BitstampAdapters;
 import com.qidiancamp.api.bitstamp.BitstampAuthenticatedV2;
@@ -20,18 +22,13 @@ import com.qidiancamp.service.trade.TradeService;
 import com.qidiancamp.service.trade.params.*;
 import com.qidiancamp.service.trade.params.orders.DefaultOpenOrdersParamCurrencyPair;
 import com.qidiancamp.service.trade.params.orders.OpenOrdersParams;
-
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static com.qidiancamp.dto.Order.OrderType.BID;
-
-/**
- * @author Matija Mazi
- */
+/** @author Matija Mazi */
 public class BitstampTradeService extends BitstampTradeServiceRaw implements TradeService {
 
   public BitstampTradeService(Exchange exchange) {
@@ -53,7 +50,14 @@ public class BitstampTradeService extends BitstampTradeServiceRaw implements Tra
         OrderType orderType = bitstampOrder.getType() == 0 ? OrderType.BID : OrderType.ASK;
         String id = Integer.toString(bitstampOrder.getId());
         BigDecimal price = bitstampOrder.getPrice();
-        limitOrders.add(new LimitOrder(orderType, bitstampOrder.getAmount(), pair, id, bitstampOrder.getDatetime(), price));
+        limitOrders.add(
+            new LimitOrder(
+                orderType,
+                bitstampOrder.getAmount(),
+                pair,
+                id,
+                bitstampOrder.getDatetime(),
+                price));
       }
     }
     return new OpenOrders(limitOrders);
@@ -61,8 +65,12 @@ public class BitstampTradeService extends BitstampTradeServiceRaw implements Tra
 
   @Override
   public String placeMarketOrder(MarketOrder order) throws IOException, BitstampException {
-    BitstampAuthenticatedV2.Side side = order.getType().equals(BID) ? BitstampAuthenticatedV2.Side.buy : BitstampAuthenticatedV2.Side.sell;
-    BitstampOrder bitstampOrder = placeBitstampMarketOrder(order.getCurrencyPair(), side, order.getOriginalAmount());
+    BitstampAuthenticatedV2.Side side =
+        order.getType().equals(BID)
+            ? BitstampAuthenticatedV2.Side.buy
+            : BitstampAuthenticatedV2.Side.sell;
+    BitstampOrder bitstampOrder =
+        placeBitstampMarketOrder(order.getCurrencyPair(), side, order.getOriginalAmount());
     if (bitstampOrder.getErrorMessage() != null) {
       throw new ExchangeException(bitstampOrder.getErrorMessage());
     }
@@ -72,8 +80,13 @@ public class BitstampTradeService extends BitstampTradeServiceRaw implements Tra
   @Override
   public String placeLimitOrder(LimitOrder order) throws IOException, BitstampException {
 
-    BitstampAuthenticatedV2.Side side = order.getType().equals(BID) ? BitstampAuthenticatedV2.Side.buy : BitstampAuthenticatedV2.Side.sell;
-    BitstampOrder bitstampOrder = placeBitstampOrder(order.getCurrencyPair(), side, order.getOriginalAmount(), order.getLimitPrice());
+    BitstampAuthenticatedV2.Side side =
+        order.getType().equals(BID)
+            ? BitstampAuthenticatedV2.Side.buy
+            : BitstampAuthenticatedV2.Side.sell;
+    BitstampOrder bitstampOrder =
+        placeBitstampOrder(
+            order.getCurrencyPair(), side, order.getOriginalAmount(), order.getLimitPrice());
     if (bitstampOrder.getErrorMessage() != null) {
       throw new ExchangeException(bitstampOrder.getErrorMessage());
     }
@@ -95,9 +108,7 @@ public class BitstampTradeService extends BitstampTradeServiceRaw implements Tra
     }
   }
 
-  /**
-   * Required parameter types: {@link TradeHistoryParamPaging#getPageLength()}
-   */
+  /** Required parameter types: {@link TradeHistoryParamPaging#getPageLength()} */
   @Override
   public UserTrades getTradeHistory(TradeHistoryParams params) throws IOException {
     Long limit = null;
@@ -116,7 +127,9 @@ public class BitstampTradeService extends BitstampTradeServiceRaw implements Tra
     if (params instanceof TradeHistoryParamsSorted) {
       sort = ((TradeHistoryParamsSorted) params).getOrder();
     }
-    BitstampUserTransaction[] txs = getBitstampUserTransactions(limit, currencyPair, offset, sort == null ? null : sort.toString());
+    BitstampUserTransaction[] txs =
+        getBitstampUserTransactions(
+            limit, currencyPair, offset, sort == null ? null : sort.toString());
     return BitstampAdapters.adaptTradeHistory(txs);
   }
 
@@ -132,9 +145,7 @@ public class BitstampTradeService extends BitstampTradeServiceRaw implements Tra
   }
 
   @Override
-  public Collection<Order> getOrder(
-      String... orderIds) throws IOException {
+  public Collection<Order> getOrder(String... orderIds) throws IOException {
     throw new NotYetImplementedForExchangeException();
   }
-
 }

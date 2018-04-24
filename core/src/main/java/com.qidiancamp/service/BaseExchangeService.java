@@ -1,12 +1,12 @@
 package com.qidiancamp.service;
 
-import java.math.BigDecimal;
 import com.qidiancamp.Exchange;
 import com.qidiancamp.dto.Order;
 import com.qidiancamp.dto.meta.CurrencyPairMetaData;
 import com.qidiancamp.dto.meta.ExchangeMetaData;
 import com.qidiancamp.dto.trade.LimitOrder;
 import com.qidiancamp.dto.trade.MarketOrder;
+import java.math.BigDecimal;
 import si.mazi.rescu.ClientConfig;
 
 /** Top of the hierarchy abstract class for an "exchange service" */

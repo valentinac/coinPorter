@@ -1,7 +1,5 @@
 package com.qidiancamp.service.marketdata;
 
-import java.io.IOException;
-import java.util.List;
 import com.qidiancamp.Exchange;
 import com.qidiancamp.currency.CurrencyPair;
 import com.qidiancamp.dto.marketdata.OrderBook;
@@ -12,6 +10,8 @@ import com.qidiancamp.exceptions.NotAvailableFromExchangeException;
 import com.qidiancamp.exceptions.NotYetImplementedForExchangeException;
 import com.qidiancamp.service.BaseService;
 import com.qidiancamp.service.marketdata.params.Params;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * Interface to provide the following to {@link Exchange}:

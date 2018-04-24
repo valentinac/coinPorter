@@ -14,7 +14,6 @@
 package com.qidiancamp.common.validator;
 
 import com.qidiancamp.common.exception.RRException;
-
 import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;

@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
 import java.io.IOException;
 import java.math.BigDecimal;
 
@@ -42,7 +41,8 @@ public class GateioPublicOrder {
   static class GateioPublicOrderDeserializer extends JsonDeserializer<GateioPublicOrder> {
 
     @Override
-    public GateioPublicOrder deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+    public GateioPublicOrder deserialize(JsonParser jp, DeserializationContext ctxt)
+        throws IOException, JsonProcessingException {
 
       final ObjectCodec oc = jp.getCodec();
       final JsonNode tickerNode = oc.readTree(jp);
@@ -52,6 +52,5 @@ public class GateioPublicOrder {
 
       return new GateioPublicOrder(price, amount);
     }
-
   }
 }

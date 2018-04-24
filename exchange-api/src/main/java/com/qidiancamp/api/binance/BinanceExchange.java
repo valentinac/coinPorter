@@ -12,14 +12,14 @@ import com.qidiancamp.dto.meta.CurrencyMetaData;
 import com.qidiancamp.dto.meta.CurrencyPairMetaData;
 import com.qidiancamp.utils.jackson.CurrencyPairDeserializer;
 import com.qidiancamp.utils.nonce.AtomicLongCurrentTimeIncrementalNonceFactory;
-import si.mazi.rescu.SynchronizedValueFactory;
-
 import java.math.BigDecimal;
 import java.util.Map;
+import si.mazi.rescu.SynchronizedValueFactory;
 
 public class BinanceExchange extends BaseExchange {
 
-  private SynchronizedValueFactory<Long> nonceFactory = new AtomicLongCurrentTimeIncrementalNonceFactory();
+  private SynchronizedValueFactory<Long> nonceFactory =
+      new AtomicLongCurrentTimeIncrementalNonceFactory();
 
   @Override
   protected void initServices() {
@@ -52,10 +52,12 @@ public class BinanceExchange extends BaseExchange {
       Map<CurrencyPair, CurrencyPairMetaData> currencyPairs = exchangeMetaData.getCurrencyPairs();
       Map<Currency, CurrencyMetaData> currencies = exchangeMetaData.getCurrencies();
 
-      BinanceMarketDataService marketDataService = (BinanceMarketDataService) this.marketDataService;
+      BinanceMarketDataService marketDataService =
+          (BinanceMarketDataService) this.marketDataService;
       for (BinanceSymbolPrice price : marketDataService.tickerAllPrices()) {
         CurrencyPair pair = CurrencyPairDeserializer.getCurrencyPairFromString(price.symbol);
-        currencyPairs.put(pair, new CurrencyPairMetaData(BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, 8));
+        currencyPairs.put(
+            pair, new CurrencyPairMetaData(BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, 8));
 
         currencies.put(pair.base, new CurrencyMetaData(8, BigDecimal.ZERO));
         currencies.put(pair.counter, new CurrencyMetaData(8, BigDecimal.ZERO));
@@ -64,5 +66,4 @@ public class BinanceExchange extends BaseExchange {
       logger.warn("An exception occurred while loading the metadata", e);
     }
   }
-
 }

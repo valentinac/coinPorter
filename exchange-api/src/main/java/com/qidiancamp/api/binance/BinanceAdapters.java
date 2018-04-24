@@ -6,8 +6,7 @@ import com.qidiancamp.dto.Order.OrderType;
 
 public class BinanceAdapters {
 
-  private BinanceAdapters() {
-  }
+  private BinanceAdapters() {}
 
   public static String toSymbol(CurrencyPair pair) {
     return pair.base.getCurrencyCode() + pair.counter.getCurrencyCode();

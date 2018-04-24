@@ -15,12 +15,11 @@ package com.qidiancamp.modules.oss.service.impl;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.qidiancamp.modules.oss.service.SysOssService;
 import com.qidiancamp.common.utils.PageUtils;
 import com.qidiancamp.common.utils.Query;
 import com.qidiancamp.modules.oss.dao.SysOssDao;
 import com.qidiancamp.modules.oss.entity.SysOssEntity;
-
+import com.qidiancamp.modules.oss.service.SysOssService;
 import java.util.Map;
 import org.springframework.stereotype.Service;
 

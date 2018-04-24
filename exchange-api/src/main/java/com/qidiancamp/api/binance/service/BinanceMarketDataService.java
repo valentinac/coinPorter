@@ -14,12 +14,12 @@ import com.qidiancamp.dto.marketdata.Trades;
 import com.qidiancamp.dto.marketdata.Trades.TradeSortType;
 import com.qidiancamp.dto.trade.LimitOrder;
 import com.qidiancamp.service.marketdata.MarketDataService;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class BinanceMarketDataService extends BinanceMarketDataServiceRaw implements MarketDataService {
+public class BinanceMarketDataService extends BinanceMarketDataServiceRaw
+    implements MarketDataService {
 
   public BinanceMarketDataService(Exchange exchange) {
     super(exchange);
@@ -28,8 +28,18 @@ public class BinanceMarketDataService extends BinanceMarketDataServiceRaw implem
   @Override
   public OrderBook getOrderBook(CurrencyPair pair, Object... args) throws IOException {
     BinanceOrderbook ob = getBinanceOrderbook(BinanceAdapters.toSymbol(pair), null);
-    List<LimitOrder> bids = ob.bids.entrySet().stream().map(e -> new LimitOrder(OrderType.BID, e.getValue(), pair, null, null, e.getKey())).collect(Collectors.toList());
-    List<LimitOrder> asks = ob.asks.entrySet().stream().map(e -> new LimitOrder(OrderType.ASK, e.getValue(), pair, null, null, e.getKey())).collect(Collectors.toList());
+    List<LimitOrder> bids =
+        ob.bids
+            .entrySet()
+            .stream()
+            .map(e -> new LimitOrder(OrderType.BID, e.getValue(), pair, null, null, e.getKey()))
+            .collect(Collectors.toList());
+    List<LimitOrder> asks =
+        ob.asks
+            .entrySet()
+            .stream()
+            .map(e -> new LimitOrder(OrderType.ASK, e.getValue(), pair, null, null, e.getKey()))
+            .collect(Collectors.toList());
     return new OrderBook(null, asks, bids);
   }
 
@@ -50,12 +60,17 @@ public class BinanceMarketDataService extends BinanceMarketDataServiceRaw implem
 
   /**
    * optional parameters provided in the args array:
-   * <p><ul>
-   * <li>0: Long fromId    optional, ID to get aggregate trades from INCLUSIVE.
-   * <li>1: Long startTime optional, Timestamp in ms to get aggregate trades from INCLUSIVE.
-   * <li>2: Long endTime   optional, Timestamp in ms to get aggregate trades until INCLUSIVE.
-   * <li>3: Integer limit     optional, Default 500; max 500.
-   * </ul><p/>
+   *
+   * <p>
+   *
+   * <ul>
+   *   <li>0: Long fromId optional, ID to get aggregate trades from INCLUSIVE.
+   *   <li>1: Long startTime optional, Timestamp in ms to get aggregate trades from INCLUSIVE.
+   *   <li>2: Long endTime optional, Timestamp in ms to get aggregate trades until INCLUSIVE.
+   *   <li>3: Integer limit optional, Default 500; max 500.
+   * </ul>
+   *
+   * <p>
    */
   @Override
   public Trades getTrades(CurrencyPair pair, Object... args) throws IOException {
@@ -81,11 +96,21 @@ public class BinanceMarketDataService extends BinanceMarketDataServiceRaw implem
     } catch (Throwable ignored) {
     }
 
-    List<BinanceAggTrades> aggTrades = binance.aggTrades(BinanceAdapters.toSymbol(pair), fromId, startTime, endTime, limit);
-    List<Trade> trades = aggTrades.stream()
-        .map(at -> new Trade(BinanceAdapters.convertType(at.buyerMaker), at.quantity, pair, at.price, at.getTimestamp(), Long.toString(at.aggregateTradeId)))
-        .collect(Collectors.toList());
+    List<BinanceAggTrades> aggTrades =
+        binance.aggTrades(BinanceAdapters.toSymbol(pair), fromId, startTime, endTime, limit);
+    List<Trade> trades =
+        aggTrades
+            .stream()
+            .map(
+                at ->
+                    new Trade(
+                        BinanceAdapters.convertType(at.buyerMaker),
+                        at.quantity,
+                        pair,
+                        at.price,
+                        at.getTimestamp(),
+                        Long.toString(at.aggregateTradeId)))
+            .collect(Collectors.toList());
     return new Trades(trades, TradeSortType.SortByTimestamp);
   }
-
 }

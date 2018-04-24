@@ -1,10 +1,10 @@
 package com.qidiancamp.service.trade.params;
 
+import com.qidiancamp.currency.CurrencyPair;
+import com.qidiancamp.service.trade.TradeService;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import com.qidiancamp.currency.CurrencyPair;
-import com.qidiancamp.service.trade.TradeService;
 
 /**
  * Generic {@link TradeHistoryParams} implementation that implements all the interfaces in the

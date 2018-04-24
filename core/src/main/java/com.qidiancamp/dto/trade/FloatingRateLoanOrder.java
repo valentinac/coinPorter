@@ -1,9 +1,9 @@
 package com.qidiancamp.dto.trade;
 
-import java.math.BigDecimal;
-import java.util.Date;
 import com.qidiancamp.dto.LoanOrder;
 import com.qidiancamp.dto.Order;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * DTO representing a floating rate loan order A floating rate loan order is a loan order whose rate

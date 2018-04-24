@@ -1,7 +1,6 @@
 package com.qidiancamp.dto.account;
 
 import com.qidiancamp.currency.Currency;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;

@@ -1,7 +1,6 @@
 package com.qidiancamp.dto.trade;
 
 import com.qidiancamp.dto.Order;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;

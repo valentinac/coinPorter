@@ -13,9 +13,9 @@
  */
 package com.qidiancamp.modules.sys.redis;
 
+import com.qidiancamp.common.utils.RedisKeys;
 import com.qidiancamp.common.utils.RedisUtils;
 import com.qidiancamp.modules.sys.entity.SysConfigEntity;
-import com.qidiancamp.common.utils.RedisKeys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

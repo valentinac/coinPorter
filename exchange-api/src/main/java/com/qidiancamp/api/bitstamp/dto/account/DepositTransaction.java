@@ -1,12 +1,13 @@
 package com.qidiancamp.api.bitstamp.dto.account;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.math.BigDecimal;
 
 public class DepositTransaction {
 
-  public DepositTransaction(@JsonProperty("amount") BigDecimal amount, @JsonProperty("confirmations") Integer confirmations,
+  public DepositTransaction(
+      @JsonProperty("amount") BigDecimal amount,
+      @JsonProperty("confirmations") Integer confirmations,
       @JsonProperty("address") String address) {
     this.amount = amount;
     this.confirmations = confirmations;
@@ -33,6 +34,8 @@ public class DepositTransaction {
 
   @Override
   public String toString() {
-    return String.format("DepositTransaction{amount=%s, confirmations=%d, address='%s'}", amount, confirmations, address);
+    return String.format(
+        "DepositTransaction{amount=%s, confirmations=%d, address='%s'}",
+        amount, confirmations, address);
   }
 }

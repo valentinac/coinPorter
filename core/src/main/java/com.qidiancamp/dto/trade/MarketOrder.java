@@ -1,10 +1,10 @@
 package com.qidiancamp.dto.trade;
 
+import com.qidiancamp.currency.CurrencyPair;
+import com.qidiancamp.dto.Order;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Set;
-import com.qidiancamp.currency.CurrencyPair;
-import com.qidiancamp.dto.Order;
 
 /**
  * DTO representing a market order

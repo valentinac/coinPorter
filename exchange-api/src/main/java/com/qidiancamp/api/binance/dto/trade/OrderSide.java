@@ -3,7 +3,8 @@ package com.qidiancamp.api.binance.dto.trade;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 public enum OrderSide {
-  BUY, SELL;
+  BUY,
+  SELL;
 
   @JsonCreator
   public static OrderSide getOrderSide(String s) {

@@ -16,7 +16,6 @@ package com.qidiancamp.modules.oss.cloud;
 import com.qidiancamp.common.group.AliyunGroup;
 import com.qidiancamp.common.group.QcloudGroup;
 import com.qidiancamp.common.group.QiniuGroup;
-
 import java.io.Serializable;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;

@@ -1,7 +1,7 @@
 package com.qidiancamp.service.trade.params;
 
-import java.util.Collection;
 import com.qidiancamp.currency.CurrencyPair;
+import java.util.Collection;
 
 public interface TradeHistoryParamMultiCurrencyPair extends TradeHistoryParams {
 

@@ -13,8 +13,8 @@
  */
 package com.qidiancamp.modules.oss.cloud;
 
-import com.qidiancamp.common.utils.Constant;
 import com.qidiancamp.common.utils.ConfigConstant;
+import com.qidiancamp.common.utils.Constant;
 import com.qidiancamp.common.utils.SpringContextUtils;
 import com.qidiancamp.modules.sys.service.SysConfigService;
 

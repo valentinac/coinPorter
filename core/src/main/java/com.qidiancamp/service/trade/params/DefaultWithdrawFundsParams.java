@@ -1,8 +1,8 @@
 package com.qidiancamp.service.trade.params;
 
+import com.qidiancamp.currency.Currency;
 import java.math.BigDecimal;
 import javax.annotation.Nullable;
-import com.qidiancamp.currency.Currency;
 
 public class DefaultWithdrawFundsParams implements WithdrawFundsParams {
   public final String address;

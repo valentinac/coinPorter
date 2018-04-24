@@ -9,7 +9,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.qidiancamp.api.bitstamp.dto.BitstampBaseResponse;
 import com.qidiancamp.api.bitstamp.dto.account.BitstampDepositAddress.BitstampDepositAddressDeserializer;
-
 import java.io.IOException;
 
 @JsonDeserialize(using = BitstampDepositAddressDeserializer.class)
@@ -37,7 +36,8 @@ public class BitstampDepositAddress extends BitstampBaseResponse {
   static class BitstampDepositAddressDeserializer extends JsonDeserializer<BitstampDepositAddress> {
 
     @Override
-    public BitstampDepositAddress deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+    public BitstampDepositAddress deserialize(JsonParser jsonParser, DeserializationContext ctxt)
+        throws IOException, JsonProcessingException {
 
       ObjectCodec oc = jsonParser.getCodec();
       JsonNode node = oc.readTree(jsonParser);

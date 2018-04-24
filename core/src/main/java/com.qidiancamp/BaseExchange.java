@@ -1,23 +1,19 @@
 package com.qidiancamp;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.*;
-
+import com.qidiancamp.currency.CurrencyPair;
 import com.qidiancamp.dto.meta.ExchangeMetaData;
 import com.qidiancamp.exceptions.ExchangeException;
 import com.qidiancamp.service.BaseExchangeService;
 import com.qidiancamp.service.account.AccountService;
 import com.qidiancamp.service.marketdata.MarketDataService;
 import com.qidiancamp.service.trade.TradeService;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.*;
 import org.apache.commons.io.IOUtils;
-import com.qidiancamp.currency.CurrencyPair;
-
-import com.qidiancamp.Exchange;
-import com.qidiancamp.ExchangeSpecification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -24,9 +24,14 @@ public class GateioBaseService extends BaseExchangeService implements BaseServic
 
     super(exchange);
 
-    this.bter = RestProxyFactory.createProxy(GateioAuthenticated.class, exchange.getExchangeSpecification().getSslUri(), getClientConfig());
+    this.bter =
+        RestProxyFactory.createProxy(
+            GateioAuthenticated.class,
+            exchange.getExchangeSpecification().getSslUri(),
+            getClientConfig());
     this.apiKey = exchange.getExchangeSpecification().getApiKey();
-    this.signatureCreator = GateioHmacPostBodyDigest.createInstance(exchange.getExchangeSpecification().getSecretKey());
+    this.signatureCreator =
+        GateioHmacPostBodyDigest.createInstance(exchange.getExchangeSpecification().getSecretKey());
   }
 
   protected <R extends GateioBaseResponse> R handleResponse(R response) {
@@ -37,5 +42,4 @@ public class GateioBaseService extends BaseExchangeService implements BaseServic
 
     return response;
   }
-
 }

@@ -16,12 +16,11 @@ package com.qidiancamp.common.aspect;
 import com.qidiancamp.common.annotation.DataFilter;
 import com.qidiancamp.common.exception.RRException;
 import com.qidiancamp.common.utils.Constant;
-import com.qidiancamp.modules.sys.shiro.ShiroUtils;
 import com.qidiancamp.modules.sys.entity.SysUserEntity;
 import com.qidiancamp.modules.sys.service.SysDeptService;
 import com.qidiancamp.modules.sys.service.SysRoleDeptService;
 import com.qidiancamp.modules.sys.service.SysUserRoleService;
-
+import com.qidiancamp.modules.sys.shiro.ShiroUtils;
 import java.util.*;
 import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.JoinPoint;

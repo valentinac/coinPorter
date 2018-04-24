@@ -2,32 +2,31 @@ package com.qidiancamp.api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Created by Administrator on 2018/2/22.
- */
+/** Created by Administrator on 2018/2/22. */
 public class GateioBaseResponse {
-    private final boolean result;
-    private final String message;
+  private final boolean result;
+  private final String message;
 
-    protected GateioBaseResponse(@JsonProperty("result") final boolean result, @JsonProperty("msg") final String message) {
+  protected GateioBaseResponse(
+      @JsonProperty("result") final boolean result, @JsonProperty("msg") final String message) {
 
-        this.result = result;
-        this.message = message;
-    }
+    this.result = result;
+    this.message = message;
+  }
 
-    public boolean isResult() {
+  public boolean isResult() {
 
-        return result;
-    }
+    return result;
+  }
 
-    public String getMessage() {
+  public String getMessage() {
 
-        return message;
-    }
+    return message;
+  }
 
-    @Override
-    public String toString() {
+  @Override
+  public String toString() {
 
-        return "GateioBaseResponse [result=" + result + ", message=" + message + "]";
-    }
+    return "GateioBaseResponse [result=" + result + ", message=" + message + "]";
+  }
 }

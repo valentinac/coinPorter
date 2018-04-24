@@ -1,11 +1,11 @@
 package com.qidiancamp.utils;
 
+import com.qidiancamp.ExchangeSpecification;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import org.knowm.xchange.ExchangeSpecification;
 
 public class AuthUtils {
 

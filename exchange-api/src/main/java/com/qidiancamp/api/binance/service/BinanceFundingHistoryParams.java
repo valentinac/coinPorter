@@ -6,10 +6,13 @@ import com.qidiancamp.service.trade.params.HistoryParamsFundingType;
 import com.qidiancamp.service.trade.params.TradeHistoryParamCurrency;
 import com.qidiancamp.service.trade.params.TradeHistoryParams;
 import com.qidiancamp.service.trade.params.TradeHistoryParamsTimeSpan;
-
 import java.util.Date;
 
-public class BinanceFundingHistoryParams implements TradeHistoryParams, TradeHistoryParamCurrency, TradeHistoryParamsTimeSpan, HistoryParamsFundingType {
+public class BinanceFundingHistoryParams
+    implements TradeHistoryParams,
+        TradeHistoryParamCurrency,
+        TradeHistoryParamsTimeSpan,
+        HistoryParamsFundingType {
 
   private Currency currency;
   private Type type;

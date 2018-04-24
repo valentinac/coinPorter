@@ -5,16 +5,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.qidiancamp.api.bitstamp.BitstampUtils;
 import com.qidiancamp.currency.Currency;
-
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * @author Matija Mazi
- */
+/** @author Matija Mazi */
 public final class BitstampUserTransaction {
 
   private final Date datetime;
@@ -24,8 +21,8 @@ public final class BitstampUserTransaction {
   private final BigDecimal fee;
 
   // possible pairs at the moment: btcusd, btceur, eurusd, xrpusd, xrpeur, xrpbtc
-  private String base;          // btc, eur, xrp
-  private String counter;       // usd, eur, btc
+  private String base; // btc, eur, xrp
+  private String counter; // usd, eur, btc
 
   private final Map<String, BigDecimal> amounts = new HashMap<>();
   private BigDecimal price;
@@ -39,21 +36,24 @@ public final class BitstampUserTransaction {
    * @param type
    * @param fee
    */
-  public BitstampUserTransaction(@JsonProperty("datetime") String datetime, @JsonProperty("id") long id
-      , @JsonProperty("order_id") long order_id
-      , @JsonProperty("type") TransactionType type
-      , @JsonProperty("fee") BigDecimal fee) {
+  public BitstampUserTransaction(
+      @JsonProperty("datetime") String datetime,
+      @JsonProperty("id") long id,
+      @JsonProperty("order_id") long order_id,
+      @JsonProperty("type") TransactionType type,
+      @JsonProperty("fee") BigDecimal fee) {
 
     this.datetime = BitstampUtils.parseDate(datetime);
     this.id = id;
     this.order_id = order_id;
     this.type = type;
-    this.fee = fee;             // fee currency is the counter currency
+    this.fee = fee; // fee currency is the counter currency
   }
 
   @JsonAnySetter
   public void setDynamicProperty(String name, Object value) {
-    // here we handle dynamically the amounts of base and counter curency plus the rate (price), which contains the underscore, ie "btc_usd
+    // here we handle dynamically the amounts of base and counter curency plus the rate (price),
+    // which contains the underscore, ie "btc_usd
     final Set<String> ccyCodeList = Currency.getAvailableCurrencyCodes();
     String[] nameArr = name.toUpperCase().split("_");
     String name1 = nameArr[0];
@@ -133,12 +133,34 @@ public final class BitstampUserTransaction {
 
   @Override
   public String toString() {
-    return "BitstampUserTransaction [datetime=" + datetime + ", id=" + id + ", order_id=" + order_id + ", type=" + type + ", fee="
-        + fee + ", base=" + base + ", counter=" + counter + ", amounts=" + amounts + ", price=" + price + "]";
+    return "BitstampUserTransaction [datetime="
+        + datetime
+        + ", id="
+        + id
+        + ", order_id="
+        + order_id
+        + ", type="
+        + type
+        + ", fee="
+        + fee
+        + ", base="
+        + base
+        + ", counter="
+        + counter
+        + ", amounts="
+        + amounts
+        + ", price="
+        + price
+        + "]";
   }
 
   public enum TransactionType {
-    deposit, withdrawal, trade, rippleWithdrawal, rippleDeposit, subAccountTransfer;
+    deposit,
+    withdrawal,
+    trade,
+    rippleWithdrawal,
+    rippleDeposit,
+    subAccountTransfer;
 
     @JsonCreator
     public static TransactionType fromString(int type) {

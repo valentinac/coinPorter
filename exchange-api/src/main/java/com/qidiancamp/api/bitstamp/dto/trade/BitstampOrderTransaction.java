@@ -2,7 +2,6 @@ package com.qidiancamp.api.bitstamp.dto.trade;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.qidiancamp.api.bitstamp.BitstampUtils;
-
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -27,10 +26,14 @@ public class BitstampOrderTransaction {
    * @param price transaction rate
    * @param fee transaction fee
    */
-  public BitstampOrderTransaction(@JsonProperty("datetime") String datetime, @JsonProperty("tid") long tid,
+  public BitstampOrderTransaction(
+      @JsonProperty("datetime") String datetime,
+      @JsonProperty("tid") long tid,
       @JsonProperty("type") BitstampUserTransaction.TransactionType type,
-      @JsonProperty("usd") BigDecimal usd, @JsonProperty("btc") BigDecimal btc,
-      @JsonProperty("price") BigDecimal price, @JsonProperty("fee") BigDecimal fee) {
+      @JsonProperty("usd") BigDecimal usd,
+      @JsonProperty("btc") BigDecimal btc,
+      @JsonProperty("price") BigDecimal price,
+      @JsonProperty("fee") BigDecimal fee) {
 
     this.datetime = BitstampUtils.parseDate(datetime);
     ;

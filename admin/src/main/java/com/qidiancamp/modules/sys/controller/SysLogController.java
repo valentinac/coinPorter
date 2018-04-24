@@ -13,8 +13,8 @@
  */
 package com.qidiancamp.modules.sys.controller;
 
-import com.qidiancamp.common.utils.R;
 import com.qidiancamp.common.utils.PageUtils;
+import com.qidiancamp.common.utils.R;
 import com.qidiancamp.modules.sys.service.SysLogService;
 import java.util.Map;
 import org.apache.shiro.authz.annotation.RequiresPermissions;

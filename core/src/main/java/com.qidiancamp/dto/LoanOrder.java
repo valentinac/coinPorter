@@ -1,9 +1,9 @@
 package com.qidiancamp.dto;
 
+import com.qidiancamp.dto.Order.OrderType;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import com.qidiancamp.dto.Order.OrderType;
 
 /** Data object representing an order for a loan */
 public class LoanOrder implements Serializable {

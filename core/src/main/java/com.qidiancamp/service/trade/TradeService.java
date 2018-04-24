@@ -1,7 +1,5 @@
 package com.qidiancamp.service.trade;
 
-import java.io.IOException;
-import java.util.Collection;
 import com.qidiancamp.dto.Order;
 import com.qidiancamp.dto.trade.LimitOrder;
 import com.qidiancamp.dto.trade.MarketOrder;
@@ -18,6 +16,8 @@ import com.qidiancamp.service.trade.params.TradeHistoryParams;
 import com.qidiancamp.service.trade.params.TradeHistoryParamsAll;
 import com.qidiancamp.service.trade.params.orders.OpenOrdersParams;
 import com.qidiancamp.service.trade.params.orders.OrderQueryParams;
+import java.io.IOException;
+import java.util.Collection;
 
 /**
  * Interface to provide the following to {@link com.qidiancamp.Exchange}:

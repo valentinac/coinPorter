@@ -9,8 +9,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.qidiancamp.api.gate.GateioAdapters;
 import com.qidiancamp.currency.CurrencyPair;
-
-
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
@@ -40,7 +38,8 @@ public class GateioCurrencyPairs {
   static class BTERCurrencyPairsDeserializer extends JsonDeserializer<GateioCurrencyPairs> {
 
     @Override
-    public GateioCurrencyPairs deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+    public GateioCurrencyPairs deserialize(JsonParser jp, DeserializationContext ctxt)
+        throws IOException, JsonProcessingException {
 
       final Set<CurrencyPair> pairs = new HashSet<>();
       final ObjectCodec oc = jp.getCodec();

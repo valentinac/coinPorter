@@ -94,7 +94,7 @@ public enum ExchangeFactory {
    *     org.knowm.xchange.ExchangeSpecification}
    */
   public Exchange createExchange(
-          Class<? extends Exchange> exchangeClass, String apiKey, String secretKey) {
+      Class<? extends Exchange> exchangeClass, String apiKey, String secretKey) {
 
     Assert.notNull(exchangeClass, "exchange cannot be null");
 

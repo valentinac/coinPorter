@@ -1,11 +1,11 @@
 package com.qidiancamp.dto;
 
+import com.qidiancamp.currency.CurrencyPair;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import com.qidiancamp.currency.CurrencyPair;
 
 /** Data object representing an order */
 public abstract class Order implements Serializable {

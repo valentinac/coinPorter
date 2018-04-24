@@ -11,7 +11,6 @@ import com.qidiancamp.service.BaseService;
 import com.qidiancamp.service.trade.params.DefaultWithdrawFundsParams;
 import com.qidiancamp.service.trade.params.TradeHistoryParams;
 import com.qidiancamp.service.trade.params.WithdrawFundsParams;
-
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;

@@ -3,7 +3,6 @@ package com.qidiancamp.dto.marketdata;
 import com.qidiancamp.currency.CurrencyPair;
 import com.qidiancamp.dto.Order;
 import com.qidiancamp.service.marketdata.MarketDataService;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -32,8 +31,8 @@ public class Trade implements Serializable {
 
   /**
    * This constructor is called to create a public Trade object in {@link
-   * MarketDataService#getTrades(com.qidiancamp.currency.CurrencyPair, Object...)}
-   * implementations) since it's missing the orderId and fee parameters.
+   * MarketDataService#getTrades(com.qidiancamp.currency.CurrencyPair, Object...)} implementations)
+   * since it's missing the orderId and fee parameters.
    *
    * @param type The trade type (BID side or ASK side)
    * @param originalAmount The depth of this trade

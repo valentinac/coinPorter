@@ -1,16 +1,13 @@
 package com.qidiancamp.api.gate;
 
-
-
 import com.qidiancamp.api.gate.dto.marketdata.*;
-
+import java.io.IOException;
+import java.util.Map;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import java.io.IOException;
-import java.util.Map;
 
 @Path("api2/1")
 @Produces(MediaType.APPLICATION_JSON)
@@ -34,18 +31,27 @@ public interface Gateio {
 
   @GET
   @Path("ticker/{ident}_{currency}")
-  GateioTicker getTicker(@PathParam("ident") String tradeableIdentifier, @PathParam("currency") String currency) throws IOException;
+  GateioTicker getTicker(
+      @PathParam("ident") String tradeableIdentifier, @PathParam("currency") String currency)
+      throws IOException;
 
   @GET
   @Path("depth/{ident}_{currency}")
-  GateioDepth getFullDepth(@PathParam("ident") String tradeableIdentifier, @PathParam("currency") String currency) throws IOException;
+  GateioDepth getFullDepth(
+      @PathParam("ident") String tradeableIdentifier, @PathParam("currency") String currency)
+      throws IOException;
 
   @GET
   @Path("trade/{ident}_{currency}")
-  GateioTradeHistory getTradeHistory(@PathParam("ident") String tradeableIdentifier, @PathParam("currency") String currency) throws IOException;
+  GateioTradeHistory getTradeHistory(
+      @PathParam("ident") String tradeableIdentifier, @PathParam("currency") String currency)
+      throws IOException;
 
   @GET
   @Path("trade/{ident}_{currency}/{tradeId}")
-  GateioTradeHistory getTradeHistorySince(@PathParam("ident") String tradeableIdentifier, @PathParam("currency") String currency,
-                                          @PathParam("tradeId") String tradeId) throws IOException;
+  GateioTradeHistory getTradeHistorySince(
+      @PathParam("ident") String tradeableIdentifier,
+      @PathParam("currency") String currency,
+      @PathParam("tradeId") String tradeId)
+      throws IOException;
 }

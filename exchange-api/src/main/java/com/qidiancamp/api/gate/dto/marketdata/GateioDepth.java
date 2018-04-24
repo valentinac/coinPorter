@@ -2,12 +2,9 @@ package com.qidiancamp.api.gate.dto.marketdata;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.qidiancamp.api.GateioBaseResponse;
-
 import java.util.List;
 
-/**
- * Data object representing depth from Bter
- */
+/** Data object representing depth from Bter */
 public class GateioDepth extends GateioBaseResponse {
 
   private final List<GateioPublicOrder> asks;
@@ -19,7 +16,9 @@ public class GateioDepth extends GateioBaseResponse {
    * @param asks
    * @param bids
    */
-  private GateioDepth(@JsonProperty("asks") List<GateioPublicOrder> asks, @JsonProperty("bids") List<GateioPublicOrder> bids,
+  private GateioDepth(
+      @JsonProperty("asks") List<GateioPublicOrder> asks,
+      @JsonProperty("bids") List<GateioPublicOrder> bids,
       @JsonProperty("result") boolean result) {
 
     super(result, null);
@@ -42,5 +41,4 @@ public class GateioDepth extends GateioBaseResponse {
 
     return "GateioDepth [asks=" + asks.toString() + ", bids=" + bids.toString() + "]";
   }
-
 }

@@ -4,9 +4,7 @@ import com.qidiancamp.Exchange;
 import com.qidiancamp.service.BaseExchangeService;
 import com.qidiancamp.service.BaseService;
 
-/**
- * @author timmolter
- */
+/** @author timmolter */
 public class BitstampBaseService extends BaseExchangeService implements BaseService {
 
   /**

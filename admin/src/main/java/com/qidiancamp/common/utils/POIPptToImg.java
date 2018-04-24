@@ -1,7 +1,6 @@
 package com.qidiancamp.common.utils;
 
 import com.qidiancamp.modules.oss.cloud.OSSFactory;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;

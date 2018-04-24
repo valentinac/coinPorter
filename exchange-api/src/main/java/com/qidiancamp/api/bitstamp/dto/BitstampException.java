@@ -1,16 +1,16 @@
 package com.qidiancamp.api.bitstamp.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import si.mazi.rescu.HttpStatusExceptionSupport;
-
 import java.util.Collection;
 import java.util.Map;
+import si.mazi.rescu.HttpStatusExceptionSupport;
 
 public class BitstampException extends HttpStatusExceptionSupport {
 
   private Map<String, Collection<String>> errors;
 
-  public BitstampException(@JsonProperty("error") Object error, @JsonProperty("reason") Object reason) {
+  public BitstampException(
+      @JsonProperty("error") Object error, @JsonProperty("reason") Object reason) {
     super(getMessage(error == null ? reason : error));
 
     if (error == null) {

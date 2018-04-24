@@ -7,10 +7,10 @@ public class GateioPlaceOrderReturn extends GateioBaseResponse {
 
   private final String orderNumber;
 
-  /**
-   * Constructor
-   */
-  private GateioPlaceOrderReturn(@JsonProperty("result") boolean result, @JsonProperty("orderNumber") String orderNumber,
+  /** Constructor */
+  private GateioPlaceOrderReturn(
+      @JsonProperty("result") boolean result,
+      @JsonProperty("orderNumber") String orderNumber,
       @JsonProperty("msg") String message) {
 
     super(result, message);
@@ -27,5 +27,4 @@ public class GateioPlaceOrderReturn extends GateioBaseResponse {
 
     return "GateioPlaceOrderReturn [orderNumber=" + orderNumber + "]";
   }
-
 }

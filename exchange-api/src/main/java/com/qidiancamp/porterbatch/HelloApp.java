@@ -12,12 +12,14 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class HelloApp {
-    public static void main(String[] args) throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
-        ApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");
-        JobLauncher jobLauncher = context.getBean(JobLauncher.class);
-        Job job = context.getBean("sampleJob", Job.class);
-        JobParametersBuilder builder = new JobParametersBuilder();
-        JobExecution jobExecution = jobLauncher.run(job, builder.toJobParameters());
-        System.out.println(jobExecution.getExitStatus().getExitCode());
-    }
+  public static void main(String[] args)
+      throws JobParametersInvalidException, JobExecutionAlreadyRunningException,
+          JobRestartException, JobInstanceAlreadyCompleteException {
+    ApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");
+    JobLauncher jobLauncher = context.getBean(JobLauncher.class);
+    Job job = context.getBean("sampleJob", Job.class);
+    JobParametersBuilder builder = new JobParametersBuilder();
+    JobExecution jobExecution = jobLauncher.run(job, builder.toJobParameters());
+    System.out.println(jobExecution.getExitStatus().getExitCode());
+  }
 }

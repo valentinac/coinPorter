@@ -3,10 +3,11 @@ package com.qidiancamp.utils.jackson;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.qidiancamp.utils.DateUtils;
+
 import java.io.IOException;
 import java.util.Date;
 import java.util.Locale;
-import org.knowm.xchange.utils.DateUtils;
 
 /**
  * Deserializes an rfc1123 formatted Date String to a Java Date rfc1123 format: 'EEE, dd MMM yyyy

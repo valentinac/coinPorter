@@ -23,7 +23,6 @@ import com.qidiancamp.modules.job.dao.ScheduleJobDao;
 import com.qidiancamp.modules.job.entity.ScheduleJobEntity;
 import com.qidiancamp.modules.job.service.ScheduleJobService;
 import com.qidiancamp.modules.job.utils.ScheduleUtils;
-
 import java.util.*;
 import javax.annotation.PostConstruct;
 import org.apache.commons.lang.StringUtils;

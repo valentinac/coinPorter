@@ -3,7 +3,6 @@ package com.qidiancamp.dto.marketdata;
 import com.qidiancamp.currency.CurrencyPair;
 import com.qidiancamp.dto.Order;
 import com.qidiancamp.dto.trade.LimitOrder;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;

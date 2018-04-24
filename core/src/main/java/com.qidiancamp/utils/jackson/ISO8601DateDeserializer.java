@@ -3,9 +3,9 @@ package com.qidiancamp.utils.jackson;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.qidiancamp.utils.DateUtils;
 import java.io.IOException;
 import java.util.Date;
-import org.knowm.xchange.utils.DateUtils;
 
 /**
  * Deserializes an ISO 8601 formatted Date String to a Java Date ISO 8601 format:

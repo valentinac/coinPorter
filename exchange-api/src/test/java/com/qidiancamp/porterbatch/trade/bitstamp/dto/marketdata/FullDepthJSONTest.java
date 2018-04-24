@@ -1,24 +1,22 @@
 package com.qidiancamp.porterbatch.trade.bitstamp.dto.marketdata;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-/**
- * Test BitStamp Full Depth JSON parsing
- */
+/** Test BitStamp Full Depth JSON parsing */
 public class FullDepthJSONTest {
 
   @Test
   public void testUnmarshal() throws IOException {
 
     // Read in the JSON from the example resources
-    InputStream is = FullDepthJSONTest.class.getResourceAsStream("/marketdata/example-full-depth-data.json");
+    InputStream is =
+        FullDepthJSONTest.class.getResourceAsStream("/marketdata/example-full-depth-data.json");
 
     // Use Jackson to parse it
     ObjectMapper mapper = new ObjectMapper();

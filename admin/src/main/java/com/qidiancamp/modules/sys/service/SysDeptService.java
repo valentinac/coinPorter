@@ -15,7 +15,6 @@ package com.qidiancamp.modules.sys.service;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.qidiancamp.modules.sys.entity.SysDeptEntity;
-
 import java.util.List;
 import java.util.Map;
 

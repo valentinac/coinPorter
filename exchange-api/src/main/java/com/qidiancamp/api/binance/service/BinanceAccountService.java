@@ -1,12 +1,10 @@
 package com.qidiancamp.api.binance.service;
 
-
 import com.qidiancamp.Exchange;
 import com.qidiancamp.api.binance.dto.account.BinanceAccountInformation;
 import com.qidiancamp.dto.account.AccountInfo;
 import com.qidiancamp.dto.account.Balance;
 import com.qidiancamp.service.account.AccountService;
-
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -22,31 +20,41 @@ public class BinanceAccountService extends BinanceAccountServiceRaw implements A
 
   @Override
   public AccountInfo getAccountInfo() throws IOException {
-    Long recvWindow = (Long) exchange.getExchangeSpecification().getExchangeSpecificParametersItem("recvWindow");
+    Long recvWindow =
+        (Long) exchange.getExchangeSpecification().getExchangeSpecificParametersItem("recvWindow");
     BinanceAccountInformation acc = super.account(recvWindow, System.currentTimeMillis());
-    List<BitstampBalance.Balance> balances = acc.balances.stream()
-        .map(b -> new Balance(Currency.getInstance(b.asset), b.free.add(b.locked), b.free))
-        .collect(Collectors.toList());
+    List<BitstampBalance.Balance> balances =
+        acc.balances
+            .stream()
+            .map(b -> new Balance(Currency.getInstance(b.asset), b.free.add(b.locked), b.free))
+            .collect(Collectors.toList());
     return new AccountInfo(new Wallet(balances));
   }
 
   @Override
   public String withdrawFunds(Currency currency, BigDecimal amount, String address)
-      throws ExchangeException, NotAvailableFromExchangeException, NotYetImplementedForExchangeException, IOException {
+      throws ExchangeException, NotAvailableFromExchangeException,
+          NotYetImplementedForExchangeException, IOException {
     return withdraw0(currency.getCurrencyCode(), address, amount);
   }
 
   @Override
   public String withdrawFunds(WithdrawFundsParams params)
-      throws ExchangeException, NotAvailableFromExchangeException, NotYetImplementedForExchangeException, IOException {
-      if (!(params instanceof DefaultWithdrawFundsParams)) {
+      throws ExchangeException, NotAvailableFromExchangeException,
+          NotYetImplementedForExchangeException, IOException {
+    if (!(params instanceof DefaultWithdrawFundsParams)) {
       throw new RuntimeException("DefaultWithdrawFundsParams must be provided.");
     }
     String id = null;
     if (params instanceof RippleWithdrawFundsParams) {
       RippleWithdrawFundsParams rippleParams = null;
-      rippleParams = (RippleWithdrawFundsParams)params;
-      id = withdraw0(rippleParams.currency.getCurrencyCode(), rippleParams.address, rippleParams.tag, rippleParams.amount);
+      rippleParams = (RippleWithdrawFundsParams) params;
+      id =
+          withdraw0(
+              rippleParams.currency.getCurrencyCode(),
+              rippleParams.address,
+              rippleParams.tag,
+              rippleParams.amount);
     } else {
       DefaultWithdrawFundsParams p = (DefaultWithdrawFundsParams) params;
       id = withdraw0(p.currency.getCurrencyCode(), p.address, p.amount);
@@ -54,21 +62,25 @@ public class BinanceAccountService extends BinanceAccountServiceRaw implements A
     return id;
   }
 
-  private String withdraw0(String asset, String address, BigDecimal amount) throws IOException, BinanceException {
+  private String withdraw0(String asset, String address, BigDecimal amount)
+      throws IOException, BinanceException {
     // the name parameter seams to be mandatory
     String name = address.length() <= 10 ? address : address.substring(0, 10);
     return super.withdraw(asset, address, amount, name, null, System.currentTimeMillis());
   }
-  private String withdraw0(String asset, String address, String addressTag, BigDecimal amount) throws IOException, BinanceException {
+
+  private String withdraw0(String asset, String address, String addressTag, BigDecimal amount)
+      throws IOException, BinanceException {
     // the name parameter seams to be mandatory
     String name = address.length() <= 10 ? address : address.substring(0, 10);
-    Long recvWindow = (Long) exchange.getExchangeSpecification().getExchangeSpecificParametersItem("recvWindow");
-    return super.withdraw(asset, address, addressTag, amount, name, recvWindow, System.currentTimeMillis());
+    Long recvWindow =
+        (Long) exchange.getExchangeSpecification().getExchangeSpecificParametersItem("recvWindow");
+    return super.withdraw(
+        asset, address, addressTag, amount, name, recvWindow, System.currentTimeMillis());
   }
 
   @Override
-  public String requestDepositAddress(Currency currency, String... args)
-      throws IOException {
+  public String requestDepositAddress(Currency currency, String... args) throws IOException {
     throw new NotAvailableFromExchangeException();
   }
 
@@ -78,14 +90,15 @@ public class BinanceAccountService extends BinanceAccountServiceRaw implements A
   }
 
   @Override
-  public List<FundingRecord> getFundingHistory(TradeHistoryParams params)
-      throws IOException {
+  public List<FundingRecord> getFundingHistory(TradeHistoryParams params) throws IOException {
     if (!(params instanceof TradeHistoryParamCurrency)) {
-      throw new RuntimeException("You must provide the currency in order to get the funding history (TradeHistoryParamCurrency).");
+      throw new RuntimeException(
+          "You must provide the currency in order to get the funding history (TradeHistoryParamCurrency).");
     }
     TradeHistoryParamCurrency cp = (TradeHistoryParamCurrency) params;
     final String asset = cp.getCurrency().getCurrencyCode();
-    Long recvWindow = (Long) exchange.getExchangeSpecification().getExchangeSpecificParametersItem("recvWindow");
+    Long recvWindow =
+        (Long) exchange.getExchangeSpecification().getExchangeSpecificParametersItem("recvWindow");
 
     boolean withdrawals = true;
     boolean deposits = true;
@@ -110,23 +123,49 @@ public class BinanceAccountService extends BinanceAccountServiceRaw implements A
 
     List<FundingRecord> result = new ArrayList<>();
     if (withdrawals) {
-      super.withdrawHistory(asset, startTime, endTime, recvWindow, System.currentTimeMillis()).forEach(w -> {
-        result.add(new FundingRecord(w.address, new Date(w.applyTime), Currency.getInstance(w.asset), w.amount, null, null, Type.WITHDRAWAL, withdrawStatus(w.status), null, null, null));
-      });
+      super.withdrawHistory(asset, startTime, endTime, recvWindow, System.currentTimeMillis())
+          .forEach(
+              w -> {
+                result.add(
+                    new FundingRecord(
+                        w.address,
+                        new Date(w.applyTime),
+                        Currency.getInstance(w.asset),
+                        w.amount,
+                        null,
+                        null,
+                        Type.WITHDRAWAL,
+                        withdrawStatus(w.status),
+                        null,
+                        null,
+                        null));
+              });
     }
 
     if (deposits) {
-      super.depositHistory(asset, startTime, endTime, recvWindow, System.currentTimeMillis()).forEach(d -> {
-        result.add(new FundingRecord(null, new Date(d.insertTime), Currency.getInstance(d.asset), d.amount, null, null, Type.DEPOSIT, depositStatus(d.status), null, null, null));
-      });
+      super.depositHistory(asset, startTime, endTime, recvWindow, System.currentTimeMillis())
+          .forEach(
+              d -> {
+                result.add(
+                    new FundingRecord(
+                        null,
+                        new Date(d.insertTime),
+                        Currency.getInstance(d.asset),
+                        d.amount,
+                        null,
+                        null,
+                        Type.DEPOSIT,
+                        depositStatus(d.status),
+                        null,
+                        null,
+                        null));
+              });
     }
 
     return result;
   }
 
-  /**
-   * (0:Email Sent,1:Cancelled 2:Awaiting Approval 3:Rejected 4:Processing 5:Failure 6Completed)
-   */
+  /** (0:Email Sent,1:Cancelled 2:Awaiting Approval 3:Rejected 4:Processing 5:Failure 6Completed) */
   private static FundingRecord.Status withdrawStatus(int status) {
     switch (status) {
       case 0:
@@ -145,9 +184,7 @@ public class BinanceAccountService extends BinanceAccountServiceRaw implements A
     }
   }
 
-  /**
-   * (0:pending,1:success)
-   */
+  /** (0:pending,1:success) */
   private static FundingRecord.Status depositStatus(int status) {
     switch (status) {
       case 0:
@@ -158,5 +195,4 @@ public class BinanceAccountService extends BinanceAccountServiceRaw implements A
         throw new RuntimeException("Unknown binance deposit status: " + status);
     }
   }
-
 }

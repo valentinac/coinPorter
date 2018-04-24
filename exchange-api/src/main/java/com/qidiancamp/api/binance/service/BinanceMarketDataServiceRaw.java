@@ -4,7 +4,6 @@ import com.qidiancamp.Exchange;
 import com.qidiancamp.api.binance.dto.BinanceException;
 import com.qidiancamp.api.binance.dto.marketdata.*;
 import com.qidiancamp.api.binance.dto.meta.BinanceTime;
-
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -25,16 +24,19 @@ public class BinanceMarketDataServiceRaw extends BinanceBaseService {
     return time.getServerTime();
   }
 
-  public BinanceOrderbook getBinanceOrderbook(String symbol, Integer limit) throws BinanceException, IOException {
+  public BinanceOrderbook getBinanceOrderbook(String symbol, Integer limit)
+      throws BinanceException, IOException {
     return binance.depth(symbol, limit);
   }
 
-  public List<BinanceAggTrades> aggTrades(String symbol, Long fromId, Long startTime, Long endTime
-      , Integer limit) throws BinanceException, IOException {
+  public List<BinanceAggTrades> aggTrades(
+      String symbol, Long fromId, Long startTime, Long endTime, Integer limit)
+      throws BinanceException, IOException {
     return binance.aggTrades(symbol, fromId, startTime, endTime, limit);
   }
 
-  public List<BinanceKline> klines(String symbol, KlineInterval interval, Integer limit, Long startTime, Long endTime)
+  public List<BinanceKline> klines(
+      String symbol, KlineInterval interval, Integer limit, Long startTime, Long endTime)
       throws BinanceException, IOException {
     List<Object[]> raw = binance.klines(symbol, interval, limit, startTime, endTime);
     return raw.stream().map(obj -> new BinanceKline(obj)).collect(Collectors.toList());

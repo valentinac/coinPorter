@@ -13,12 +13,11 @@
  */
 package com.qidiancamp.modules.sys.controller;
 
-import com.qidiancamp.common.utils.R;
-import com.qidiancamp.modules.sys.service.SysDictService;
 import com.qidiancamp.common.utils.PageUtils;
+import com.qidiancamp.common.utils.R;
 import com.qidiancamp.common.validator.ValidatorUtils;
 import com.qidiancamp.modules.sys.entity.SysDictEntity;
-
+import com.qidiancamp.modules.sys.service.SysDictService;
 import java.util.Arrays;
 import java.util.Map;
 import org.apache.shiro.authz.annotation.RequiresPermissions;

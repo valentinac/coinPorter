@@ -5,11 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.qidiancamp.currency.Currency;
 import com.qidiancamp.currency.CurrencyPair;
 import com.qidiancamp.utils.ObjectMapperHelper;
-
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Map;
-
 
 /**
  * This class is loaded during creation of the Exchange and is intended to hold both data that is

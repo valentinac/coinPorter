@@ -15,12 +15,11 @@ package com.qidiancamp.common.aspect;
 
 import com.google.gson.Gson;
 import com.qidiancamp.common.annotation.SysLog;
+import com.qidiancamp.common.utils.HttpContextUtils;
 import com.qidiancamp.common.utils.IPUtils;
+import com.qidiancamp.modules.sys.entity.SysLogEntity;
 import com.qidiancamp.modules.sys.entity.SysUserEntity;
 import com.qidiancamp.modules.sys.service.SysLogService;
-import com.qidiancamp.common.utils.HttpContextUtils;
-import com.qidiancamp.modules.sys.entity.SysLogEntity;
-
 import java.lang.reflect.Method;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;

@@ -17,7 +17,6 @@ import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import com.qidiancamp.common.utils.R;
 import com.qidiancamp.modules.sys.shiro.ShiroUtils;
-
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;

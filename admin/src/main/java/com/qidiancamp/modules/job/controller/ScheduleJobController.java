@@ -19,7 +19,6 @@ import com.qidiancamp.common.utils.R;
 import com.qidiancamp.common.validator.ValidatorUtils;
 import com.qidiancamp.modules.job.entity.ScheduleJobEntity;
 import com.qidiancamp.modules.job.service.ScheduleJobService;
-
 import java.util.Map;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;

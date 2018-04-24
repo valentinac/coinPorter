@@ -14,9 +14,8 @@
 package com.qidiancamp.modules.sys.service;
 
 import com.baomidou.mybatisplus.service.IService;
-import com.qidiancamp.modules.sys.entity.SysConfigEntity;
 import com.qidiancamp.common.utils.PageUtils;
-
+import com.qidiancamp.modules.sys.entity.SysConfigEntity;
 import java.util.Map;
 
 /**

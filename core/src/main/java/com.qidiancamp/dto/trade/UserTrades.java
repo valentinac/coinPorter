@@ -1,7 +1,7 @@
 package com.qidiancamp.dto.trade;
 
-import java.util.List;
 import com.qidiancamp.dto.marketdata.Trades;
+import java.util.List;
 
 public class UserTrades extends Trades {
 

@@ -1,28 +1,20 @@
 package com.qidiancamp.api.binance.service;
 
-
 import com.qidiancamp.currency.CurrencyPair;
 import com.qidiancamp.service.trade.params.TradeHistoryParamCurrencyPair;
 import com.qidiancamp.service.trade.params.TradeHistoryParamLimit;
 import com.qidiancamp.service.trade.params.TradeHistoryParamsIdSpan;
 
-public class BinanceTradeHistoryParams implements TradeHistoryParamCurrencyPair, TradeHistoryParamLimit, TradeHistoryParamsIdSpan {
+public class BinanceTradeHistoryParams
+    implements TradeHistoryParamCurrencyPair, TradeHistoryParamLimit, TradeHistoryParamsIdSpan {
 
-  /**
-   * mandatory
-   */
+  /** mandatory */
   private CurrencyPair currencyPair;
-  /**
-   * optional
-   */
+  /** optional */
   private Integer limit;
-  /**
-   * optional
-   */
+  /** optional */
   private String startId;
-  /**
-   * ignored
-   */
+  /** ignored */
   private String endId;
 
   public CurrencyPair getCurrencyPair() {

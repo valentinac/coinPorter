@@ -1,6 +1,5 @@
 package com.qidiancamp.api.binance.service;
 
-
 import com.qidiancamp.currency.CurrencyPair;
 import com.qidiancamp.service.trade.params.CancelOrderByCurrencyPair;
 import com.qidiancamp.service.trade.params.CancelOrderByIdParams;

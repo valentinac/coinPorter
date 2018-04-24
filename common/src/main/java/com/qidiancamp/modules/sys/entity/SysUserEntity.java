@@ -17,9 +17,8 @@ import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.qidiancamp.common.validator.group.UpdateGroup;
 import com.qidiancamp.common.validator.group.AddGroup;
-
+import com.qidiancamp.common.validator.group.UpdateGroup;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
