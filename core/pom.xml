@@ -15,7 +15,6 @@
     <dependencies>
 
         <!-- Third party dependencies -->
-
         <dependency>
             <groupId>com.github.mmazi</groupId>
             <artifactId>rescu</artifactId>

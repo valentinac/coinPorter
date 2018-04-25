@@ -3,6 +3,7 @@ package com.qidiancamp.porterbatch.trade.bitstamp.dto.trade;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.qidiancamp.api.bitstamp.dto.trade.BitstampOrder;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;

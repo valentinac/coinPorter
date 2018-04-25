@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.qidiancamp.utils.DateUtils;
-
 import java.io.IOException;
 import java.util.Date;
 import java.util.Locale;
