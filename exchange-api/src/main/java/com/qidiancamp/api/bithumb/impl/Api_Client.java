@@ -1,10 +1,17 @@
 package com.qidiancamp.api.bithumb.impl;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qidiancamp.api.IStockRestApi;
 import com.qidiancamp.api.bithumb.HttpRequest;
 import com.qidiancamp.api.bithumb.Util;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+
 import java.net.URLEncoder;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -126,91 +133,96 @@ public class Api_Client implements IStockRestApi {
     return result;
   }
 
-  private HashMap<String, String> getHttpHeaders(
-      String endpoint, HashMap<String, String> rgData, String apiKey, String apiSecret) {
-
-    String strData = Util.mapToQueryString(rgData).replace("?", "");
-    String nNonce = usecTime();
-
-    strData = strData.substring(0, strData.length() - 1);
-
-    System.out.println("1 : " + strData);
-
-    strData = encodeURIComponent(strData);
-
-    HashMap<String, String> array = new HashMap<String, String>();
-
-    String str = endpoint + ";" + strData + ";" + nNonce;
-    // String str =
-    // "/info/balance;order_currency=BTC&payment_currency=KRW&endpoint=%2Finfo%2Fbalance;272184496";
-
-    String encoded = asHex(hmacSha512(str, apiSecret));
-
-    System.out.println("strData was: " + str);
-    System.out.println("apiSecret was: " + apiSecret);
-    array.put("Api-Key", apiKey);
-    array.put("Api-Sign", encoded);
-    array.put("Api-Nonce", String.valueOf(nNonce));
-
-    return array;
-  }
-
-  private static final String DEFAULT_ENCODING = "UTF-8";
-  private static final String HMAC_SHA512 = "HmacSHA512";
-
-  public static byte[] hmacSha512(String value, String key) {
-    try {
-      SecretKeySpec keySpec = new SecretKeySpec(key.getBytes(DEFAULT_ENCODING), HMAC_SHA512);
-
-      Mac mac = Mac.getInstance(HMAC_SHA512);
-      mac.init(keySpec);
-
-      final byte[] macData = mac.doFinal(value.getBytes());
-      byte[] hex = new Hex().encode(macData);
-
-      // return mac.doFinal(value.getBytes(DEFAULT_ENCODING));
-      return hex;
-
-    } catch (NoSuchAlgorithmException e) {
-      throw new RuntimeException(e);
-    } catch (InvalidKeyException e) {
-      throw new RuntimeException(e);
-    } catch (UnsupportedEncodingException e) {
-      throw new RuntimeException(e);
+    private HashMap<String, String> getHttpHeaders(String endpoint, HashMap<String, String> rgData, String apiKey, String apiSecret) {
+	    	
+		String strData = Util.mapToQueryString(rgData).replace("?", "");
+		String nNonce = usecTime();
+		
+		strData = strData.substring(0, strData.length()-1);
+	
+	
+		System.out.println("1 : " + strData);
+		
+		strData = encodeURIComponent(strData);
+		
+		HashMap<String, String> array = new HashMap<String, String>();
+	
+		
+		String str = endpoint + ";"	+ strData + ";" + nNonce;
+		//String str = "/info/balance;order_currency=BTC&payment_currency=KRW&endpoint=%2Finfo%2Fbalance;272184496";
+		
+        String encoded = asHex(hmacSha512(str, apiSecret));
+		
+		System.out.println("strData was: " + str);
+		System.out.println("apiSecret was: " + apiSecret);
+		array.put("Api-Key", apiKey);
+		array.put("Api-Sign", encoded);
+		array.put("Api-Nonce", String.valueOf(nNonce));
+	
+		return array;
+		
     }
-  }
+    
+    private static final String DEFAULT_ENCODING = "UTF-8";
+	private static final String HMAC_SHA512 = "HmacSHA512";
+	 
+	public static byte[] hmacSha512(String value, String key){
+	    try {
+	        SecretKeySpec keySpec = new SecretKeySpec(
+	                key.getBytes(DEFAULT_ENCODING),
+	                HMAC_SHA512);
+	 
+	        Mac mac = Mac.getInstance(HMAC_SHA512);
+	        mac.init(keySpec);
+	
+	        final byte[] macData = mac.doFinal( value.getBytes( ) );
+	        byte[] hex = new Hex().encode( macData );
+	        
+	        //return mac.doFinal(value.getBytes(DEFAULT_ENCODING));
+	        return hex;
+	 
+	    } catch (NoSuchAlgorithmException e) {
+	        throw new RuntimeException(e);
+	    } catch (InvalidKeyException e) {
+	        throw new RuntimeException(e);
+	    } catch (UnsupportedEncodingException e) {
+	        throw new RuntimeException(e);
+	    }
+	}
+	 
+	public static String asHex(byte[] bytes){
+	    return new String(Base64.encodeBase64(bytes));
+	}
 
-  public static String asHex(byte[] bytes) {
-    return new String(Base64.encodeBase64(bytes));
-  }
+    @SuppressWarnings("unchecked")
+    public String callApi(String endpoint, HashMap<String, String> params) {
+		String rgResultDecode = "";
+		HashMap<String, String> rgParams = new HashMap<String, String>();
+		rgParams.put("endpoint", endpoint);
+	
+		if (params != null) {
+		    rgParams.putAll(params);
+		}
+	
+		String api_host = api_url + endpoint;
+		HashMap<String, String> httpHeaders = getHttpHeaders(endpoint, rgParams, api_key, api_secret);
+	
+		rgResultDecode = request(api_host, "POST", rgParams, httpHeaders);
+	
+		if (!rgResultDecode.startsWith("error")) {
+		    // json �Ľ�
+		    HashMap<String, String> result;
+		    try {
+			result = new ObjectMapper().readValue(rgResultDecode,
+				HashMap.class);
+	
+			System.out.println("==== ��� ��� ====");
+			System.out.println(result.get("status"));
+		    } catch (IOException e) {
+			e.printStackTrace();
+		    }
 
-  @SuppressWarnings("unchecked")
-  public String callApi(String endpoint, HashMap<String, String> params) {
-    String rgResultDecode = "";
-    HashMap<String, String> rgParams = new HashMap<String, String>();
-    rgParams.put("endpoint", endpoint);
-
-    if (params != null) {
-      rgParams.putAll(params);
+		}
+		return rgResultDecode;
     }
-
-    String api_host = api_url + endpoint;
-    HashMap<String, String> httpHeaders = getHttpHeaders(endpoint, rgParams, api_key, api_secret);
-
-    rgResultDecode = request(api_host, "POST", rgParams, httpHeaders);
-
-    if (!rgResultDecode.startsWith("error")) {
-      // json �Ľ�
-      HashMap<String, String> result;
-      try {
-        result = new ObjectMapper().readValue(rgResultDecode, HashMap.class);
-
-        System.out.println("==== ��� ��� ====");
-        System.out.println(result.get("status"));
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
-    return rgResultDecode;
-  }
 }

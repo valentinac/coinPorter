@@ -1,6 +1,6 @@
 package com.qidiancamp.api.binance.service;
 
-import com.qidiancamp.binance.BinanceAuthenticated;
+import com.qidiancamp.api.binance.BinanceAuthenticated;
 import com.qidiancamp.service.BaseParamsDigest;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;

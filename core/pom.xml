@@ -11,7 +11,7 @@
 
     <groupId>com.qidiancamp</groupId>
     <artifactId>core</artifactId>
-
+    <packaging>jar</packaging>
     <dependencies>
 
         <!-- Third party dependencies -->
@@ -31,5 +31,31 @@
             <artifactId>commons-lang3</artifactId>
             <scope>test</scope>
         </dependency>
+
+
+        <!-- Logging is through SLF4J -->
+        <!--<dependency>-->
+            <!--<groupId>org.slf4j</groupId>-->
+            <!--<artifactId>slf4j-api</artifactId>-->
+        <!--</dependency>-->
+
+        <!-- SLF4J implementation for use in examples -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- JUnit for testing -->
+        <!--<dependency>-->
+            <!--<groupId>junit</groupId>-->
+            <!--<artifactId>junit</artifactId>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.assertj</groupId>-->
+            <!--<artifactId>assertj-core</artifactId>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
     </dependencies>
 </project>

@@ -1,6 +1,7 @@
 package com.qidiancamp.api.gate;
 
-import org.knowm.xchange.currency.CurrencyPair;
+
+import com.qidiancamp.currency.CurrencyPair;
 
 public class GateioUtils {
 

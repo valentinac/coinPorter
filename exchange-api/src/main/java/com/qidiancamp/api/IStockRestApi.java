@@ -1,4 +1,4 @@
-package com.qidiancamptech.api;
+package com.qidiancamp.api;
 
 import java.io.IOException;
 import org.apache.http.HttpException;

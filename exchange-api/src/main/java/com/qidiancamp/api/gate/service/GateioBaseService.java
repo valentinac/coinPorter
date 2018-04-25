@@ -1,11 +1,12 @@
 package com.qidiancamp.api.gate.service;
 
-import org.knowm.xchange.Exchange;
-import org.knowm.xchange.exceptions.ExchangeException;
-import org.knowm.xchange.gateio.GateioAuthenticated;
-import org.knowm.xchange.gateio.dto.GateioBaseResponse;
-import org.knowm.xchange.service.BaseExchangeService;
-import org.knowm.xchange.service.BaseService;
+
+import com.qidiancamp.Exchange;
+import com.qidiancamp.api.GateioBaseResponse;
+import com.qidiancamp.api.gate.GateioAuthenticated;
+import com.qidiancamp.exceptions.ExchangeException;
+import com.qidiancamp.service.BaseExchangeService;
+import com.qidiancamp.service.BaseService;
 import si.mazi.rescu.ParamsDigest;
 import si.mazi.rescu.RestProxyFactory;
 

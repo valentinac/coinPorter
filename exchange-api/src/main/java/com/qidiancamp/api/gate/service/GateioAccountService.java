@@ -1,18 +1,19 @@
 package com.qidiancamp.api.gate.service;
 
+import com.qidiancamp.Exchange;
+import com.qidiancamp.currency.Currency;
+import com.qidiancamp.dto.account.AccountInfo;
+import com.qidiancamp.dto.account.FundingRecord;
+import com.qidiancamp.exceptions.NotAvailableFromExchangeException;
+import com.qidiancamp.exceptions.NotYetImplementedForExchangeException;
+import com.qidiancamp.api.gate.GateioAdapters;
+import com.qidiancamp.service.account.AccountService;
+import com.qidiancamp.service.trade.params.TradeHistoryParams;
+import com.qidiancamp.service.trade.params.WithdrawFundsParams;
+
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
-import org.knowm.xchange.Exchange;
-import org.knowm.xchange.currency.Currency;
-import org.knowm.xchange.dto.account.AccountInfo;
-import org.knowm.xchange.dto.account.FundingRecord;
-import org.knowm.xchange.exceptions.NotAvailableFromExchangeException;
-import org.knowm.xchange.exceptions.NotYetImplementedForExchangeException;
-import org.knowm.xchange.gateio.GateioAdapters;
-import org.knowm.xchange.service.account.AccountService;
-import org.knowm.xchange.service.trade.params.TradeHistoryParams;
-import org.knowm.xchange.service.trade.params.WithdrawFundsParams;
 
 public class GateioAccountService extends GateioAccountServiceRaw implements AccountService {
 
@@ -24,6 +25,7 @@ public class GateioAccountService extends GateioAccountServiceRaw implements Acc
   public GateioAccountService(Exchange exchange) {
 
     super(exchange);
+
   }
 
   @Override
@@ -33,14 +35,14 @@ public class GateioAccountService extends GateioAccountServiceRaw implements Acc
   }
 
   @Override
-  public String withdrawFunds(Currency currency, BigDecimal amount, String address)
-      throws IOException {
+  public String withdrawFunds(Currency currency, BigDecimal amount, String address) throws IOException {
 
     throw new NotAvailableFromExchangeException();
   }
 
   @Override
-  public String withdrawFunds(WithdrawFundsParams params) throws IOException {
+  public String withdrawFunds(
+      WithdrawFundsParams params) throws IOException {
     throw new NotAvailableFromExchangeException();
   }
 
@@ -56,7 +58,8 @@ public class GateioAccountService extends GateioAccountServiceRaw implements Acc
   }
 
   @Override
-  public List<FundingRecord> getFundingHistory(TradeHistoryParams params) throws IOException {
+  public List<FundingRecord> getFundingHistory(
+      TradeHistoryParams params) throws IOException {
     throw new NotYetImplementedForExchangeException();
   }
 }

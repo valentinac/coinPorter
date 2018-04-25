@@ -1,11 +1,12 @@
 package com.qidiancamp.api.gate.dto.trade;
 
 import com.fasterxml.jackson.annotation.*;
+import com.qidiancamp.api.gate.dto.GateioOrderType;
+
+import javax.annotation.Generated;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
-import javax.annotation.Generated;
-import org.knowm.xchange.gateio.dto.GateioOrderType;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Generated("org.jsonschema2pojo")
@@ -14,29 +15,22 @@ public class GateioTrade {
 
   @JsonProperty("id")
   private String id;
-
   @JsonProperty("orderid")
   private String orderid;
-
   @JsonProperty("pair")
   private String pair;
-
   @JsonProperty("type")
   private GateioOrderType type;
-
   @JsonProperty("rate")
   private BigDecimal rate;
-
   @JsonProperty("amount")
   private BigDecimal amount;
-
   @JsonProperty("time")
   private String time;
-
   @JsonProperty("time_unix")
   private long timeUnix;
-
-  @JsonIgnore private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+  @JsonIgnore
+  private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
   @JsonProperty("id")
   public String getId() {
@@ -145,4 +139,5 @@ public class GateioTrade {
 
     this.additionalProperties.put(name, value);
   }
+
 }

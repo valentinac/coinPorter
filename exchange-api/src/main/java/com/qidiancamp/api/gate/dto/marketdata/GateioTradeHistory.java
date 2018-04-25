@@ -1,19 +1,18 @@
 package com.qidiancamp.api.gate.dto.marketdata;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.qidiancamp.api.GateioBaseResponse;
+import com.qidiancamp.api.gate.dto.GateioOrderType;
+
 import java.math.BigDecimal;
 import java.util.List;
-import org.knowm.xchange.gateio.dto.GateioBaseResponse;
-import org.knowm.xchange.gateio.dto.GateioOrderType;
 
 public class GateioTradeHistory extends GateioBaseResponse {
 
   private final List<GateioPublicTrade> trades;
   private final String elapsed;
 
-  private GateioTradeHistory(
-      @JsonProperty("data") List<GateioPublicTrade> trades,
-      @JsonProperty("result") boolean result,
+  private GateioTradeHistory(@JsonProperty("data") List<GateioPublicTrade> trades, @JsonProperty("result") boolean result,
       @JsonProperty("elapsed") String elapsed) {
 
     super(result, null);
@@ -45,12 +44,8 @@ public class GateioTradeHistory extends GateioBaseResponse {
     private final String tradeId;
     private final GateioOrderType type;
 
-    private GateioPublicTrade(
-        @JsonProperty("date") long date,
-        @JsonProperty("price") BigDecimal price,
-        @JsonProperty("amount") BigDecimal amount,
-        @JsonProperty("tid") String tradeId,
-        @JsonProperty("type") GateioOrderType type) {
+    private GateioPublicTrade(@JsonProperty("date") long date, @JsonProperty("price") BigDecimal price, @JsonProperty("amount") BigDecimal amount,
+        @JsonProperty("tid") String tradeId, @JsonProperty("type") GateioOrderType type) {
 
       this.date = date;
       this.price = price;
@@ -87,17 +82,7 @@ public class GateioTradeHistory extends GateioBaseResponse {
     @Override
     public String toString() {
 
-      return "BTERPublicTrade [date="
-          + date
-          + ", price="
-          + price
-          + ", amount="
-          + amount
-          + ", tradeId="
-          + tradeId
-          + ", type="
-          + type
-          + "]";
+      return "BTERPublicTrade [date=" + date + ", price=" + price + ", amount=" + amount + ", tradeId=" + tradeId + ", type=" + type + "]";
     }
   }
 }
