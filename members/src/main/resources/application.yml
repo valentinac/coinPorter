@@ -4,7 +4,7 @@ server:
         uri-encoding: UTF-8
         max-threads: 1000
         min-spare-threads: 30
-    port: 8082
+    port: 8090
     context-path: /members
 
 # mysql
@@ -12,14 +12,17 @@ spring:
     datasource:
         type: com.alibaba.druid.pool.DruidDataSource
         driverClassName: com.mysql.jdbc.Driver
-        url: jdbc:mysql://182.92.237.118:3306/coinporter?useUnicode=true&failOverReadOnly=false&characterEncoding=UTF-8
+        url: jdbc:mysql://182.92.237.118:3306/coinporter?useUnicode=true&characterEncoding=UTF-8
         username: root
         password: root
     jackson:
         time-zone: GMT+8
         date-format: yyyy-MM-dd HH:mm:ss
     resources:
-            static-locations: classpath:/static/,classpath:/views/
+        static-locations: classpath:/statics/,classpath:/templates/
+    freemarker:
+        suffix: .html
+        request-context-attribute: request
 
 # Mybatis配置
 mybatis-plus:
@@ -52,3 +55,4 @@ mybatis-plus:
     call-setters-on-nulls: true
 logging:
     config: classpath:logback-spring.xml
+

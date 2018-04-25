@@ -16,7 +16,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
 @SpringBootApplication
-//@EnableAutoConfiguration
 @MapperScan(basePackages = {"com.qidiancamp.modules.*.dao"})
 @ComponentScan(basePackages = {"com.qidiancamp"})
 public class MembersApplication extends SpringBootServletInitializer {
