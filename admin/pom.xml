@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>admin</artifactId>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <description>admin</description>
     <properties>
         <quartz.version>2.3.0</quartz.version>
@@ -25,7 +25,15 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-dependencies</artifactId>
+            <version>${version.spring.boot}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
+            <version>${version.spring.boot}</version>
         </dependency>
         <dependency>
             <groupId>org.quartz-scheduler</groupId>

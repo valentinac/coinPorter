@@ -15,12 +15,12 @@
         <module>generator</module>
     </modules>
     <name>coinPorter</name>
-    <url>http://maven.apache.org</url>
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.9.RELEASE</version>
-    </parent>
+    <!--<url>http://maven.apache.org</url>-->
+    <!--<parent>-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-starter-parent</artifactId>-->
+        <!--<version>1.5.9.RELEASE</version>-->
+    <!--</parent>-->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -28,6 +28,7 @@
         <version.assertj>3.9.1</version.assertj>
         <version.commons.io>2.6</version.commons.io>
         <version.commons.lang3>3.7</version.commons.lang3>
+        <version.commons.codec>1.10</version.commons.codec>
         <version.fasterxml>2.9.5</version.fasterxml>
         <version.github.mmazi>2.0.2</version.github.mmazi>
         <version.junit>4.12</version.junit>
@@ -39,7 +40,7 @@
         <version.httpcore>4.3.3</version.httpcore>
         <version.httpclient>4.3.3</version.httpclient>
         <spring.version>3.2.0.RELEASE</spring.version>
-
+        <version.spring.boot>1.5.9.RELEASE</version.spring.boot>
         <servlet.version>3.1.0</servlet.version>
         <junit.version>4.12</junit.version>
         <jedis.version>2.9.0</jedis.version>
@@ -70,6 +71,13 @@
     </distributionManagement>
 
     <repositories>
+        <repository>
+            <id>mvnrepository</id>
+            <url>http://mvnrepository.com/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
         <repository>
             <id>sonatype-oss-public</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
@@ -117,6 +125,11 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${version.commons.lang3}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${version.commons.codec}</version>
             </dependency>
 
             <!-- Charting -->
@@ -169,8 +182,34 @@
         </dependencies>
     </dependencyManagement>
 
+    <!-- 全局依赖声明 -->
+    <dependencies>
+        <!-- Third party dependencies -->
+        <!--<dependency>-->
+            <!--<groupId>com.github.mmazi</groupId>-->
+            <!--<artifactId>rescu</artifactId>-->
+            <!--<version>${version.github.mmazi}</version>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${version.commons.io}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${version.commons.lang3}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- SLF4J implementation for use in examples -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${version.qos.logback}</version>
+            <scope>test</scope>
+        </dependency>
 
-
+    </dependencies>
 
     <build>
 
