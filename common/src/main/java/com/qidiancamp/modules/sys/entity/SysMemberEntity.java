@@ -2,7 +2,12 @@ package com.qidiancamp.modules.sys.entity;
 
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.qidiancamp.common.validator.group.AddGroup;
+import com.qidiancamp.common.validator.group.UpdateGroup;
+import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -25,10 +30,14 @@ public class SysMemberEntity implements Serializable {
 	/**
 	 * 会员
 	 */
+	@NotBlank(message="会员名称不为空", groups = {AddGroup.class, UpdateGroup.class})
+	@Size(max=10,message = "会员名称最多10个字", groups = {AddGroup.class, UpdateGroup.class})
 	private String memberName;
 	/**
 	 * 会员密码
 	 */
+	@NotBlank(message="密码不为空", groups = {AddGroup.class})
+	@Size(max=10,message = "密码最多10个字", groups = {AddGroup.class})
 	private String memberPwd;
 	/**
 	 * 邮箱
@@ -45,6 +54,7 @@ public class SysMemberEntity implements Serializable {
 	/**
 	 * 状态  0：禁用   1：正常
 	 */
+	@NotNull(message="状态不为空", groups = {AddGroup.class, UpdateGroup.class})
 	private Integer status;
 	/**
 	 * 创建时间

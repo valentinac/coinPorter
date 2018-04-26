@@ -2,7 +2,12 @@ package com.qidiancamp.modules.sys.entity;
 
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.qidiancamp.common.validator.group.AddGroup;
+import com.qidiancamp.common.validator.group.UpdateGroup;
+import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -25,6 +30,8 @@ public class SysExchangeEntity implements Serializable {
 	/**
 	 * 交易所名称
 	 */
+	@NotBlank(message="名称不为空", groups = {AddGroup.class, UpdateGroup.class})
+	@Size(max=10,message = "名称最多10个字", groups = {AddGroup.class, UpdateGroup.class})
 	private String exchangeName;
 	/**
 	 * url
@@ -33,6 +40,7 @@ public class SysExchangeEntity implements Serializable {
 	/**
 	 * 状态  0：禁用   1：正常
 	 */
+	@NotNull(message="状态不为空", groups = {AddGroup.class, UpdateGroup.class})
 	private Integer status;
 	/**
 	 * 创建时间
