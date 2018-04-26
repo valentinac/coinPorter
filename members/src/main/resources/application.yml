@@ -20,10 +20,6 @@ spring:
         date-format: yyyy-MM-dd HH:mm:ss
     resources:
         static-locations: classpath:/statics/,classpath:/templates/
-    freemarker:
-        suffix: .html
-        request-context-attribute: request
-
 # Mybatis配置
 mybatis-plus:
   mapper-locations: classpath:mapper/**/*.xml

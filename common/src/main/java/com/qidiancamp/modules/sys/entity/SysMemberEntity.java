@@ -11,7 +11,7 @@ import java.util.Date;
  * 
  * @author abao
  * @email abao@gmail.com
- * @date 2018-04-25 14:35:20
+ * @date 2018-04-26 14:41:27
  */
 @TableName("sys_member")
 public class SysMemberEntity implements Serializable {

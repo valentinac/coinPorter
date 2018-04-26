@@ -37,6 +37,17 @@ public class MembersApplication extends SpringBootServletInitializer {
 		public void addInterceptors(InterceptorRegistry registry) {
 			registry.addInterceptor(new UserSecurityInterceptor()).addPathPatterns("/wap/**");
 		}
+
+		@Bean
+		public FreeMarkerViewResolver freeMarkerViewResolver() {
+			System.out.println("MvcConfig.freeMarkerViewResolver()");
+			FreeMarkerViewResolver resolver = new FreeMarkerViewResolver();
+			resolver.setPrefix("");
+			resolver.setSuffix(".html");
+			resolver.setContentType("text/html; charset=UTF-8");
+			resolver.setRequestContextAttribute("request");
+			return resolver;
+		}
 	}
 
 }

@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * 
  * @author abao
  * @email abao@gmail.com
- * @date 2018-04-25 14:35:20
+ * @date 2018-04-26 14:41:27
  */
 public interface SysMemberDao extends BaseMapper<SysMemberEntity> {
 	
