@@ -14,7 +14,6 @@ import com.qidiancamp.exceptions.ExchangeException;
 import com.qidiancamp.exceptions.NotAvailableFromExchangeException;
 import com.qidiancamp.exceptions.NotYetImplementedForExchangeException;
 import com.qidiancamp.service.trade.TradeService;
-import com.qidiancamp.service.trade.params.*;
 import com.qidiancamp.service.trade.params.orders.OpenOrdersParams;
 import java.io.IOException;
 import java.util.Collection;

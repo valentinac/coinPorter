@@ -14,7 +14,7 @@ import com.qidiancamp.exceptions.ExchangeException;
 import com.qidiancamp.exceptions.NotAvailableFromExchangeException;
 import com.qidiancamp.exceptions.NotYetImplementedForExchangeException;
 import com.qidiancamp.service.account.AccountService;
-import com.qidiancamp.service.trade.params.*;
+
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Arrays;
