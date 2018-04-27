@@ -25,7 +25,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <version.assertj>3.9.1</version.assertj>
+
         <version.commons.io>2.6</version.commons.io>
         <version.commons.lang3>3.7</version.commons.lang3>
         <version.commons.codec>1.10</version.commons.codec>
@@ -39,10 +39,11 @@
         <version.slf4j>1.7.25</version.slf4j>
         <version.httpcore>4.3.3</version.httpcore>
         <version.httpclient>4.3.3</version.httpclient>
+        <version.assertj>3.8.0</version.assertj>
         <spring.version>3.2.0.RELEASE</spring.version>
         <version.spring.boot>1.5.9.RELEASE</version.spring.boot>
         <servlet.version>3.1.0</servlet.version>
-        <junit.version>4.12</junit.version>
+        <version.aspectj>1.8.13</version.aspectj>
         <jedis.version>2.9.0</jedis.version>
         <druid.version>1.1.6</druid.version>
         <mybatisplus.version>2.1.6</mybatisplus.version>
@@ -252,11 +253,12 @@
                     <!--<skip>false</skip>-->
                 <!--</configuration>-->
             <!--</plugin>-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.20.1</version>
-            </plugin>
+            <!-- 测试插件会自动跑所有的测试用例 -->
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-surefire-plugin</artifactId>-->
+                <!--<version>2.20.1</version>-->
+            <!--</plugin>-->
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

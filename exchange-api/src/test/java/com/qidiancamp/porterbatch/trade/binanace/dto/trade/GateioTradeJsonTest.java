@@ -7,11 +7,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.List;
+
+import com.qidiancamp.api.gate.dto.GateioOrderType;
+import com.qidiancamp.api.gate.dto.trade.GateioOpenOrder;
+import com.qidiancamp.api.gate.dto.trade.GateioOpenOrders;
+import com.qidiancamp.api.gate.dto.trade.GateioOrderStatus;
+import com.qidiancamp.api.gate.dto.trade.GateioPlaceOrderReturn;
+import com.qidiancamp.currency.CurrencyPair;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
-import org.knowm.xchange.currency.CurrencyPair;
-import org.knowm.xchange.gateio.dto.GateioOrderType;
-
 public class GateioTradeJsonTest {
 
   @Test

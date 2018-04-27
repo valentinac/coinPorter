@@ -19,6 +19,7 @@
             <artifactId>rescu</artifactId>
             <version>${version.github.mmazi}</version>
         </dependency>
+        <!-- SLF4J implementation for use in examples -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -45,13 +46,14 @@
             <version>${version.commons.lang3}</version>
             <scope>test</scope>
         </dependency>
-        <!-- SLF4J implementation for use in examples -->
+
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${version.qos.logback}</version>
             <scope>test</scope>
         </dependency>
+
 
     </dependencies>
 </project>

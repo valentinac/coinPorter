@@ -2,13 +2,13 @@ package com.qidiancamp.porterbatch.trade.bitstamp.marketdata;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.qidiancamp.api.bitstamp.BitstampExchange;
 import org.junit.Test;
-import org.knowm.xchange.Exchange;
-import org.knowm.xchange.ExchangeFactory;
-import org.knowm.xchange.bitstamp.BitstampExchange;
-import org.knowm.xchange.currency.CurrencyPair;
-import org.knowm.xchange.dto.marketdata.Ticker;
-import org.knowm.xchange.service.marketdata.MarketDataService;
+import com.qidiancamp.Exchange;
+import com.qidiancamp.ExchangeFactory;
+import com.qidiancamp.currency.CurrencyPair;
+import com.qidiancamp.dto.marketdata.Ticker;
+import com.qidiancamp.service.marketdata.MarketDataService;
 
 /** @author timmolter */
 public class TickerFetchIntegration {

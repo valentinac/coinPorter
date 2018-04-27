@@ -8,21 +8,23 @@ import java.io.InputStream;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
+
+import com.qidiancamp.api.bitstamp.BitstampAdapters;
 import org.junit.Test;
-import org.knowm.xchange.bitstamp.dto.account.BitstampBalance;
-import org.knowm.xchange.bitstamp.dto.marketdata.BitstampOrderBook;
-import org.knowm.xchange.bitstamp.dto.marketdata.BitstampTicker;
-import org.knowm.xchange.bitstamp.dto.marketdata.BitstampTransaction;
-import org.knowm.xchange.bitstamp.dto.trade.BitstampUserTransaction;
-import org.knowm.xchange.currency.Currency;
-import org.knowm.xchange.currency.CurrencyPair;
-import org.knowm.xchange.dto.Order.OrderType;
-import org.knowm.xchange.dto.account.AccountInfo;
-import org.knowm.xchange.dto.marketdata.OrderBook;
-import org.knowm.xchange.dto.marketdata.Ticker;
-import org.knowm.xchange.dto.marketdata.Trade;
-import org.knowm.xchange.dto.marketdata.Trades;
-import org.knowm.xchange.dto.trade.UserTrades;
+import com.qidiancamp.api.bitstamp.dto.account.BitstampBalance;
+import com.qidiancamp.api.bitstamp.dto.marketdata.BitstampOrderBook;
+import com.qidiancamp.api.bitstamp.dto.marketdata.BitstampTicker;
+import com.qidiancamp.api.bitstamp.dto.marketdata.BitstampTransaction;
+import com.qidiancamp.api.bitstamp.dto.trade.BitstampUserTransaction;
+import com.qidiancamp.currency.Currency;
+import com.qidiancamp.currency.CurrencyPair;
+import com.qidiancamp.dto.Order.OrderType;
+import com.qidiancamp.dto.account.AccountInfo;
+import com.qidiancamp.dto.marketdata.OrderBook;
+import com.qidiancamp.dto.marketdata.Ticker;
+import com.qidiancamp.dto.marketdata.Trade;
+import com.qidiancamp.dto.marketdata.Trades;
+import com.qidiancamp.dto.trade.UserTrades;
 
 /** Tests the BitstampAdapter class */
 public class BitstampAdapterTest {

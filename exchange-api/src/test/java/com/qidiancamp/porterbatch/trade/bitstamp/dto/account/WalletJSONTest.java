@@ -8,6 +8,8 @@ import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.qidiancamp.api.bitstamp.dto.account.BitstampBalance;
 import org.junit.Test;
 
 /** Test BitStamp Full Depth JSON parsing */
@@ -24,8 +26,8 @@ public class WalletJSONTest {
     ObjectMapper mapper = new ObjectMapper();
     BitstampBalance bitstampBalance = mapper.readValue(is, BitstampBalance.class);
 
-    Map<String, Balance> balances = new HashMap<>();
-    for (Balance b : bitstampBalance.getBalances()) {
+    Map<String, BitstampBalance.Balance> balances = new HashMap<>();
+    for (BitstampBalance.Balance b : bitstampBalance.getBalances()) {
       balances.put(b.getCurrency(), b);
     }
 
