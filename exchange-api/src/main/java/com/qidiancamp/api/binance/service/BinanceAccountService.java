@@ -33,7 +33,7 @@ public class BinanceAccountService extends BinanceAccountServiceRaw implements A
   public AccountInfo getAccountInfo() throws IOException {
     Long recvWindow = (Long) exchange.getExchangeSpecification().getExchangeSpecificParametersItem("recvWindow");
     BinanceAccountInformation acc = super.account(recvWindow, System.currentTimeMillis());
-    List<BitstampBalance.Balance> balances = acc.balances.stream()
+    List<Balance> balances = acc.balances.stream()
         .map(b -> new Balance(Currency.getInstance(b.asset), b.free.add(b.locked), b.free))
         .collect(Collectors.toList());
     return new AccountInfo(new Wallet(balances));

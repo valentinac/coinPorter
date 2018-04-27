@@ -20,10 +20,10 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
-import org.codehaus.jackson.map.ObjectMapper;
+//import org.codehaus.jackson.map.ObjectMapper;
 
 @SuppressWarnings("unused")
-public class Api_Client implements IStockRestApi {
+public class Api_Client {
   protected String api_url = "https://api.bithumb.com";
   protected String api_key;
   protected String api_secret;

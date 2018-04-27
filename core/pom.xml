@@ -15,14 +15,43 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.github.mmazi</groupId>
+            <artifactId>rescu</artifactId>
+            <version>${version.github.mmazi}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${version.slf4j}</version>
+        </dependency>
+        <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>2.0.2</version>
+            <version>${version.fasterxml}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.0.2</version>
+            <version>${version.fasterxml}</version>
         </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${version.commons.io}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${version.commons.lang3}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- SLF4J implementation for use in examples -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${version.qos.logback}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 </project>
