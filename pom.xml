@@ -15,29 +15,35 @@
         <module>generator</module>
     </modules>
     <name>coinPorter</name>
-    <url>http://maven.apache.org</url>
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.9.RELEASE</version>
-    </parent>
+    <!--<url>http://maven.apache.org</url>-->
+    <!--<parent>-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-starter-parent</artifactId>-->
+        <!--<version>1.5.9.RELEASE</version>-->
+    <!--</parent>-->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <version.assertj>3.9.1</version.assertj>
+
         <version.commons.io>2.6</version.commons.io>
         <version.commons.lang3>3.7</version.commons.lang3>
-        <version.fasterxml>2.9.5</version.fasterxml>
+        <version.commons.codec>1.10</version.commons.codec>
+        <version.fasterxml>2.9.0</version.fasterxml>
         <version.github.mmazi>2.0.2</version.github.mmazi>
         <version.junit>4.12</version.junit>
-        <version.knowm.xchart>3.5.1</version.knowm.xchart>
+        <!--<version.knowm.xchart>3.5.1</version.knowm.xchart>-->
         <version.powermock>1.7.3</version.powermock>
         <version.qos.logback>1.2.3</version.qos.logback>
         <version.reflections>0.9.11</version.reflections>
         <version.slf4j>1.7.25</version.slf4j>
+        <version.httpcore>4.3.3</version.httpcore>
+        <version.httpclient>4.3.3</version.httpclient>
+        <version.assertj>3.8.0</version.assertj>
+        <spring.version>3.2.0.RELEASE</spring.version>
+        <version.spring.boot>1.5.9.RELEASE</version.spring.boot>
         <servlet.version>3.1.0</servlet.version>
-        <junit.version>4.12</junit.version>
+        <version.aspectj>1.8.13</version.aspectj>
         <jedis.version>2.9.0</jedis.version>
         <druid.version>1.1.6</druid.version>
         <mybatisplus.version>2.1.6</mybatisplus.version>
@@ -45,7 +51,7 @@
         <mysql.version>5.1.38</mysql.version>
         <commons.lang.version>2.6</commons.lang.version>
         <commons.fileupload.version>1.3.1</commons.fileupload.version>
-        <commons.io.version>2.5</commons.io.version>
+        <!--<commons.io.version>2.5</commons.io.version>  use version.commons.io -->
         <commons.codec.version>1.10</commons.codec.version>
         <fastjson.version>1.2.45</fastjson.version>
         <skipIntegrationTests>true</skipIntegrationTests>
@@ -63,10 +69,16 @@
             <name>Nexus Release Repository</name>
             <url>http://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
-        <downloadUrl>https://oss.sonatype.org/content/groups/public/org/knowm/xchange</downloadUrl>
     </distributionManagement>
 
     <repositories>
+        <repository>
+            <id>mvnrepository</id>
+            <url>http://mvnrepository.com/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
         <repository>
             <id>sonatype-oss-public</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
@@ -115,13 +127,18 @@
                 <artifactId>commons-lang3</artifactId>
                 <version>${version.commons.lang3}</version>
             </dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${version.commons.codec}</version>
+            </dependency>
 
             <!-- Charting -->
-            <dependency>
-                <groupId>org.knowm.xchart</groupId>
-                <artifactId>xchart</artifactId>
-                <version>${version.knowm.xchart}</version>
-            </dependency>
+            <!--<dependency>-->
+                <!--<groupId>org.knowm.xchart</groupId>-->
+                <!--<artifactId>xchart</artifactId>-->
+                <!--<version>${version.knowm.xchart}</version>-->
+            <!--</dependency>-->
 
             <!-- Reflections - java runtime metadata analysis for integration testing -->
             <dependency>
@@ -159,130 +176,24 @@
             </dependency>
             <!-- SLF4J implementation for use in examples -->
             <!--<dependency>-->
-            <!--<groupId>ch.qos.logback</groupId>-->
-            <!--<artifactId>logback-classic</artifactId>-->
-            <!--<version>${version.qos.logback}</version>-->
+                <!--<groupId>ch.qos.logback</groupId>-->
+                <!--<artifactId>logback-classic</artifactId>-->
+                <!--<version>${version.qos.logback}</version>-->
             <!--</dependency>-->
         </dependencies>
     </dependencyManagement>
 
+    <!-- 全局依赖声明 -->
     <dependencies>
+        <!-- Third party dependencies -->
         <!--<dependency>-->
-        <!--<groupId>org.knowm.xchange</groupId>-->
-        <!--<artifactId>xchange-core</artifactId>-->
-        <!--<version>4.3.6-SNAPSHOT</version>-->
-        <!--</dependency>-->
-        <!-- Logging is through SLF4J -->
-        <!--<dependency>-->
-        <!--<groupId>org.slf4j</groupId>-->
-        <!--<artifactId>slf4j-api</artifactId>-->
-        <!--<version>${version.slf4j}</version>-->
+            <!--<groupId>com.github.mmazi</groupId>-->
+            <!--<artifactId>rescu</artifactId>-->
+            <!--<version>${version.github.mmazi}</version>-->
         <!--</dependency>-->
 
-        <!--&lt;!&ndash; SLF4J implementation for use in examples &ndash;&gt;-->
-        <!--<dependency>-->
-        <!--<groupId>ch.qos.logback</groupId>-->
-        <!--<artifactId>logback-classic</artifactId>-->
-        <!--<scope>test</scope>-->
-        <!--</dependency>-->
 
-        <!-- JUnit for testing -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${version.junit}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>${version.assertj}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>${servlet.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-            <version>${jedis.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-            <version>${druid.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus</artifactId>
-            <version>${mybatisplus.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatisplus-spring-boot-starter</artifactId>
-            <version>${mybatisplus.spring.boot.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>${fastjson.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>${commons.lang.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
-            <version>${commons.fileupload.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>${commons.io.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>${commons.codec.version}</version>
-        </dependency>
     </dependencies>
-
 
     <build>
 
@@ -309,11 +220,45 @@
                 </configuration>
             </plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.20.1</version>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-source-plugin</artifactId>-->
+                <!--<version>3.0.1</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>attach-sources</id>-->
+                        <!--<goals>-->
+                            <!--<goal>jar</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+                <!--<configuration>-->
+                    <!--<skipSource>false</skipSource>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-javadoc-plugin</artifactId>-->
+                <!--<version>3.0.0-M1</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>attach-javadocs</id>-->
+                        <!--<goals>-->
+                            <!--<goal>jar</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+                <!--<configuration>-->
+                    <!--<quiet>true</quiet>-->
+                    <!--<skip>false</skip>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+            <!-- 测试插件会自动跑所有的测试用例 -->
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-surefire-plugin</artifactId>-->
+                <!--<version>2.20.1</version>-->
+            <!--</plugin>-->
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -334,22 +279,22 @@
                     </includes>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>com.coveo</groupId>
-                <artifactId>fmt-maven-plugin</artifactId>
-                <version>2.4.0</version>
-                <configuration>
-                    <filesNamePattern>.*\.java</filesNamePattern>
-                    <skip>false</skip>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>format</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>com.coveo</groupId>-->
+                <!--<artifactId>fmt-maven-plugin</artifactId>-->
+                <!--<version>2.4.0</version>-->
+                <!--<configuration>-->
+                    <!--<filesNamePattern>.*\.java</filesNamePattern>-->
+                    <!--<skip>false</skip>-->
+                <!--</configuration>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<goals>-->
+                            <!--<goal>format</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
 
         </plugins>
     </build>

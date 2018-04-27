@@ -11,22 +11,24 @@ import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+
+import com.qidiancamp.api.gate.GateioAdapters;
 import org.junit.Before;
 import org.junit.Test;
-import org.knowm.xchange.currency.Currency;
-import org.knowm.xchange.currency.CurrencyPair;
-import org.knowm.xchange.dto.Order.OrderType;
-import org.knowm.xchange.dto.account.Wallet;
-import org.knowm.xchange.dto.marketdata.OrderBook;
-import org.knowm.xchange.dto.marketdata.Trade;
-import org.knowm.xchange.dto.marketdata.Trades;
-import org.knowm.xchange.dto.trade.LimitOrder;
-import org.knowm.xchange.dto.trade.OpenOrders;
-import org.knowm.xchange.gateio.dto.account.GateioFunds;
-import org.knowm.xchange.gateio.dto.marketdata.GateioCurrencyPairs;
-import org.knowm.xchange.gateio.dto.marketdata.GateioDepth;
-import org.knowm.xchange.gateio.dto.marketdata.GateioTradeHistory;
-import org.knowm.xchange.gateio.dto.trade.GateioOpenOrders;
+import com.qidiancamp.currency.Currency;
+import com.qidiancamp.currency.CurrencyPair;
+import com.qidiancamp.dto.Order.OrderType;
+import com.qidiancamp.dto.account.Wallet;
+import com.qidiancamp.dto.marketdata.OrderBook;
+import com.qidiancamp.dto.marketdata.Trade;
+import com.qidiancamp.dto.marketdata.Trades;
+import com.qidiancamp.dto.trade.LimitOrder;
+import com.qidiancamp.dto.trade.OpenOrders;
+import com.qidiancamp.api.gate.dto.account.GateioFunds;
+import com.qidiancamp.api.gate.dto.marketdata.GateioCurrencyPairs;
+import com.qidiancamp.api.gate.dto.marketdata.GateioDepth;
+import com.qidiancamp.api.gate.dto.marketdata.GateioTradeHistory;
+import com.qidiancamp.api.gate.dto.trade.GateioOpenOrders;
 
 public class GateioAdapterTest {
 

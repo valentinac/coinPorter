@@ -1,8 +1,10 @@
-package com.qidiancamptech.porterbatch.trade;
+package com.qidiancamp.porterbatch.trade;
 
-import com.qidiancamptech.api.IStockRestApi;
-import com.qidiancamptech.api.gate.impl.StockRestApi;
+
 import java.io.IOException;
+
+import com.qidiancamp.api.IStockRestApi;
+import com.qidiancamp.api.gate.impl.StockRestApi;
 import org.apache.http.HttpException;
 
 public class GateIoClientTest {

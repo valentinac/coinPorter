@@ -16,7 +16,7 @@ public class Retries {
    * @param initialRetrySec Number of seconds to wait before trying again on the first retry.
    * @param action A callable or lambda expression that contains the code that will be tried and
    *     retried, if necessary.
-   * @param retryableException An instance of {@link org.knowm.xchange.utils.retries.IPredicate}
+   * @param retryableException An instance of {@link com.qidiancamp.utils.retries.IPredicate}
    *     that will be used to check if the exception caught is retryable, which can be any complex
    *     criteria that the user defines.
    * @return

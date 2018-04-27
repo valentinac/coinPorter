@@ -9,11 +9,12 @@ import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+
+import com.qidiancamp.api.gate.dto.GateioOrderType;
+import com.qidiancamp.api.gate.dto.marketdata.*;
+import com.qidiancamp.currency.CurrencyPair;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
-import org.knowm.xchange.currency.CurrencyPair;
-import org.knowm.xchange.gateio.dto.GateioOrderType;
-import org.knowm.xchange.gateio.dto.marketdata.GateioMarketInfoWrapper.GateioMarketInfo;
 
 public class GateioMarketDataJsonTest {
 
@@ -29,11 +30,11 @@ public class GateioMarketDataJsonTest {
     ObjectMapper mapper = new ObjectMapper();
     GateioMarketInfoWrapper marketInfoWrapper = mapper.readValue(is, GateioMarketInfoWrapper.class);
 
-    Map<CurrencyPair, GateioMarketInfo> marketInfoMap = marketInfoWrapper.getMarketInfoMap();
+    Map<CurrencyPair, GateioMarketInfoWrapper.GateioMarketInfo> marketInfoMap = marketInfoWrapper.getMarketInfoMap();
     assertThat(marketInfoMap).hasSize(2);
 
     CurrencyPair pair = new CurrencyPair("LTC", "CNY");
-    GateioMarketInfo marketInfo = marketInfoMap.get(pair);
+    GateioMarketInfoWrapper.GateioMarketInfo marketInfo = marketInfoMap.get(pair);
     assertThat(marketInfo.getCurrencyPair()).isEqualTo(pair);
     assertThat(marketInfo.getDecimalPlaces()).isEqualTo(2);
     assertThat(marketInfo.getMinAmount()).isEqualTo(".5");

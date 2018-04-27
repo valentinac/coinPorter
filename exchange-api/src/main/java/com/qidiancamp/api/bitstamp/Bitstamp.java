@@ -39,6 +39,6 @@ public interface Bitstamp {
   /** Returns descending list of transactions. */
   @GET
   @Path("transactions/")
-  BitstampTransaction[] getTransactions(@QueryParam("time") String bitstamp.jsontime)
+  BitstampTransaction[] getTransactions(@QueryParam("time") String bitstamp)
       throws IOException;
 }

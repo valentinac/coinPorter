@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
+
+import com.qidiancamp.api.bitstamp.dto.marketdata.BitstampOrderBook;
 import org.junit.Test;
 
 /** Test BitStamp Full Depth JSON parsing */
