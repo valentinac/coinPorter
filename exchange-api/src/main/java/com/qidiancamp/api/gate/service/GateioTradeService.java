@@ -1,6 +1,9 @@
 package com.qidiancamp.api.gate.service;
 
 import com.qidiancamp.Exchange;
+import com.qidiancamp.api.gate.GateioAdapters;
+import com.qidiancamp.api.gate.dto.trade.GateioOpenOrders;
+import com.qidiancamp.api.gate.dto.trade.GateioTrade;
 import com.qidiancamp.currency.CurrencyPair;
 import com.qidiancamp.dto.Order;
 import com.qidiancamp.dto.trade.LimitOrder;
@@ -10,13 +13,9 @@ import com.qidiancamp.dto.trade.UserTrades;
 import com.qidiancamp.exceptions.ExchangeException;
 import com.qidiancamp.exceptions.NotAvailableFromExchangeException;
 import com.qidiancamp.exceptions.NotYetImplementedForExchangeException;
-import com.qidiancamp.api.gate.GateioAdapters;
-import com.qidiancamp.api.gate.dto.trade.GateioOpenOrders;
-import com.qidiancamp.api.gate.dto.trade.GateioTrade;
 import com.qidiancamp.service.trade.TradeService;
 import com.qidiancamp.service.trade.params.*;
 import com.qidiancamp.service.trade.params.orders.OpenOrdersParams;
-
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
@@ -39,8 +38,7 @@ public class GateioTradeService extends GateioTradeServiceRaw implements TradeSe
   }
 
   @Override
-  public OpenOrders getOpenOrders(
-      OpenOrdersParams params) throws IOException {
+  public OpenOrders getOpenOrders(OpenOrdersParams params) throws IOException {
     GateioOpenOrders openOrders = super.getGateioOpenOrders();
     Collection<CurrencyPair> currencyPairs = exchange.getExchangeSymbols();
 
@@ -54,13 +52,17 @@ public class GateioTradeService extends GateioTradeServiceRaw implements TradeSe
   }
 
   /**
-   * Submits a Limit Order to be executed on the Gateio Exchange for the desired market defined by {@code CurrencyPair}. WARNING - Gateio will return
-   * true regardless of whether or not an order actually gets created. The reason for this is that orders are simply submitted to a queue in their
-   * back-end. One example for why an order might not get created is because there are insufficient funds. The best attempt you can make to confirm
-   * that the order was created is to poll {@link #getOpenOrders}. However, if the order is created and executed before it is caught in its open state
-   * from calling {@link #getOpenOrders} then the only way to confirm would be confirm the expected difference in funds available for your account.
+   * Submits a Limit Order to be executed on the Gateio Exchange for the desired market defined by
+   * {@code CurrencyPair}. WARNING - Gateio will return true regardless of whether or not an order
+   * actually gets created. The reason for this is that orders are simply submitted to a queue in
+   * their back-end. One example for why an order might not get created is because there are
+   * insufficient funds. The best attempt you can make to confirm that the order was created is to
+   * poll {@link #getOpenOrders}. However, if the order is created and executed before it is caught
+   * in its open state from calling {@link #getOpenOrders} then the only way to confirm would be
+   * confirm the expected difference in funds available for your account.
    *
-   * @return String "true"/"false" Used to determine if the order request was submitted successfully.
+   * @return String "true"/"false" Used to determine if the order request was submitted
+   *     successfully.
    */
   @Override
   public String placeLimitOrder(LimitOrder limitOrder) throws IOException {
@@ -75,8 +77,7 @@ public class GateioTradeService extends GateioTradeServiceRaw implements TradeSe
   }
 
   @Override
-  public boolean cancelOrder(
-      CancelOrderParams orderParams) throws IOException {
+  public boolean cancelOrder(CancelOrderParams orderParams) throws IOException {
     if (orderParams instanceof CancelOrderByIdParams) {
       return cancelOrder(((CancelOrderByIdParams) orderParams).getOrderId());
     } else {
@@ -84,11 +85,10 @@ public class GateioTradeService extends GateioTradeServiceRaw implements TradeSe
     }
   }
 
-  /**
-   * Required parameter: {@link TradeHistoryParamCurrencyPair}
-   */
+  /** Required parameter: {@link TradeHistoryParamCurrencyPair} */
   @Override
-  public UserTrades getTradeHistory(TradeHistoryParams params) throws ExchangeException, IOException {
+  public UserTrades getTradeHistory(TradeHistoryParams params)
+      throws ExchangeException, IOException {
 
     CurrencyPair pair = ((TradeHistoryParamCurrencyPair) params).getCurrencyPair();
     List<GateioTrade> userTrades = getGateioTradeHistory(pair).getTrades();
@@ -108,9 +108,7 @@ public class GateioTradeService extends GateioTradeServiceRaw implements TradeSe
   }
 
   @Override
-  public Collection<Order> getOrder(
-      String... orderIds) throws IOException {
+  public Collection<Order> getOrder(String... orderIds) throws IOException {
     throw new NotYetImplementedForExchangeException();
   }
-
 }

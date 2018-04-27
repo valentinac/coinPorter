@@ -1,6 +1,5 @@
 package com.qidiancamp.api.gate;
 
-
 import com.qidiancamp.currency.CurrencyPair;
 
 public class GateioUtils {

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="plugins/jqgrid/ui.jqgrid-bootstrap.css">
+    <link rel="stylesheet" href="plugins/ztree/css/metroStyle/metroStyle.css">
     <link rel="stylesheet" href="css/main.css">
     <script src="libs/jquery.min.js"></script>
     <script src="plugins/layer/layer.js"></script>
@@ -15,13 +16,18 @@
     <script src="libs/vue.min.js"></script>
     <script src="plugins/jqgrid/grid.locale-cn.js"></script>
     <script src="plugins/jqgrid/jquery.jqGrid.min.js"></script>
+    <script src="plugins/ztree/jquery.ztree.all.min.js"></script>
     <script src="js/common.js"></script>
 </head>
 <body>
 <div id="rrapp" v-cloak>
     <div v-show="showList">
+        <div class="grid-btn">
+                <a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+                <a class="btn btn-primary"><i class="fa fa-pencil-square-o"></i>&nbsp;谷歌验证</a>
+        </div>
         <table id="jqGrid"></table>
-        <div id="jqGridPager"></div>
+        <!--<div id="jqGridPager"></div>-->
     </div>
 
     <div v-show="!showList" class="panel panel-default">
@@ -58,16 +64,13 @@
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-sm-2 control-label">状态 0：禁用 1：正常</div>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" v-model="sysMember.status" placeholder="状态  0：禁用   1：正常"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-2 control-label">创建时间</div>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" v-model="sysMember.createTime" placeholder="创建时间"/>
-                </div>
+                <div class="col-sm-2 control-label">状态</div>
+                <label class="radio-inline">
+                    <input type="radio" name="status" value="0" v-model="sysMember.status"/> 禁用
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="status" value="1" v-model="sysMember.status"/> 正常
+                </label>
             </div>
             <div class="form-group">
                 <div class="col-sm-2 control-label"></div>
@@ -77,7 +80,6 @@
         </form>
     </div>
 </div>
-
 <script src="js/modules/sysmember.js"></script>
 </body>
 </html>

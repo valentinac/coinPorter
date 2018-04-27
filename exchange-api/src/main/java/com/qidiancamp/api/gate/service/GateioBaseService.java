@@ -1,6 +1,5 @@
 package com.qidiancamp.api.gate.service;
 
-
 import com.qidiancamp.Exchange;
 import com.qidiancamp.api.GateioBaseResponse;
 import com.qidiancamp.api.gate.GateioAuthenticated;

@@ -2,7 +2,6 @@ package com.qidiancamp.api.gate.service;
 
 import com.qidiancamp.Exchange;
 import com.qidiancamp.api.gate.dto.account.GateioFunds;
-
 import java.io.IOException;
 
 public class GateioAccountServiceRaw extends GateioBaseService {
@@ -19,8 +18,11 @@ public class GateioAccountServiceRaw extends GateioBaseService {
 
   public GateioFunds getGateioAccountInfo() throws IOException {
 
-    GateioFunds gateioFunds = bter.getFunds(exchange.getExchangeSpecification().getApiKey(), signatureCreator, exchange.getNonceFactory());
+    GateioFunds gateioFunds =
+        bter.getFunds(
+            exchange.getExchangeSpecification().getApiKey(),
+            signatureCreator,
+            exchange.getNonceFactory());
     return handleResponse(gateioFunds);
   }
-
 }

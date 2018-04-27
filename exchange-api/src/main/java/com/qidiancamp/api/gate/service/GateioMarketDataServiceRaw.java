@@ -1,7 +1,5 @@
 package com.qidiancamp.api.gate.service;
 
-
-
 import com.qidiancamp.Exchange;
 import com.qidiancamp.api.gate.GateioAdapters;
 import com.qidiancamp.api.gate.dto.marketdata.GateioDepth;
@@ -11,7 +9,6 @@ import com.qidiancamp.api.gate.dto.marketdata.GateioTradeHistory;
 import com.qidiancamp.currency.Currency;
 import com.qidiancamp.currency.CurrencyPair;
 import com.qidiancamp.dto.marketdata.Ticker;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,7 +27,8 @@ public class GateioMarketDataServiceRaw extends GateioBaseService {
     super(exchange);
   }
 
-  public Map<CurrencyPair, GateioMarketInfoWrapper.GateioMarketInfo> getBTERMarketInfo() throws IOException {
+  public Map<CurrencyPair, GateioMarketInfoWrapper.GateioMarketInfo> getBTERMarketInfo()
+      throws IOException {
 
     GateioMarketInfoWrapper bterMarketInfo = bter.getMarketInfo();
 
@@ -41,11 +39,15 @@ public class GateioMarketDataServiceRaw extends GateioBaseService {
 
     Map<String, GateioTicker> gateioTickers = bter.getTickers();
     Map<CurrencyPair, Ticker> adaptedTickers = new HashMap<>(gateioTickers.size());
-    gateioTickers.forEach((currencyPairString, gateioTicker) -> {
-      String[] currencyPairStringSplit = currencyPairString.split("_");
-      CurrencyPair currencyPair = new CurrencyPair(new Currency(currencyPairStringSplit[0].toUpperCase()), new Currency(currencyPairStringSplit[1].toUpperCase()));
-      adaptedTickers.put(currencyPair, GateioAdapters.adaptTicker(currencyPair, gateioTicker));
-    });
+    gateioTickers.forEach(
+        (currencyPairString, gateioTicker) -> {
+          String[] currencyPairStringSplit = currencyPairString.split("_");
+          CurrencyPair currencyPair =
+              new CurrencyPair(
+                  new Currency(currencyPairStringSplit[0].toUpperCase()),
+                  new Currency(currencyPairStringSplit[1].toUpperCase()));
+          adaptedTickers.put(currencyPair, GateioAdapters.adaptTicker(currencyPair, gateioTicker));
+        });
 
     return adaptedTickers;
   }
@@ -53,38 +55,48 @@ public class GateioMarketDataServiceRaw extends GateioBaseService {
   public Map<CurrencyPair, GateioDepth> getGateioDepths() throws IOException {
     Map<String, GateioDepth> depths = bter.getDepths();
     Map<CurrencyPair, GateioDepth> adaptedDepths = new HashMap<>(depths.size());
-    depths.forEach((currencyPairString, gateioDepth) -> {
-      String[] currencyPairStringSplit = currencyPairString.split("_");
-      CurrencyPair currencyPair = new CurrencyPair(new Currency(currencyPairStringSplit[0].toUpperCase()), new Currency(currencyPairStringSplit[1].toUpperCase()));
-      adaptedDepths.put(currencyPair, gateioDepth);
-    });
+    depths.forEach(
+        (currencyPairString, gateioDepth) -> {
+          String[] currencyPairStringSplit = currencyPairString.split("_");
+          CurrencyPair currencyPair =
+              new CurrencyPair(
+                  new Currency(currencyPairStringSplit[0].toUpperCase()),
+                  new Currency(currencyPairStringSplit[1].toUpperCase()));
+          adaptedDepths.put(currencyPair, gateioDepth);
+        });
     return adaptedDepths;
   }
 
   public GateioTicker getBTERTicker(String tradableIdentifier, String currency) throws IOException {
 
-    GateioTicker gateioTicker = bter.getTicker(tradableIdentifier.toLowerCase(), currency.toLowerCase());
+    GateioTicker gateioTicker =
+        bter.getTicker(tradableIdentifier.toLowerCase(), currency.toLowerCase());
 
     return handleResponse(gateioTicker);
   }
 
-  public GateioDepth getBTEROrderBook(String tradeableIdentifier, String currency) throws IOException {
+  public GateioDepth getBTEROrderBook(String tradeableIdentifier, String currency)
+      throws IOException {
 
-    GateioDepth gateioDepth = bter.getFullDepth(tradeableIdentifier.toLowerCase(), currency.toLowerCase());
+    GateioDepth gateioDepth =
+        bter.getFullDepth(tradeableIdentifier.toLowerCase(), currency.toLowerCase());
 
     return handleResponse(gateioDepth);
   }
 
-  public GateioTradeHistory getBTERTradeHistory(String tradeableIdentifier, String currency) throws IOException {
+  public GateioTradeHistory getBTERTradeHistory(String tradeableIdentifier, String currency)
+      throws IOException {
 
     GateioTradeHistory tradeHistory = bter.getTradeHistory(tradeableIdentifier, currency);
 
     return handleResponse(tradeHistory);
   }
 
-  public GateioTradeHistory getBTERTradeHistorySince(String tradeableIdentifier, String currency, String tradeId) throws IOException {
+  public GateioTradeHistory getBTERTradeHistorySince(
+      String tradeableIdentifier, String currency, String tradeId) throws IOException {
 
-    GateioTradeHistory tradeHistory = bter.getTradeHistorySince(tradeableIdentifier, currency, tradeId);
+    GateioTradeHistory tradeHistory =
+        bter.getTradeHistorySince(tradeableIdentifier, currency, tradeId);
 
     return handleResponse(tradeHistory);
   }
