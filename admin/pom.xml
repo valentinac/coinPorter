@@ -68,11 +68,6 @@
             <artifactId>spring-context-support</artifactId>
             <version>4.3.16.RELEASE</version>
         </dependency>
-
-
-
-
-
         <dependency>
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz</artifactId>
