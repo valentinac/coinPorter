@@ -1,8 +1,8 @@
 package com.qidiancamp.dto.marketdata;
 
 import com.qidiancamp.currency.CurrencyPair;
-import com.qidiancamp.utils.Assert;
-import com.qidiancamp.utils.DateUtils;
+import com.qidiancamp.common.utils.Assert;
+import com.qidiancamp.common.utils.DateUtils;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;

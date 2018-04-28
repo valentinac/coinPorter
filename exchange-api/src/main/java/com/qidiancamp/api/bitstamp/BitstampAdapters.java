@@ -24,7 +24,7 @@ import com.qidiancamp.dto.trade.LimitOrder;
 import com.qidiancamp.dto.trade.UserTrade;
 import com.qidiancamp.dto.trade.UserTrades;
 import com.qidiancamp.exceptions.ExchangeException;
-import com.qidiancamp.utils.DateUtils;
+import com.qidiancamp.common.utils.DateUtils;
 import java.math.BigDecimal;
 import java.text.MessageFormat;
 import java.util.ArrayList;

@@ -6,7 +6,7 @@ import com.qidiancamp.api.bitstamp.dto.marketdata.BitstampTicker;
 import com.qidiancamp.api.bitstamp.dto.marketdata.BitstampTransaction;
 import com.qidiancamp.api.bitstamp.service.BitstampMarketDataServiceRaw;
 import com.qidiancamp.currency.CurrencyPair;
-import com.qidiancamp.utils.jackson.CurrencyPairDeserializer;
+import com.qidiancamp.common.utils.jackson.CurrencyPairDeserializer;
 import java.io.IOException;
 import java.util.Objects;
 import javax.ws.rs.*;

@@ -19,6 +19,7 @@ import com.qidiancamp.dto.trade.UserTrades;
 import com.qidiancamp.exceptions.ExchangeException;
 import com.qidiancamp.exceptions.NotYetImplementedForExchangeException;
 import com.qidiancamp.service.trade.TradeService;
+import com.qidiancamp.service.trade.params.*;
 import com.qidiancamp.service.trade.params.orders.DefaultOpenOrdersParamCurrencyPair;
 import com.qidiancamp.service.trade.params.orders.OpenOrdersParams;
 import java.io.IOException;

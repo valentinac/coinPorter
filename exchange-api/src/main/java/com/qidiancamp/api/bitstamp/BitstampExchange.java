@@ -6,7 +6,7 @@ import com.qidiancamp.ExchangeSpecification;
 import com.qidiancamp.api.bitstamp.service.BitstampAccountService;
 import com.qidiancamp.api.bitstamp.service.BitstampMarketDataService;
 import com.qidiancamp.api.bitstamp.service.BitstampTradeService;
-import com.qidiancamp.utils.nonce.CurrentTimeNonceFactory;
+import com.qidiancamp.common.utils.nonce.CurrentTimeNonceFactory;
 import si.mazi.rescu.SynchronizedValueFactory;
 
 /** @author Matija Mazi */

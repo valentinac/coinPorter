@@ -1,7 +1,7 @@
 package com.qidiancamp;
 
 import com.qidiancamp.exceptions.ExchangeException;
-import com.qidiancamp.utils.Assert;
+import com.qidiancamp.common.utils.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,11 +25,11 @@ public enum ExchangeFactory {
    * Create an Exchange object with default ExchangeSpecification
    *
    * <p>The factory is parameterized with the name of the exchange implementation class. This must
-   * be a class extending {@link org.knowm.xchange.Exchange}.
+   * be a class extending {@link com.qidiancamp.Exchange}.
    *
    * @param exchangeClassName the fully-qualified class name of the exchange
    * @return a new exchange instance configured with the default {@link
-   *     org.knowm.xchange.ExchangeSpecification}
+   *     com.qidiancamp.ExchangeSpecification}
    */
   public Exchange createExchange(String exchangeClassName) {
 
@@ -40,11 +40,11 @@ public enum ExchangeFactory {
    * Create an Exchange object with default ExchangeSpecification
    *
    * <p>The factory is parameterized with the name of the exchange implementation class. This must
-   * be a class extending {@link org.knowm.xchange.Exchange}.
+   * be a class extending {@link com.qidiancamp.Exchange}.
    *
    * @param exchangeClass the class of the exchange
    * @return a new exchange instance configured with the default {@link
-   *     org.knowm.xchange.ExchangeSpecification}
+   *     com.qidiancamp.ExchangeSpecification}
    */
   public Exchange createExchange(Class<? extends Exchange> exchangeClass) {
 
@@ -56,13 +56,13 @@ public enum ExchangeFactory {
    * keys provided through parameters
    *
    * <p>The factory is parameterized with the name of the exchange implementation class. This must
-   * be a class extending {@link org.knowm.xchange.Exchange}.
+   * be a class extending {@link com.qidiancamp.Exchange}.
    *
    * @param exchangeClassName the fully-qualified class name of the exchange
    * @param apiKey the public API key
    * @param secretKey the secret API key
    * @return a new exchange instance configured with the default {@link
-   *     org.knowm.xchange.ExchangeSpecification}
+   *     com.qidiancamp.ExchangeSpecification}
    */
   public Exchange createExchange(String exchangeClassName, String apiKey, String secretKey) {
 
@@ -85,13 +85,13 @@ public enum ExchangeFactory {
    * keys provided through parameters
    *
    * <p>The factory is parameterized with the name of the exchange implementation class. This must
-   * be a class extending {@link org.knowm.xchange.Exchange}.
+   * be a class extending {@link com.qidiancamp.Exchange}.
    *
    * @param exchangeClass the class of the exchange
    * @param apiKey the public API key
    * @param secretKey the secret API key
    * @return a new exchange instance configured with the default {@link
-   *     org.knowm.xchange.ExchangeSpecification}
+   *     com.qidiancamp.ExchangeSpecification}
    */
   public Exchange createExchange(
       Class<? extends Exchange> exchangeClass, String apiKey, String secretKey) {
@@ -115,7 +115,7 @@ public enum ExchangeFactory {
    *
    * @param exchangeSpecification the exchange specification
    * @return a new exchange instance configured with the provided {@link
-   *     org.knowm.xchange.ExchangeSpecification}
+   *     com.qidiancamp.ExchangeSpecification}
    */
   public Exchange createExchange(ExchangeSpecification exchangeSpecification) {
 
@@ -133,11 +133,11 @@ public enum ExchangeFactory {
    * Create an Exchange object without default ExchangeSpecification
    *
    * <p>The factory is parameterized with the name of the exchange implementation class. This must
-   * be a class extending {@link org.knowm.xchange.Exchange}.
+   * be a class extending {@link com.qidiancamp.Exchange}.
    *
    * @param exchangeClassName the fully-qualified class name of the exchange
    * @return a new exchange instance configured with the default {@link
-   *     org.knowm.xchange.ExchangeSpecification}
+   *     com.qidiancamp.ExchangeSpecification}
    */
   public Exchange createExchangeWithoutSpecification(String exchangeClassName) {
 
@@ -168,11 +168,11 @@ public enum ExchangeFactory {
    * Create an Exchange object without default ExchangeSpecification
    *
    * <p>The factory is parameterized with the name of the exchange implementation class. This must
-   * be a class extending {@link org.knowm.xchange.Exchange}.
+   * be a class extending {@link com.qidiancamp.Exchange}.
    *
    * @param exchangeClass the class of the exchange
    * @return a new exchange instance configured with the default {@link
-   *     org.knowm.xchange.ExchangeSpecification}
+   *     com.qidiancamp.ExchangeSpecification}
    */
   public Exchange createExchangeWithoutSpecification(Class<? extends Exchange> exchangeClass) {
 

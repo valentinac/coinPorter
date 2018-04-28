@@ -9,7 +9,7 @@ import com.qidiancamp.api.gate.service.GateioMarketDataService;
 import com.qidiancamp.api.gate.service.GateioMarketDataServiceRaw;
 import com.qidiancamp.api.gate.service.GateioTradeService;
 import com.qidiancamp.currency.CurrencyPair;
-import com.qidiancamp.utils.nonce.AtomicLongIncrementalTime2013NonceFactory;
+import com.qidiancamp.common.utils.nonce.AtomicLongIncrementalTime2013NonceFactory;
 import java.io.IOException;
 import java.util.Map;
 import si.mazi.rescu.SynchronizedValueFactory;
