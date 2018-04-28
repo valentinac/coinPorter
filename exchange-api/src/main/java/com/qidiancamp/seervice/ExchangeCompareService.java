@@ -1,4 +1,4 @@
-package com.qidiancamp.service;
+package com.qidiancamp.seervice;
 
 
 import com.qidiancamp.Exchange;
@@ -20,7 +20,7 @@ public class ExchangeCompareService {
         if(Exchanges.getCnName(exchangeA)==null || Exchanges.getCnName(exchangeB)==null){
             throw new Exception("交易所信息错误");
         }
-//        List coinListA =
+//        List coinListA = BinanceExchange
 
         return res;
     }
