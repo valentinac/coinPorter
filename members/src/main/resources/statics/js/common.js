@@ -3,6 +3,8 @@ $.jgrid.defaults.width = 1000;
 $.jgrid.defaults.responsive = true;
 $.jgrid.defaults.styleUI = 'Bootstrap';
 
+var baseURL = "../../";
+
 //工具集合Tools
 window.T = {};
 
@@ -20,17 +22,8 @@ T.p = url;
 //全局配置
 $.ajaxSetup({
 	dataType: "json",
-	contentType: "application/json",
 	cache: false
 });
-
-function hasPermission(permission) {
-    if (window.parent.permissions.indexOf(permission) > -1) {
-        return true;
-    } else {
-        return false;
-    }
-}
 
 //重写alert
 window.alert = function(msg, callback){
@@ -80,4 +73,20 @@ function getSelectedRows() {
     }
     
     return grid.getGridParam("selarrrow");
+}
+
+//判断是否为空
+function isBlank(value) {
+    return !value || !/\S/.test(value)
+}
+
+/*3.用正则表达式实现html转码*/
+function htmlEncodeByRegExp(str){
+    if(str.length == 0) return "";
+    return str.replace(/[<>&"]/g,function(c){return {'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c];});
+}
+/*4.用正则表达式实现html解码*/
+function htmlDecodeByRegExp (str){
+    var arrEntities={'lt':'<','gt':'>','amp':'&','quot':'"'};
+    return str.replace(/&(lt|gt|amp|quot);/ig,function(all,t){return arrEntities[t];});
 }
