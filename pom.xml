@@ -54,6 +54,7 @@
         <commons.codec.version>1.10</commons.codec.version>
         <fastjson.version>1.2.45</fastjson.version>
         <skipIntegrationTests>true</skipIntegrationTests>
+        <com.squareup.retrofit2.version>2.3.0</com.squareup.retrofit2.version>
     </properties>
 
     <!-- repository info -->
