@@ -1,12 +1,13 @@
 $(function () {
     $("#jqGrid").jqGrid({
-        url: baseURL + 'sys/sysexchange/list',
+        url: baseURL + 'sys/mbexchangecofig/list',
         datatype: "json",
         colModel: [			
-			{ label: '交易所ID', name: 'exchangeId', index: 'exchange_id', width: 50, key: true },
-			{ label: '交易所名称', name: 'exchangeName',  width: 80 },
-			{ label: '访问地址', name: 'exchangeUrl',  width: 160 },
-			{ label: '状态', name: 'status',  width: 80 , formatter: function(value, options, row){
+			{ label: '配置ID', name: 'cofigId', index: 'cofig_id', width: 50, key: true },
+			{ label: '交易所名称', name: 'exchangeName', width: 80 },
+			{ label: 'apiKey', name: 'apiKey',  width: 80 },
+			{ label: 'secretKey', name: 'secretKey', width: 80 },
+			{ label: '状态', name: 'status',  width: 80, formatter: function(value, options, row){
 				return value === 0 ?
 					'<span class="label label-danger">禁用</span>' :
 					'<span class="label label-success">正常</span>';
@@ -39,13 +40,27 @@ $(function () {
         }
     });
 });
-
+var setting = {
+	data: {
+		simpleData: {
+			enable: true,
+			idKey: "exchangeId",
+			pIdKey: "1",
+			rootPId: -1
+		},
+		key: {
+			url:"nourl",
+			name:"exchangeName"
+		}
+	}
+};
+var ztree;
 var vm = new Vue({
 	el:'#rrapp',
 	data:{
 		showList: true,
 		title: null,
-		sysExchange: {}
+		sysMbExchangeCofig: {exchangeId:"",exchangeName:""}
 	},
 	methods: {
 		query: function () {
@@ -54,25 +69,26 @@ var vm = new Vue({
 		add: function(){
 			vm.showList = false;
 			vm.title = "新增";
-			vm.sysExchange = {};
+			vm.sysMbExchangeCofig = {exchangeId:"",exchangeName:""};
+			vm.getExchange();
 		},
 		update: function (event) {
-			var exchangeId = getSelectedRow();
-			if(exchangeId == null){
+			var cofigId = getSelectedRow();
+			if(cofigId == null){
 				return ;
 			}
 			vm.showList = false;
             vm.title = "修改";
             
-            vm.getInfo(exchangeId)
+            vm.getInfo(cofigId)
 		},
 		saveOrUpdate: function (event) {
-			var url = vm.sysExchange.exchangeId == null ? "sys/sysexchange/save" : "sys/sysexchange/update";
+			var url = vm.sysMbExchangeCofig.cofigId == null ? "sys/mbexchangecofig/save" : "sys/mbexchangecofig/update";
 			$.ajax({
 				type: "POST",
-			    url: baseURL + url,
+			    url:  baseURL + url,
                 contentType: "application/json",
-			    data: JSON.stringify(vm.sysExchange),
+			    data: JSON.stringify(vm.sysMbExchangeCofig),
 			    success: function(r){
 			    	if(r.code === 0){
 						alert('操作成功', function(index){
@@ -85,17 +101,17 @@ var vm = new Vue({
 			});
 		},
 		del: function (event) {
-			var exchangeIds = getSelectedRows();
-			if(exchangeIds == null){
+			var cofigIds = getSelectedRows();
+			if(cofigIds == null){
 				return ;
 			}
 			
 			confirm('确定要删除选中的记录？', function(){
 				$.ajax({
 					type: "POST",
-				    url: baseURL + "sys/sysexchange/delete",
+				    url: baseURL + "sys/mbexchangecofig/delete",
                     contentType: "application/json",
-				    data: JSON.stringify(exchangeIds),
+				    data: JSON.stringify(cofigIds),
 				    success: function(r){
 						if(r.code == 0){
 							alert('操作成功', function(index){
@@ -108,9 +124,9 @@ var vm = new Vue({
 				});
 			});
 		},
-		getInfo: function(exchangeId){
-			$.get(baseURL + "sys/sysexchange/info/"+exchangeId, function(r){
-                vm.sysExchange = r.sysExchange;
+		getInfo: function(cofigId){
+			$.get(baseURL + "sys/mbexchangecofig/info/"+cofigId, function(r){
+                vm.sysMbExchangeCofig = r.sysMbExchangeCofig;
             });
 		},
 		reload: function (event) {
@@ -119,6 +135,37 @@ var vm = new Vue({
 			$("#jqGrid").jqGrid('setGridParam',{ 
                 page:page
             }).trigger("reloadGrid");
-		}
+		},
+		getExchange: function(){
+			//加载部门树
+			$.get(baseURL + "sys/mbexchangecofig/selectexchange", function(r){
+				ztree = $.fn.zTree.init($("#exchangeTree"), setting, r.list);
+				var node = ztree.getNodeByParam("exchangeId", vm.sysMbExchangeCofig.exchangeId);
+				ztree.selectNode(node);
+				if(node){
+					vm.sysMbExchangeCofig.exchangeName = node.name;
+				}
+			})
+		},
+		exchangeTree: function(){
+			layer.open({
+				type: 1,
+				offset: '50px',
+				skin: 'layui-layer-molv',
+				title: "选择交易所",
+				area: ['300px', '450px'],
+				shade: 0,
+				shadeClose: false,
+				content: jQuery("#exchangeLayer"),
+				btn: ['确定', '取消'],
+				btn1: function (index) {
+					var node = ztree.getSelectedNodes();
+                    console.log(JSON.stringify(node));
+					vm.sysMbExchangeCofig.exchangeId = node[0].exchangeId;
+					vm.sysMbExchangeCofig.exchangeName = node[0].exchangeName;
+					layer.close(index);
+				}
+			});
+		},
 	}
 });
