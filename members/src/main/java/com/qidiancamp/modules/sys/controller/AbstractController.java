@@ -13,6 +13,7 @@
  */
 package com.qidiancamp.modules.sys.controller;
 
+import com.qidiancamp.modules.sys.entity.SysMemberEntity;
 import com.qidiancamp.modules.sys.entity.SysUserEntity;
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
@@ -28,15 +29,15 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractController {
   protected Logger logger = LoggerFactory.getLogger(getClass());
 
-  protected SysUserEntity getUser() {
-    return (SysUserEntity) SecurityUtils.getSubject().getPrincipal();
+  protected SysMemberEntity getUser() {
+    return (SysMemberEntity) SecurityUtils.getSubject().getPrincipal();
   }
 
   protected Long getUserId() {
-    return getUser().getUserId();
+    return getUser().getMemberId();
   }
 
   protected Long getDeptId() {
-    return getUser().getDeptId();
+    return null;
   }
 }
