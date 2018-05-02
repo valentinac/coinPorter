@@ -1,28 +1,27 @@
 $(function () {
 	$("#jqGrid").jqGrid({
-		url:baseURL + 'sys/member/list',
+		url: baseURL + 'sys/sysmember/list',
 		datatype: "json",
 		colModel: [
-			{ label: '会员ID', name: 'memberId', index: 'member_id', width: 50, key: true },
-			{ label: '会员', name: 'memberName',  width: 80 },
-			{ label: '邮箱', name: 'email', width: 80 },
-			{ label: '手机号', name: 'mobile', width: 80 },
-			{ label: '谷歌code', name: 'goolgeCode', width: 80 },
-			{ label: '状态', name: 'status', width: 80, formatter: function(value, options, row){
+			{ label: '会员ID', name: 'userId', index: "user_id", width: 45 },
+			{ label: '会员', name: 'username', width: 75 },
+			{ label: '邮箱', name: 'email', width: 90 },
+			{ label: '手机号', name: 'mobile', width: 100 },
+			{ label: '状态', name: 'status', width: 60, formatter: function(value, options, row){
 				return value === 0 ?
 					'<span class="label label-danger">禁用</span>' :
 					'<span class="label label-success">正常</span>';
 			}},
-			{ label: '创建时间', name: 'createTime', width: 80 }
+			{ label: '创建时间', name: 'createTime', index: "create_time", width: 85}
 		],
 		viewrecords: true,
 		height: 385,
 		rowNum: 10,
 		rowList : [10,30,50],
-		rownumbers: true,
+		rownumbers: false,
 		rownumWidth: 25,
 		autowidth:true,
-		multiselect: true,
+		multiselect: false,
 		pager: "#jqGridPager",
 		jsonReader : {
 			root: "page.list",
@@ -41,43 +40,37 @@ $(function () {
 		}
 	});
 });
-
 var vm = new Vue({
 	el:'#rrapp',
 	data:{
+		q:{
+			username: null
+		},
 		showList: true,
-		title: null,
-		sysMember: {}
+		title:null,
+		user:{
+			status:1
+		}
 	},
 	methods: {
 		query: function () {
 			vm.reload();
 		},
-		add: function(){
-			vm.showList = false;
-			vm.title = "新增";
-			vm.sysMember = {};
-		},
-		update: function (event) {
-			var memberId = getSelectedRow();
-			if(memberId == null){
-				return ;
-			}
+		update: function () {
 			vm.showList = false;
 			vm.title = "修改";
-
-			vm.getInfo(memberId)
+			vm.getUser();
 		},
-		saveOrUpdate: function (event) {
-			var url = vm.sysMember.memberId == null ? "sys/member/save" : "sys/member/update";
+		saveOrUpdate: function () {
+			var url = vm.user.userId == null ? "sys/sysmember/save" : "sys/sysmember/update";
 			$.ajax({
 				type: "POST",
 				url: baseURL + url,
 				contentType: "application/json",
-				data: JSON.stringify(vm.sysMember),
+				data: JSON.stringify(vm.user),
 				success: function(r){
 					if(r.code === 0){
-						alert('操作成功', function(index){
+						alert('操作成功', function(){
 							vm.reload();
 						});
 					}else{
@@ -86,39 +79,17 @@ var vm = new Vue({
 				}
 			});
 		},
-		del: function (event) {
-			var memberIds = getSelectedRows();
-			if(memberIds == null){
-				return ;
-			}
-
-			confirm('确定要删除选中的记录？', function(){
-				$.ajax({
-					type: "POST",
-					url: baseURL + "sys/member/delete",
-					contentType: "application/json",
-					data: JSON.stringify(memberIds),
-					success: function(r){
-						if(r.code == 0){
-							alert('操作成功', function(index){
-								$("#jqGrid").trigger("reloadGrid");
-							});
-						}else{
-							alert(r.msg);
-						}
-					}
-				});
+		getUser: function(userId){
+			$.get(baseURL + "sys/sysmember/info/", function(r){
+				vm.user = r.user;
+				vm.user.password = null;
 			});
 		},
-		getInfo: function(memberId){
-			$.get(baseURL + "sys/member/info/"+memberId, function(r){
-				vm.sysMember = r.sysMember;
-			});
-		},
-		reload: function (event) {
+		reload: function () {
 			vm.showList = true;
 			var page = $("#jqGrid").jqGrid('getGridParam','page');
 			$("#jqGrid").jqGrid('setGridParam',{
+				postData:{'username': vm.q.username},
 				page:page
 			}).trigger("reloadGrid");
 		}

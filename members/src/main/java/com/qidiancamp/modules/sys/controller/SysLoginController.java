@@ -16,7 +16,10 @@ package com.qidiancamp.modules.sys.controller;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import com.qidiancamp.common.utils.R;
+import com.qidiancamp.modules.sys.entity.SysUserEntity;
+import com.qidiancamp.modules.sys.service.SysUserService;
 import com.qidiancamp.modules.sys.shiro.ShiroUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +33,9 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 登录相关
@@ -41,19 +47,18 @@ import java.io.IOException;
 @Controller
 public class SysLoginController {
   @Autowired private Producer producer;
+  @Autowired private SysUserService sysUserService;
 
   @RequestMapping("captcha.jpg")
   public void captcha(HttpServletResponse response) throws IOException {
     response.setHeader("Cache-Control", "no-store, no-cache");
     response.setContentType("image/jpeg");
-
     // 生成文字验证码
     String text = producer.createText();
     // 生成图片验证码
     BufferedImage image = producer.createImage(text);
     // 保存到shiro session
     ShiroUtils.setSessionAttribute(Constants.KAPTCHA_SESSION_KEY, text);
-
     ServletOutputStream out = response.getOutputStream();
     ImageIO.write(image, "jpg", out);
   }
@@ -90,4 +95,40 @@ public class SysLoginController {
     ShiroUtils.logout();
     return "redirect:login.html";
   }
+
+  /** 登录 */
+  @ResponseBody
+  @RequestMapping(value = "/sys/reg", method = RequestMethod.POST)
+  public R reg(String username, String password,String repassword,String email, String captcha) {
+    //		String kaptcha = ShiroUtils.getKaptcha(Constants.KAPTCHA_SESSION_KEY);
+    //		if(!captcha.equalsIgnoreCase(kaptcha)){
+    //			return R.error("验证码不正确");
+    //		}
+    Map map = new HashMap<>();
+    map.put("username",username);
+    List<SysUserEntity> list = sysUserService.selectByMap(map);
+    if(list.size()>0){
+      return R.error("用户名已存在");
+    }
+    if(StringUtils.isEmpty(password)||!password.equals(repassword)){
+      return R.error("两次密码不一致");
+    }
+    map = new HashMap<>();
+    map.put("email",email);
+    List<SysUserEntity> list2 = sysUserService.selectByMap(map);
+    if(list2.size()>0){
+      return R.error("邮箱已存在");
+    }
+
+    SysUserEntity user = new SysUserEntity();
+    user.setUsername(username);
+    user.setPassword(password);
+    user.setEmail(email);
+    user.setDeptId(1L);
+    user.setUserType(1);
+    user.setStatus(1);
+    sysUserService.save(user);
+    return R.ok();
+  }
+
 }

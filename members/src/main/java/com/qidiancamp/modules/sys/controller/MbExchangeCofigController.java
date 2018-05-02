@@ -7,10 +7,7 @@ import com.qidiancamp.common.utils.R;
 import com.qidiancamp.common.validator.ValidatorUtils;
 import com.qidiancamp.common.validator.group.AddGroup;
 import com.qidiancamp.common.validator.group.UpdateGroup;
-import com.qidiancamp.modules.sys.entity.SysDeptEntity;
-import com.qidiancamp.modules.sys.entity.SysExchangeEntity;
-import com.qidiancamp.modules.sys.entity.SysMbExchangeCofigEntity;
-import com.qidiancamp.modules.sys.entity.SysMemberEntity;
+import com.qidiancamp.modules.sys.entity.*;
 
 import java.util.*;
 
@@ -39,6 +36,7 @@ public class MbExchangeCofigController extends AbstractController {
   /** 列表 */
   @RequestMapping("/list")
   public R list(@RequestParam Map<String, Object> params) {
+    params.put("member_id",getUser().getUserId());
     PageUtils page = sysMbExchangeCofigService.queryPage(params);
     return R.ok().put("page", page);
   }
@@ -54,16 +52,16 @@ public class MbExchangeCofigController extends AbstractController {
   @RequestMapping("/save")
   public R save(@RequestBody SysMbExchangeCofigEntity sysMbExchangeCofig) {
     ValidatorUtils.validateEntity(sysMbExchangeCofig, AddGroup.class);
-    SysMemberEntity sysMemberEntity = getUser();
+    SysUserEntity sysUserEntity = getUser();
     Map map = new HashMap();
-    map.put("member_id",sysMemberEntity.getMemberId());
+    map.put("member_id",sysUserEntity.getUserId());
     map.put("exchange_id",sysMbExchangeCofig.getExchangeId());
     List<SysMbExchangeCofigEntity> list = sysMbExchangeCofigService.selectByMap(map);
     if(list.size()>0){
       return R.error("该交易所已配置");
     }
-    sysMbExchangeCofig.setMemberId(sysMemberEntity.getMemberId().intValue());
-    sysMbExchangeCofig.setMemberName(sysMemberEntity.getMemberName());
+    sysMbExchangeCofig.setMemberId(sysUserEntity.getUserId().intValue());
+    sysMbExchangeCofig.setMemberName(sysUserEntity.getUsername());
     sysMbExchangeCofig.setCreateTime(new Date());
     sysMbExchangeCofigService.insert(sysMbExchangeCofig);
 
