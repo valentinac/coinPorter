@@ -72,6 +72,12 @@ public class SysUserEntity implements Serializable {
   /** 状态 0：禁用 1：正常 */
   private Integer status;
 
+  /** 0管理后台用户 1会员用户 */
+  private Integer userType;
+
+  /** 谷歌code */
+  private String goolgeCode;
+
   /** 角色ID列表 */
   @TableField(exist = false)
   private List<Long> roleIdList;
@@ -246,5 +252,21 @@ public class SysUserEntity implements Serializable {
 
   public void setDeptName(String deptName) {
     this.deptName = deptName;
+  }
+
+  public Integer getUserType() {
+    return userType;
+  }
+
+  public void setUserType(Integer userType) {
+    this.userType = userType;
+  }
+
+  public String getGoolgeCode() {
+    return goolgeCode;
+  }
+
+  public void setGoolgeCode(String goolgeCode) {
+    this.goolgeCode = goolgeCode;
   }
 }

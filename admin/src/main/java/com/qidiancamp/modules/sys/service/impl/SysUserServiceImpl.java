@@ -58,7 +58,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity>
   @DataFilter(subDept = true, user = false)
   public PageUtils queryPage(Map<String, Object> params) {
     String username = (String) params.get("username");
-
+    Integer user_type = (Integer)params.get("user_type");
     Page<SysUserEntity> page =
         this.selectPage(
             new Query<SysUserEntity>(params).getPage(),
@@ -66,7 +66,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity>
                 .like(StringUtils.isNotBlank(username), "username", username)
                 .addFilterIfNeed(
                     params.get(Constant.SQL_FILTER) != null,
-                    (String) params.get(Constant.SQL_FILTER)));
+                    (String) params.get(Constant.SQL_FILTER))
+                .eq("user_type",user_type)
+        );
 
     for (SysUserEntity sysUserEntity : page.getRecords()) {
       SysDeptEntity sysDeptEntity = sysDeptService.selectById(sysUserEntity.getDeptId());

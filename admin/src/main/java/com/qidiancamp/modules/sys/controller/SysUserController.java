@@ -49,8 +49,8 @@ public class SysUserController extends AbstractController {
   @RequestMapping("/list")
   @RequiresPermissions("sys:user:list")
   public R list(@RequestParam Map<String, Object> params) {
+    params.put("user_type",0);
     PageUtils page = sysUserService.queryPage(params);
-
     return R.ok().put("page", page);
   }
 
