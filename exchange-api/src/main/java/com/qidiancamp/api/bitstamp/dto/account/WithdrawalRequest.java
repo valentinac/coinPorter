@@ -2,18 +2,19 @@ package com.qidiancamp.api.bitstamp.dto.account;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.qidiancamp.api.bitstamp.BitstampUtils;
 import java.math.BigDecimal;
 import java.util.Date;
+import com.qidiancamp.api.bitstamp.BitstampUtils;
+import com.qidiancamp.currency.Currency;
 
 public class WithdrawalRequest {
 
-  private Long id;
-
   private final Date datetime;
-
+  private Long id;
   private Type type;
   private BigDecimal amount;
+
+  private Currency currency;
 
   @JsonProperty("status")
   private String statusOriginal; // keep the original status, if it comes to "unknown"
@@ -24,13 +25,13 @@ public class WithdrawalRequest {
   @JsonProperty("transaction_id")
   private String transactionId; // Transaction id (bitcoin withdrawals only).
 
-  public Long getId() {
-    return id;
-  }
-
   public WithdrawalRequest(@JsonProperty("datetime") String datetime) {
     super();
     this.datetime = BitstampUtils.parseDate(datetime);
+  }
+
+  public Long getId() {
+    return id;
   }
 
   public Date getDatetime() {
@@ -66,6 +67,10 @@ public class WithdrawalRequest {
     return transactionId;
   }
 
+  public Currency getCurrency() {
+    return currency;
+  }
+
   @Override
   public String toString() {
     return "WithdrawalRequest [id="
@@ -97,6 +102,7 @@ public class WithdrawalRequest {
     rippleBTC,
     XRP,
     litecoin,
+    ETH,
     unknown;
 
     // 0 (SEPA), 1 (bitcoin) or 2(WIRE transfer).
@@ -117,6 +123,8 @@ public class WithdrawalRequest {
           return XRP;
         case "15":
           return litecoin;
+        case "16":
+          return ETH;
         default:
           return unknown;
       }

@@ -1,16 +1,16 @@
 package com.qidiancamp.api.bitstamp;
 
-import com.qidiancamp.exceptions.ExchangeException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
+import com.qidiancamp.exceptions.ExchangeException;
 
 /** A central place for shared Bitstamp properties */
 public final class BitstampUtils {
 
-  private static final SimpleDateFormat DATE_FORMAT;
   public static final int MAX_TRANSACTIONS_PER_QUERY = 1000;
+  private static final SimpleDateFormat DATE_FORMAT;
 
   static {
     DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -24,7 +24,7 @@ public final class BitstampUtils {
    * Format a date String for Bitstamp
    *
    * @param dateString A {@code String} whose beginning should be parsed.
-   * @return A {@link java.util.Date}
+   * @return A {@link Date}
    */
   public static Date parseDate(String dateString) {
 

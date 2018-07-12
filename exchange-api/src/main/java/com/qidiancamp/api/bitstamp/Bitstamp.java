@@ -1,14 +1,14 @@
 package com.qidiancamp.api.bitstamp;
 
-import com.qidiancamp.api.bitstamp.dto.marketdata.BitstampOrderBook;
-import com.qidiancamp.api.bitstamp.dto.marketdata.BitstampTicker;
-import com.qidiancamp.api.bitstamp.dto.marketdata.BitstampTransaction;
 import java.io.IOException;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import com.qidiancamp.api.bitstamp.dto.marketdata.BitstampOrderBook;
+import com.qidiancamp.api.bitstamp.dto.marketdata.BitstampTicker;
+import com.qidiancamp.api.bitstamp.dto.marketdata.BitstampTransaction;
 
 /**
  * @author Matija Mazi See https://www.bitstamp.net/api/ for up-to-date docs.
@@ -39,6 +39,5 @@ public interface Bitstamp {
   /** Returns descending list of transactions. */
   @GET
   @Path("transactions/")
-  BitstampTransaction[] getTransactions(@QueryParam("time") String bitstamp)
-      throws IOException;
+  BitstampTransaction[] getTransactions(@QueryParam("time") String time) throws IOException;
 }

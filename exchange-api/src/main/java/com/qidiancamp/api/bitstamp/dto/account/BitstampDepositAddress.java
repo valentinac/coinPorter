@@ -7,9 +7,9 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import java.io.IOException;
 import com.qidiancamp.api.bitstamp.dto.BitstampBaseResponse;
 import com.qidiancamp.api.bitstamp.dto.account.BitstampDepositAddress.BitstampDepositAddressDeserializer;
-import java.io.IOException;
 
 @JsonDeserialize(using = BitstampDepositAddressDeserializer.class)
 public class BitstampDepositAddress extends BitstampBaseResponse {
@@ -43,8 +43,11 @@ public class BitstampDepositAddress extends BitstampBaseResponse {
       JsonNode node = oc.readTree(jsonParser);
       if (node.get("error") != null) {
         return new BitstampDepositAddress(node.path("error").asText(), "");
+      } else if (node.get("address") != null) {
+        return new BitstampDepositAddress(null, node.get("address").asText());
+      } else {
+        return new BitstampDepositAddress(null, node.asText());
       }
-      return new BitstampDepositAddress(null, node.asText());
     }
   }
 }

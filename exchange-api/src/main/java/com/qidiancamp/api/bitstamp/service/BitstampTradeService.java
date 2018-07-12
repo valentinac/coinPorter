@@ -2,6 +2,11 @@ package com.qidiancamp.api.bitstamp.service;
 
 import static com.qidiancamp.dto.Order.OrderType.BID;
 
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import com.qidiancamp.Exchange;
 import com.qidiancamp.api.bitstamp.BitstampAdapters;
 import com.qidiancamp.api.bitstamp.BitstampAuthenticatedV2;
@@ -17,16 +22,16 @@ import com.qidiancamp.dto.trade.MarketOrder;
 import com.qidiancamp.dto.trade.OpenOrders;
 import com.qidiancamp.dto.trade.UserTrades;
 import com.qidiancamp.exceptions.ExchangeException;
-import com.qidiancamp.exceptions.NotYetImplementedForExchangeException;
 import com.qidiancamp.service.trade.TradeService;
-import com.qidiancamp.service.trade.params.*;
+import com.qidiancamp.service.trade.params.CancelOrderByIdParams;
+import com.qidiancamp.service.trade.params.CancelOrderParams;
+import com.qidiancamp.service.trade.params.TradeHistoryParamCurrencyPair;
+import com.qidiancamp.service.trade.params.TradeHistoryParamOffset;
+import com.qidiancamp.service.trade.params.TradeHistoryParamPaging;
+import com.qidiancamp.service.trade.params.TradeHistoryParams;
+import com.qidiancamp.service.trade.params.TradeHistoryParamsSorted;
 import com.qidiancamp.service.trade.params.orders.DefaultOpenOrdersParamCurrencyPair;
 import com.qidiancamp.service.trade.params.orders.OpenOrdersParams;
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 /** @author Matija Mazi */
 public class BitstampTradeService extends BitstampTradeServiceRaw implements TradeService {
@@ -146,6 +151,14 @@ public class BitstampTradeService extends BitstampTradeServiceRaw implements Tra
 
   @Override
   public Collection<Order> getOrder(String... orderIds) throws IOException {
-    throw new NotYetImplementedForExchangeException();
+
+    Collection<Order> orders = new ArrayList<>(orderIds.length);
+
+    for (String orderId : orderIds) {
+      orders.add(
+          BitstampAdapters.adaptOrder(orderId, super.getBitstampOrder(Long.parseLong(orderId))));
+    }
+
+    return orders;
   }
 }

@@ -1,5 +1,9 @@
 package com.qidiancamp.api.bitstamp.service;
 
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 import com.qidiancamp.Exchange;
 import com.qidiancamp.api.bitstamp.BitstampAdapters;
 import com.qidiancamp.api.bitstamp.BitstampUtils;
@@ -14,12 +18,14 @@ import com.qidiancamp.exceptions.ExchangeException;
 import com.qidiancamp.exceptions.NotAvailableFromExchangeException;
 import com.qidiancamp.exceptions.NotYetImplementedForExchangeException;
 import com.qidiancamp.service.account.AccountService;
-import com.qidiancamp.service.trade.params.*;
-
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
+import com.qidiancamp.service.trade.params.DefaultWithdrawFundsParams;
+import com.qidiancamp.service.trade.params.RippleWithdrawFundsParams;
+import com.qidiancamp.service.trade.params.TradeHistoryParamCurrencyPair;
+import com.qidiancamp.service.trade.params.TradeHistoryParamOffset;
+import com.qidiancamp.service.trade.params.TradeHistoryParamPaging;
+import com.qidiancamp.service.trade.params.TradeHistoryParams;
+import com.qidiancamp.service.trade.params.TradeHistoryParamsSorted;
+import com.qidiancamp.service.trade.params.WithdrawFundsParams;
 
 /** @author Matija Mazi */
 public class BitstampAccountService extends BitstampAccountServiceRaw implements AccountService {
@@ -56,9 +62,9 @@ public class BitstampAccountService extends BitstampAccountServiceRaw implements
 
       BitstampWithdrawal response =
           withdrawRippleFunds(
-              rippleWithdrawFundsParams.amount,
-              rippleWithdrawFundsParams.address,
-              rippleWithdrawFundsParams.tag);
+              rippleWithdrawFundsParams.getAmount(),
+              rippleWithdrawFundsParams.getAddress(),
+              rippleWithdrawFundsParams.getTag());
 
       if (response.error != null) {
         throw new ExchangeException("Failed to withdraw: " + response.error);
@@ -73,16 +79,16 @@ public class BitstampAccountService extends BitstampAccountServiceRaw implements
       DefaultWithdrawFundsParams defaultParams = (DefaultWithdrawFundsParams) params;
 
       BitstampWithdrawal response;
-      if (defaultParams.currency.equals(Currency.LTC)) {
-        response = withdrawLtcFunds(defaultParams.amount, defaultParams.address);
-      } else if (defaultParams.currency.equals(Currency.ETH)) {
-        response = withdrawEthFunds(defaultParams.amount, defaultParams.address);
-      } else if (defaultParams.currency.equals(Currency.BTC)) {
-        response = withdrawBtcFunds(defaultParams.amount, defaultParams.address);
-      } else if (defaultParams.currency.equals(Currency.BCH)) {
-        response = withdrawBchFunds(defaultParams.amount, defaultParams.address);
+      if (defaultParams.getCurrency().equals(Currency.LTC)) {
+        response = withdrawLtcFunds(defaultParams.getAmount(), defaultParams.getAddress());
+      } else if (defaultParams.getCurrency().equals(Currency.ETH)) {
+        response = withdrawEthFunds(defaultParams.getAmount(), defaultParams.getAddress());
+      } else if (defaultParams.getCurrency().equals(Currency.BTC)) {
+        response = withdrawBtcFunds(defaultParams.getAmount(), defaultParams.getAddress());
+      } else if (defaultParams.getCurrency().equals(Currency.BCH)) {
+        response = withdrawBchFunds(defaultParams.getAmount(), defaultParams.getAddress());
       } else {
-        throw new IllegalStateException("Cannot withdraw " + defaultParams.currency);
+        throw new IllegalStateException("Cannot withdraw " + defaultParams.getCurrency());
       }
 
       if (response.error != null) {

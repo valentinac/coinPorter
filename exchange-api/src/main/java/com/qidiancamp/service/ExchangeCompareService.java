@@ -1,7 +1,6 @@
-package com.qidiancamp.seervice;
+package com.qidiancamp.service;
 
 
-import com.qidiancamp.Exchange;
 import com.qidiancamp.dto.BlockInfo;
 import com.qidiancamp.dto.Exchanges;
 

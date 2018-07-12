@@ -1,5 +1,13 @@
 package com.qidiancamp.api.bitstamp;
 
+import java.io.IOException;
+import java.util.Objects;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 import com.qidiancamp.api.bitstamp.dto.BitstampException;
 import com.qidiancamp.api.bitstamp.dto.marketdata.BitstampOrderBook;
 import com.qidiancamp.api.bitstamp.dto.marketdata.BitstampTicker;
@@ -7,10 +15,6 @@ import com.qidiancamp.api.bitstamp.dto.marketdata.BitstampTransaction;
 import com.qidiancamp.api.bitstamp.service.BitstampMarketDataServiceRaw;
 import com.qidiancamp.currency.CurrencyPair;
 import com.qidiancamp.common.utils.jackson.CurrencyPairDeserializer;
-import java.io.IOException;
-import java.util.Objects;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 
 /** @author Matija Mazi See https://www.bitstamp.net/api/ for up-to-date docs. */
 @Path("api/v2")

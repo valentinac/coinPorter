@@ -1,14 +1,23 @@
 package com.qidiancamp.api.bitstamp;
 
+import java.io.IOException;
+import java.math.BigDecimal;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import com.qidiancamp.api.bitstamp.dto.BitstampException;
-import com.qidiancamp.api.bitstamp.dto.account.*;
+import com.qidiancamp.api.bitstamp.dto.account.BitstampBalance;
+import com.qidiancamp.api.bitstamp.dto.account.BitstampDepositAddress;
+import com.qidiancamp.api.bitstamp.dto.account.BitstampRippleDepositAddress;
+import com.qidiancamp.api.bitstamp.dto.account.BitstampWithdrawal;
+import com.qidiancamp.api.bitstamp.dto.account.DepositTransaction;
+import com.qidiancamp.api.bitstamp.dto.account.WithdrawalRequest;
 import com.qidiancamp.api.bitstamp.dto.trade.BitstampOrder;
 import com.qidiancamp.api.bitstamp.dto.trade.BitstampOrderStatusResponse;
 import com.qidiancamp.api.bitstamp.dto.trade.BitstampUserTransaction;
-import java.io.IOException;
-import java.math.BigDecimal;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 import si.mazi.rescu.ParamsDigest;
 import si.mazi.rescu.SynchronizedValueFactory;
 
@@ -202,6 +211,6 @@ public interface BitstampAuthenticated {
       @FormParam("key") String apiKey,
       @FormParam("signature") ParamsDigest signer,
       @FormParam("nonce") SynchronizedValueFactory<Long> nonce,
-      @FormParam("id") int orderId)
+      @FormParam("id") long orderId)
       throws BitstampException, IOException;
 }

@@ -5,6 +5,10 @@ import java.math.BigDecimal;
 
 public class DepositTransaction {
 
+  private BigDecimal amount;
+  private Integer confirmations;
+  private String address;
+
   public DepositTransaction(
       @JsonProperty("amount") BigDecimal amount,
       @JsonProperty("confirmations") Integer confirmations,
@@ -13,12 +17,6 @@ public class DepositTransaction {
     this.confirmations = confirmations;
     this.address = address;
   }
-
-  private BigDecimal amount;
-
-  private Integer confirmations;
-
-  private String address;
 
   public BigDecimal getAmount() {
     return amount;

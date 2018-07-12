@@ -1,9 +1,9 @@
 package com.qidiancamp.api.bitstamp.service;
 
-import com.qidiancamp.service.BaseParamsDigest;
 import java.math.BigInteger;
 import javax.crypto.Mac;
 import javax.ws.rs.FormParam;
+import com.qidiancamp.service.BaseParamsDigest;
 import si.mazi.rescu.RestInvocation;
 
 /** @author Benedikt Bünz */

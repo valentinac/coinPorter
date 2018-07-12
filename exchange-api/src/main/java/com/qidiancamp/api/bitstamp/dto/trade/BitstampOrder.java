@@ -3,9 +3,9 @@ package com.qidiancamp.api.bitstamp.dto.trade;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.qidiancamp.api.bitstamp.BitstampUtils;
 import java.math.BigDecimal;
 import java.util.Date;
+import com.qidiancamp.api.bitstamp.BitstampUtils;
 import si.mazi.rescu.ExceptionalReturnContentException;
 
 /** @author Matija Mazi */

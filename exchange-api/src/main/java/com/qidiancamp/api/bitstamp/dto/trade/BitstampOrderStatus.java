@@ -15,10 +15,6 @@ public enum BitstampOrderStatus {
   Open,
   Finished;
 
-  public static BitstampOrderStatus fromString(String orderStatusString) {
-    return fromString.get(orderStatusString.toLowerCase());
-  }
-
   private static final Map<String, BitstampOrderStatus> fromString =
       new HashMap<String, BitstampOrderStatus>();
 
@@ -26,6 +22,10 @@ public enum BitstampOrderStatus {
     for (BitstampOrderStatus orderStatus : values()) {
       fromString.put(orderStatus.name().toLowerCase(), orderStatus);
     }
+  }
+
+  public static BitstampOrderStatus fromString(String orderStatusString) {
+    return fromString.get(orderStatusString.toLowerCase());
   }
 
   static class BitstampOrderStatusDeserializer extends JsonDeserializer<BitstampOrderStatus> {

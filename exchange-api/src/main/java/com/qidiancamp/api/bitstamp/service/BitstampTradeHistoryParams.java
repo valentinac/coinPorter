@@ -61,16 +61,16 @@ public class BitstampTradeHistoryParams
   }
 
   @Override
+  public Integer getPageNumber() {
+    return (offset == null || pageLength == null) ? null : offset / pageLength;
+  }
+
+  @Override
   public void setPageNumber(Integer pageNumber) {
     if (pageNumber == null) {
       setOffset(null);
     } else if (pageLength != null) {
       this.offset = pageNumber * pageLength;
     }
-  }
-
-  @Override
-  public Integer getPageNumber() {
-    return (offset == null || pageLength == null) ? null : offset / pageLength;
   }
 }

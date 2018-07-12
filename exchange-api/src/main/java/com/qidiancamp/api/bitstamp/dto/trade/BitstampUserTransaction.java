@@ -3,13 +3,13 @@ package com.qidiancamp.api.bitstamp.dto.trade;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.qidiancamp.api.bitstamp.BitstampUtils;
-import com.qidiancamp.currency.Currency;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import com.qidiancamp.api.bitstamp.BitstampUtils;
+import com.qidiancamp.currency.Currency;
 
 /** @author Matija Mazi */
 public final class BitstampUserTransaction {
@@ -19,12 +19,10 @@ public final class BitstampUserTransaction {
   private final long order_id;
   private final TransactionType type;
   private final BigDecimal fee;
-
+  private final Map<String, BigDecimal> amounts = new HashMap<>();
   // possible pairs at the moment: btcusd, btceur, eurusd, xrpusd, xrpeur, xrpbtc
   private String base; // btc, eur, xrp
   private String counter; // usd, eur, btc
-
-  private final Map<String, BigDecimal> amounts = new HashMap<>();
   private BigDecimal price;
 
   /**
