@@ -1,4 +1,4 @@
-package com.qidiancamp.modules.sys.controller;
+package com.qidiancamp.modules.exchange.controller;
 
 import com.qidiancamp.common.utils.PageUtils;
 import com.qidiancamp.common.utils.R;
@@ -6,7 +6,7 @@ import com.qidiancamp.common.validator.ValidatorUtils;
 import com.qidiancamp.common.validator.group.AddGroup;
 import com.qidiancamp.common.validator.group.UpdateGroup;
 import com.qidiancamp.modules.sys.entity.SysExchangeEntity;
-import com.qidiancamp.modules.sys.service.SysExchangeService;
+import com.qidiancamp.modules.exchange.service.ExchangeSettingService;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
@@ -26,13 +26,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2018-04-26 14:38:34
  */
 @RestController
-@RequestMapping("sys/sysexchange")
-public class SysExchangeController {
-  @Autowired private SysExchangeService sysExchangeService;
+@RequestMapping("exchange/setting")
+public class
+ExchangeSettingController {
+  @Autowired private ExchangeSettingService sysExchangeService;
 
   /** 列表 */
   @RequestMapping("/list")
-  @RequiresPermissions("sys:sysexchange:list")
+  @RequiresPermissions("exchange:setting:list")
   public R list(@RequestParam Map<String, Object> params) {
     PageUtils page = sysExchangeService.queryPage(params);
 
@@ -41,7 +42,7 @@ public class SysExchangeController {
 
   /** 信息 */
   @RequestMapping("/info/{exchangeId}")
-  @RequiresPermissions("sys:sysexchange:info")
+  @RequiresPermissions("exchange:setting:info")
   public R info(@PathVariable("exchangeId") String exchangeId) {
     SysExchangeEntity sysExchange = sysExchangeService.selectById(exchangeId);
 
@@ -50,7 +51,7 @@ public class SysExchangeController {
 
   /** 保存 */
   @RequestMapping("/save")
-  @RequiresPermissions("sys:sysexchange:save")
+  @RequiresPermissions("exchange:setting:save")
   public R save(@RequestBody SysExchangeEntity sysExchange) {
     ValidatorUtils.validateEntity(sysExchange, AddGroup.class);
     sysExchange.setCreateTime(new Date());
@@ -60,7 +61,7 @@ public class SysExchangeController {
 
   /** 修改 */
   @RequestMapping("/update")
-  @RequiresPermissions("sys:sysexchange:update")
+  @RequiresPermissions("exchange:setting:update")
   public R update(@RequestBody SysExchangeEntity sysExchange) {
     ValidatorUtils.validateEntity(sysExchange, UpdateGroup.class);
     sysExchangeService.updateById(sysExchange);
@@ -69,7 +70,7 @@ public class SysExchangeController {
 
   /** 删除 */
   @RequestMapping("/delete")
-  @RequiresPermissions("sys:sysexchange:delete")
+  @RequiresPermissions("exchange:setting:delete")
   public R delete(@RequestBody String[] exchangeIds) {
     sysExchangeService.deleteBatchIds(Arrays.asList(exchangeIds));
     return R.ok();

@@ -1,4 +1,4 @@
-package com.qidiancamp.modules.sys.service;
+package com.qidiancamp.modules.exchange.service;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.qidiancamp.common.utils.PageUtils;
@@ -12,7 +12,7 @@ import java.util.Map;
  * @email abao@gmail.com
  * @date 2018-04-26 14:38:34
  */
-public interface SysExchangeService extends IService<SysExchangeEntity> {
+public interface ExchangeSettingService extends IService<SysExchangeEntity> {
 
   PageUtils queryPage(Map<String, Object> params);
 }
