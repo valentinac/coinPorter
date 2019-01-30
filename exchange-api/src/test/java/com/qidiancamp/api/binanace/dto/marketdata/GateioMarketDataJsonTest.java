@@ -24,7 +24,7 @@ public class GateioMarketDataJsonTest {
     // Read in the JSON from the example resources
     InputStream is =
         GateioMarketDataJsonTest.class.getResourceAsStream(
-            "/marketdata/example-market-info-data.json");
+            "/binance/marketdata/example-market-info-data.json");
 
     // Use Jackson to parse it
     ObjectMapper mapper = new ObjectMapper();
@@ -46,7 +46,7 @@ public class GateioMarketDataJsonTest {
 
     // Read in the JSON from the example resources
     InputStream is =
-        GateioMarketDataJsonTest.class.getResourceAsStream("/marketdata/example-pairs-data.json");
+        GateioMarketDataJsonTest.class.getResourceAsStream("/binance/marketdata/example-pairs-data.json");
 
     // Use Jackson to parse it
     ObjectMapper mapper = new ObjectMapper();
@@ -63,7 +63,7 @@ public class GateioMarketDataJsonTest {
 
     // Read in the JSON from the example resources
     InputStream is =
-        GateioMarketDataJsonTest.class.getResourceAsStream("/marketdata/example-depth-data.json");
+        GateioMarketDataJsonTest.class.getResourceAsStream("/binance/marketdata/example-depth-data.json");
 
     // Use Jackson to parse it
     ObjectMapper mapper = new ObjectMapper();
@@ -84,7 +84,7 @@ public class GateioMarketDataJsonTest {
 
     // Read in the JSON from the example resources
     InputStream is =
-        GateioMarketDataJsonTest.class.getResourceAsStream("/marketdata/example-trades-data.json");
+        GateioMarketDataJsonTest.class.getResourceAsStream("/binance/marketdata/example-trades-data.json");
 
     // Use Jackson to parse it
     ObjectMapper mapper = new ObjectMapper();

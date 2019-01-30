@@ -40,7 +40,7 @@ GateioAdapterTest {
 
     // Read in the JSON from the example resources
     InputStream is =
-        GateioAdapterTest.class.getResourceAsStream("/marketdata/example-pairs-data.json");
+        GateioAdapterTest.class.getResourceAsStream("/binance/marketdata/example-pairs-data.json");
 
     // Use Jackson to parse it
     ObjectMapper mapper = new ObjectMapper();
@@ -54,7 +54,7 @@ GateioAdapterTest {
 
     // Read in the JSON from the example resources
     InputStream is =
-        GateioAdapterTest.class.getResourceAsStream("/trade/example-order-list-data.json");
+        GateioAdapterTest.class.getResourceAsStream("/binance/trade/example-order-list-data.json");
 
     // Use Jackson to parse it
     ObjectMapper mapper = new ObjectMapper();
@@ -77,7 +77,7 @@ GateioAdapterTest {
   public void testAdaptTrades() throws IOException {
 
     InputStream is =
-        GateioAdapterTest.class.getResourceAsStream("/marketdata/example-trades-data.json");
+        GateioAdapterTest.class.getResourceAsStream("/binance/marketdata/example-trades-data.json");
 
     // Use Jackson to parse it
     ObjectMapper mapper = new ObjectMapper();
@@ -102,7 +102,7 @@ GateioAdapterTest {
 
     // Read in the JSON from the example resources
     InputStream is =
-        GateioAdapterTest.class.getResourceAsStream("/account/example-funds-data.json");
+        GateioAdapterTest.class.getResourceAsStream("/binance/account/example-funds-data.json");
 
     // Use Jackson to parse it
     ObjectMapper mapper = new ObjectMapper();
@@ -129,7 +129,7 @@ GateioAdapterTest {
 
     // Read in the JSON from the example resources
     InputStream is =
-        GateioAdapterTest.class.getResourceAsStream("/marketdata/example-depth-data.json");
+        GateioAdapterTest.class.getResourceAsStream("/binance/marketdata/example-depth-data.json");
 
     // Use Jackson to parse it
     ObjectMapper mapper = new ObjectMapper();

@@ -23,7 +23,7 @@ public class GateioTradeJsonTest {
 
     // Read in the JSON from the example resources
     InputStream is =
-        GateioTradeJsonTest.class.getResourceAsStream("/trade/example-order-list-data.json");
+        GateioTradeJsonTest.class.getResourceAsStream("/binance/trade/example-order-list-data.json");
 
     // Use Jackson to parse it
     ObjectMapper mapper = new ObjectMapper();
@@ -47,7 +47,7 @@ public class GateioTradeJsonTest {
 
     // Read in the JSON from the example resources
     InputStream is =
-        GateioTradeJsonTest.class.getResourceAsStream("/trade/example-order-result-data.json");
+        GateioTradeJsonTest.class.getResourceAsStream("/binance/trade/example-order-result-data.json");
 
     // Use Jackson to parse it
     ObjectMapper mapper = new ObjectMapper();
@@ -63,7 +63,7 @@ public class GateioTradeJsonTest {
 
     // Read in the JSON from the example resources
     InputStream is =
-        GateioTradeJsonTest.class.getResourceAsStream("/trade/example-order-status-data.json");
+        GateioTradeJsonTest.class.getResourceAsStream("/binance/trade/example-order-status-data.json");
 
     // Use Jackson to parse it
     ObjectMapper mapper = new ObjectMapper();
