@@ -16,7 +16,7 @@ public class OpenOrdersJSONTest {
   public void testUnmarshal() throws IOException {
 
     // Read in the JSON from the example resources
-    InputStream is = OpenOrdersJSONTest.class.getResourceAsStream("/trade/example-openorders.json");
+    InputStream is = OpenOrdersJSONTest.class.getResourceAsStream("/bitstamp/trade/example-openorders.json");
 
     // Use Jackson to parse it
     ObjectMapper mapper = new ObjectMapper();

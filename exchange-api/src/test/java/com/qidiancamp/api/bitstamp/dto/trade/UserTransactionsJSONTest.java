@@ -19,7 +19,7 @@ public class UserTransactionsJSONTest {
 
     // Read in the JSON from the example resources
     InputStream is =
-        UserTransactionsJSONTest.class.getResourceAsStream("/trade/example-user-transactions.json");
+        UserTransactionsJSONTest.class.getResourceAsStream("/bitstamp/trade/example-user-transactions.json");
 
     // Use Jackson to parse it
     ObjectMapper mapper = new ObjectMapper();

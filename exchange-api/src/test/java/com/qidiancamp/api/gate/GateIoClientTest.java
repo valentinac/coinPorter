@@ -13,7 +13,7 @@ public class GateIoClientTest {
 
     String api_key = "2E507D68-8B7E-4861-B47B-F256E3FB6B00";
     String secret_key = "8b204e7a2f750930f58ae64696d10a0e50aeb76dc44055ebacd240beade4235d";
-    String url_prex = "https://data.gate.io";
+    String url_prex = "https://data.gateio.io";
 
     IStockRestApi stockGet = new StockRestApi(url_prex);
 

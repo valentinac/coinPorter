@@ -33,7 +33,7 @@ public class BitstampAdapterTest {
 
     // Read in the JSON from the example resources
     InputStream is =
-        BitstampAdapterTest.class.getResourceAsStream("/account/example-accountinfo-data.json");
+        BitstampAdapterTest.class.getResourceAsStream("/bitstamp/account/example-accountinfo-data.json");
 
     // Use Jackson to parse it
     ObjectMapper mapper = new ObjectMapper();
@@ -63,7 +63,7 @@ public class BitstampAdapterTest {
 
     // Read in the JSON from the example resources
     InputStream is =
-        BitstampAdapterTest.class.getResourceAsStream("/marketdata/example-full-depth-data.json");
+        BitstampAdapterTest.class.getResourceAsStream("/bitstamp/marketdata/example-full-depth-data.json");
 
     // Use Jackson to parse it
     ObjectMapper mapper = new ObjectMapper();
@@ -89,7 +89,7 @@ public class BitstampAdapterTest {
 
     // Read in the JSON from the example resources
     InputStream is =
-        BitstampAdapterTest.class.getResourceAsStream("/marketdata/example-trades-data.json");
+        BitstampAdapterTest.class.getResourceAsStream("/bitstamp/marketdata/example-trades-data.json");
 
     // Use Jackson to parse it
     ObjectMapper mapper = new ObjectMapper();
@@ -109,7 +109,7 @@ public class BitstampAdapterTest {
 
     // Read in the JSON from the example resources
     InputStream is =
-        BitstampAdapterTest.class.getResourceAsStream("/marketdata/example-trades-data.json");
+        BitstampAdapterTest.class.getResourceAsStream("/bitstamp/marketdata/example-trades-data.json");
 
     // Use Jackson to parse it
     ObjectMapper mapper = new ObjectMapper();
@@ -132,7 +132,7 @@ public class BitstampAdapterTest {
 
     // Read in the JSON from the example resources
     InputStream is =
-        BitstampAdapterTest.class.getResourceAsStream("/marketdata/example-ticker-data.json");
+        BitstampAdapterTest.class.getResourceAsStream("/bitstamp/marketdata/example-ticker-data.json");
 
     // Use Jackson to parse it
     ObjectMapper mapper = new ObjectMapper();
@@ -155,7 +155,7 @@ public class BitstampAdapterTest {
 
     // Read in the JSON from the example resources
     InputStream is =
-        BitstampAdapterTest.class.getResourceAsStream("/trade/example-user-transactions.json");
+        BitstampAdapterTest.class.getResourceAsStream("/bitstamp/trade/example-user-transactions.json");
 
     // Use Jackson to parse it
     ObjectMapper mapper = new ObjectMapper();

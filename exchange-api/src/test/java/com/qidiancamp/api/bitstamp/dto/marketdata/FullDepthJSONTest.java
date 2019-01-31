@@ -17,7 +17,7 @@ public class FullDepthJSONTest {
 
     // Read in the JSON from the example resources
     InputStream is =
-        FullDepthJSONTest.class.getResourceAsStream("/marketdata/example-full-depth-data.json");
+        FullDepthJSONTest.class.getResourceAsStream("/bitstamp/marketdata/example-full-depth-data.json");
 
     // Use Jackson to parse it
     ObjectMapper mapper = new ObjectMapper();

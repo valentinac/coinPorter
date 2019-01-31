@@ -15,7 +15,7 @@ public class WithdrawalsJSONTest {
   public void testUnmarshal() throws IOException {
 
     // Read in the JSON from the example resources
-    InputStream is = WithdrawalsJSONTest.class.getResourceAsStream("/account/withdrawals.json");
+    InputStream is = WithdrawalsJSONTest.class.getResourceAsStream("/bitstamp/account/withdrawals.json");
 
     // Use Jackson to parse it
     ObjectMapper mapper = new ObjectMapper();

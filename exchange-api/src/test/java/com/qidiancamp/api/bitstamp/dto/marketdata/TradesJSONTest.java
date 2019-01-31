@@ -17,7 +17,7 @@ public class TradesJSONTest {
 
     // Read in the JSON from the example resources
     InputStream is =
-        TradesJSONTest.class.getResourceAsStream("/marketdata/example-trades-data.json");
+        TradesJSONTest.class.getResourceAsStream("/bitstamp/marketdata/example-trades-data.json");
 
     // Use Jackson to parse it
     ObjectMapper mapper = new ObjectMapper();
