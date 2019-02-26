@@ -7,7 +7,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-@MapperScan(basePackages = {"com.qidiancamp.modules.*.dao"})
+@MapperScan(basePackages = {"com.qidiancamp.modules.*.dao","com.qidiancamp.api"})
 public class PorterApplication extends SpringBootServletInitializer {
 
   public static void main(String[] args) {

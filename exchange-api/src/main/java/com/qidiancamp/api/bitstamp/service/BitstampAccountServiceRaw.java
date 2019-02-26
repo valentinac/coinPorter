@@ -36,6 +36,9 @@ public class BitstampAccountServiceRaw extends BitstampBaseService {
   private final String apiKey;
   private final SynchronizedValueFactory<Long> nonceFactory;
 
+  public BitstampAccountServiceRaw() {
+  }
+
   /**
    * Constructor
    *

@@ -18,6 +18,9 @@ public abstract class BaseExchangeService {
    */
   protected final Exchange exchange;
 
+  public BaseExchangeService() {
+  }
+
   /** Constructor */
   protected BaseExchangeService(Exchange exchange) {
 

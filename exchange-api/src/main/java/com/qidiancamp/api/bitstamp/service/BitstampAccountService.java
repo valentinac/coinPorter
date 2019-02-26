@@ -26,8 +26,10 @@ import com.qidiancamp.service.trade.params.TradeHistoryParamPaging;
 import com.qidiancamp.service.trade.params.TradeHistoryParams;
 import com.qidiancamp.service.trade.params.TradeHistoryParamsSorted;
 import com.qidiancamp.service.trade.params.WithdrawFundsParams;
+import org.springframework.stereotype.Service;
 
 /** @author Matija Mazi */
+@Service
 public class BitstampAccountService extends BitstampAccountServiceRaw implements AccountService {
 
   /**
@@ -39,6 +41,8 @@ public class BitstampAccountService extends BitstampAccountServiceRaw implements
 
     super(exchange);
   }
+
+  public BitstampAccountService(){};
 
   @Override
   public AccountInfo getAccountInfo() throws IOException {

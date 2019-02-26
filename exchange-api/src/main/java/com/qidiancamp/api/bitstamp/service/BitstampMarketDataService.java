@@ -8,8 +8,10 @@ import com.qidiancamp.dto.marketdata.OrderBook;
 import com.qidiancamp.dto.marketdata.Ticker;
 import com.qidiancamp.dto.marketdata.Trades;
 import com.qidiancamp.service.marketdata.MarketDataService;
+import org.springframework.stereotype.Service;
 
 /** @author Matija Mazi */
+@Service
 public class BitstampMarketDataService extends BitstampMarketDataServiceRaw
     implements MarketDataService {
 

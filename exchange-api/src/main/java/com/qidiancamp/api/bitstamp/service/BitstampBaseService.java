@@ -13,6 +13,9 @@ import com.qidiancamp.service.BaseService;
 /** @author timmolter */
 public class BitstampBaseService extends BaseExchangeService implements BaseService {
 
+  public BitstampBaseService() {
+  }
+
   /**
    * Constructor
    *
