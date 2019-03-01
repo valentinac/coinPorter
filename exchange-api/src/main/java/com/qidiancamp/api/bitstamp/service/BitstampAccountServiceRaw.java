@@ -29,12 +29,12 @@ import si.mazi.rescu.SynchronizedValueFactory;
 /** @author gnandiga */
 public class BitstampAccountServiceRaw extends BitstampBaseService {
 
-  private final BitstampDigest signatureCreator;
-  private final BitstampAuthenticated bitstampAuthenticated;
+  private BitstampDigest signatureCreator;
+  private BitstampAuthenticated bitstampAuthenticated;
 
-  private final BitstampAuthenticatedV2 bitstampAuthenticatedV2;
-  private final String apiKey;
-  private final SynchronizedValueFactory<Long> nonceFactory;
+  private BitstampAuthenticatedV2 bitstampAuthenticatedV2;
+  private String apiKey;
+  private SynchronizedValueFactory<Long> nonceFactory;
 
   public BitstampAccountServiceRaw() {
   }
