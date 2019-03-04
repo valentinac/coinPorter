@@ -11,6 +11,7 @@ import com.qidiancamp.api.huobi.service.HuobiAccountService;
 import com.qidiancamp.api.huobi.service.HuobiMarketDataService;
 import com.qidiancamp.api.huobi.service.HuobiMarketDataServiceRaw;
 import com.qidiancamp.api.huobi.service.HuobiTradeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import si.mazi.rescu.SynchronizedValueFactory;
 
 import java.io.IOException;
@@ -19,12 +20,27 @@ public class HuobiExchange extends BaseExchange implements Exchange {
 
   private final SynchronizedValueFactory<Long> nonceFactory = new CurrentTimeNonceFactory();
 
-  @Override
-  protected void initServices() {
-    this.marketDataService = new HuobiMarketDataService(this);
-    this.tradeService = new HuobiTradeService(this);
-    this.accountService = new HuobiAccountService(this);
+  @Autowired
+  public void setMarketDataServices(HuobiMarketDataService huobiMarketDataService){
+    super.marketDataService = huobiMarketDataService;
   }
+
+  @Autowired
+  public void setTradeService(HuobiTradeService huobiTradeService){
+    super.tradeService = huobiTradeService;
+  }
+
+  @Autowired
+  public void setAccountService(HuobiAccountService huobiAccountService){
+    super.accountService = huobiAccountService;
+  }
+
+//  @Override
+//  protected void initServices() {
+//    this.marketDataService = new HuobiMarketDataService(this);
+//    this.tradeService = new HuobiTradeService(this);
+//    this.accountService = new HuobiAccountService(this);
+//  }
 
   @Override
   public ExchangeSpecification getDefaultExchangeSpecification() {

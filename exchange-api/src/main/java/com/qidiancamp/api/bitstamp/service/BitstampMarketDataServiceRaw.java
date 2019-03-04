@@ -9,6 +9,7 @@ import com.qidiancamp.api.bitstamp.dto.marketdata.BitstampOrderBook;
 import com.qidiancamp.api.bitstamp.dto.marketdata.BitstampTicker;
 import com.qidiancamp.api.bitstamp.dto.marketdata.BitstampTransaction;
 import com.qidiancamp.currency.CurrencyPair;
+import org.springframework.beans.factory.annotation.Value;
 import si.mazi.rescu.RestProxyFactory;
 
 /** @author gnandiga */
@@ -16,13 +17,17 @@ public class BitstampMarketDataServiceRaw extends BitstampBaseService {
 
   private final BitstampV2 bitstampV2;
 
-  public BitstampMarketDataServiceRaw(Exchange exchange) {
+  @Value("${coinfig.bitstamp.ssluri}")
+  private String ssluri;
 
-    super(exchange);
+  public BitstampMarketDataServiceRaw() {
+
+//    super(exchange);
     this.bitstampV2 =
         RestProxyFactory.createProxy(
-            BitstampV2.class, exchange.getExchangeSpecification().getSslUri(), getClientConfig());
+            BitstampV2.class, ssluri, getClientConfig());
   }
+
 
   public BitstampTicker getBitstampTicker(CurrencyPair pair) throws IOException {
     try {

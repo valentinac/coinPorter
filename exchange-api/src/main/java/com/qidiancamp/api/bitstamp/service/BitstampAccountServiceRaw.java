@@ -46,7 +46,7 @@ public class BitstampAccountServiceRaw extends BitstampBaseService {
    */
   protected BitstampAccountServiceRaw(Exchange exchange) {
 
-    super(exchange);
+//    super(exchange);
 
     this.bitstampAuthenticated =
         RestProxyFactory.createProxy(

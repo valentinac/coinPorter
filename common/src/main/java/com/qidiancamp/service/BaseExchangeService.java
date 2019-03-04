@@ -16,16 +16,16 @@ public abstract class BaseExchangeService {
    * The base Exchange. Every service has access to the containing exchange class, which hold meta
    * data and the exchange specification
    */
-  protected Exchange exchange=null;
+  protected Exchange exchange;
 
   public BaseExchangeService() {
   }
 
   /** Constructor */
-  protected BaseExchangeService(Exchange exchange) {
-
-    this.exchange = exchange;
-  }
+//  protected BaseExchangeService(Exchange exchange) {
+//
+//    this.exchange = exchange;
+//  }
 
   public void verifyOrder(LimitOrder limitOrder) {
 

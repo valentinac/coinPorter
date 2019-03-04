@@ -15,9 +15,9 @@ import org.springframework.stereotype.Service;
 public class BitstampMarketDataService extends BitstampMarketDataServiceRaw
     implements MarketDataService {
 
-  public BitstampMarketDataService(Exchange exchange) {
-    super(exchange);
-  }
+//  public BitstampMarketDataService(Exchange exchange) {
+//    super(exchange);
+//  }
 
   @Override
   public Ticker getTicker(CurrencyPair currencyPair, Object... args) throws IOException {

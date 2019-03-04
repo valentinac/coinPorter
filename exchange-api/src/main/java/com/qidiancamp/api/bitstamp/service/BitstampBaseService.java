@@ -16,15 +16,15 @@ public class BitstampBaseService extends BaseExchangeService implements BaseServ
   public BitstampBaseService() {
   }
 
-  /**
-   * Constructor
-   *
-   * @param exchange
-   */
-  public BitstampBaseService(Exchange exchange) {
-
-    super(exchange);
-  }
+//  /**
+//   * Constructor
+//   *
+//   * @param exchange
+//   */
+//  public BitstampBaseService(Exchange exchange) {
+//
+//    super(exchange);
+//  }
 
   protected ExchangeException handleError(BitstampException exception) {
 

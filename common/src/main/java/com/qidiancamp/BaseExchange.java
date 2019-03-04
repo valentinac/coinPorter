@@ -16,6 +16,8 @@ import java.util.*;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 public abstract class BaseExchange implements Exchange {
 
@@ -25,8 +27,7 @@ public abstract class BaseExchange implements Exchange {
   protected MarketDataService marketDataService;
   protected TradeService tradeService;
   protected AccountService accountService;
-
-  protected abstract void initServices();
+//  protected abstract void initServices();
 
   @Override
   public void applySpecification(ExchangeSpecification exchangeSpecification) {
@@ -105,7 +106,7 @@ public abstract class BaseExchange implements Exchange {
           "No \"exchange name\" found in the ExchangeSpecification. The name is used to load the meta data file from the classpath and may lead to unexpected results.");
     }
 
-    initServices();
+//    initServices();
 
     if (this.exchangeSpecification.isShouldLoadRemoteMetaData()) {
       try {

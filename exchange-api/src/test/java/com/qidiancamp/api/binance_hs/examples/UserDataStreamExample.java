@@ -16,7 +16,7 @@ import com.qidiancamp.api.binance_hs.domain.event.UserDataUpdateEvent.UserDataUp
 public class UserDataStreamExample {
 
   public static void main(String[] args) {
-    BinanceApiClientFactory factory = BinanceApiClientFactory.newInstance("8GOySnT93z9lo8mxTFDQNBbBtuaqoKV1f5FzHwqINLAFqtrV2yTkCSWnbErHVzjI", "5i2KgN6jfMDhtwqLf0ysW9kV0q2UNsgXq5PUS3zeRlrVkEOqbszuAHve6ICJ85FW");
+    BinanceApiClientFactory factory = BinanceApiClientFactory.newInstance("UFyg0elVw4mBQKptheHLERc407118mi52xCkCY03UoUHW96efFj8uTMKnRoVX8RU", "BpPoHmikcIYW5KNCBTSP1YxGFXGVVI7Jo7tsGy3JonYC5luuJ1uYW9O5PQUwr9Ne");
     BinanceApiRestClient client = factory.newRestClient();
 
     // First, we obtain a listenKey which is required to interact with the user data stream

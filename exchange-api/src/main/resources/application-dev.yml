@@ -1,0 +1,27 @@
+
+exCoinfig:
+  gateio:
+    apikey: 2E507D68-8B7E-4861-B47B-F256E3FB6B00
+    secret: 8b204e7a2f750930f58ae64696d10a0e50aeb76dc44055ebacd240beade4235d
+  bianace:
+    apikey: UFyg0elVw4mBQKptheHLERc407118mi52xCkCY03UoUHW96efFj8uTMKnRoVX8RU
+    secret: BpPoHmikcIYW5KNCBTSP1YxGFXGVVI7Jo7tsGy3JonYC5luuJ1uYW9O5PQUwr9Ne
+  bitstamp:
+    apikey: 6mqM0HgDwODlETya0LW4OVrCL75mNkdA
+    secret: 6Eavk9qSCwlenOykePmXggAbkAxKBv8G
+    userid:
+    ssluri: https://www.bitstamp.net
+    host: www.bitstamp.net
+    port: 80
+    name: Bitstamp
+    discription: Bitstamp is a Bitcoin exchange registered in Slovenia.
+  bithumb:
+    apikey:
+    secret:
+  coinone:
+    apikey:
+    secret:
+  huobipro:
+    apikey:
+    secret:
+

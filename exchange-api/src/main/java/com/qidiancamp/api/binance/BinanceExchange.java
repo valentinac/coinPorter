@@ -14,6 +14,8 @@ import com.qidiancamp.common.utils.jackson.CurrencyPairDeserializer;
 import com.qidiancamp.common.utils.nonce.AtomicLongCurrentTimeIncrementalNonceFactory;
 import java.math.BigDecimal;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import si.mazi.rescu.SynchronizedValueFactory;
 
 public class BinanceExchange extends BaseExchange {
@@ -21,13 +23,26 @@ public class BinanceExchange extends BaseExchange {
   private SynchronizedValueFactory<Long> nonceFactory =
       new AtomicLongCurrentTimeIncrementalNonceFactory();
 
-  @Override
-  protected void initServices() {
-    this.marketDataService = new BinanceMarketDataService(this);
-    this.tradeService = new BinanceTradeService(this);
-    this.accountService = new BinanceAccountService(this);
+//  @Override
+//  protected void initServices() {
+//    this.marketDataService = new BinanceMarketDataService(this);
+//    this.tradeService = new BinanceTradeService(this);
+//    this.accountService = new BinanceAccountService(this);
+//  }
+
+  @Autowired
+  public void setMarketDataServices(BinanceMarketDataService binanceMarketDataService){
+    super.marketDataService = binanceMarketDataService;
+  }
+  @Autowired
+  public void setTradeService(BinanceTradeService binanceTradeService){
+    super.tradeService = binanceTradeService;
   }
 
+  @Autowired
+  public void setAccountService(BinanceAccountService binanceAccountService){
+    super.accountService = binanceAccountService;
+  }
   @Override
   public SynchronizedValueFactory<Long> getNonceFactory() {
 

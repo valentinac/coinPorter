@@ -11,6 +11,7 @@ import com.qidiancamp.api.bitstamp.dto.trade.BitstampOrder;
 import com.qidiancamp.api.bitstamp.dto.trade.BitstampOrderStatusResponse;
 import com.qidiancamp.api.bitstamp.dto.trade.BitstampUserTransaction;
 import com.qidiancamp.currency.CurrencyPair;
+import org.springframework.beans.factory.annotation.Value;
 import si.mazi.rescu.RestProxyFactory;
 import si.mazi.rescu.SynchronizedValueFactory;
 
@@ -20,29 +21,29 @@ public class BitstampTradeServiceRaw extends BitstampBaseService {
   private final BitstampAuthenticated bitstampAuthenticated;
   private final BitstampAuthenticatedV2 bitstampAuthenticatedV2;
   private final BitstampDigest signatureCreator;
+  @Value("${exCoinfig.bitstamp.apikey}")
   private String apiKey;
+  @Value("${exCoinfig.bitstamp.secret}")
+  private String secret;
+  @Value("${exCoinfig.bitstamp.userid}")
+  private String userid;
+  @Value("${exCoinfig.bitstamp.ssluri}")
+  private String ssluri;
   private SynchronizedValueFactory<Long> nonceFactory;
 
-  public BitstampTradeServiceRaw(Exchange exchange) {
+  public BitstampTradeServiceRaw() {
 
-    super(exchange);
+//    super(exchange);
     this.bitstampAuthenticated =
         RestProxyFactory.createProxy(
-            BitstampAuthenticated.class,
-            exchange.getExchangeSpecification().getSslUri(),
-            getClientConfig());
+            BitstampAuthenticated.class,ssluri,getClientConfig());
     this.bitstampAuthenticatedV2 =
         RestProxyFactory.createProxy(
-            BitstampAuthenticatedV2.class,
-            exchange.getExchangeSpecification().getSslUri(),
-            getClientConfig());
-    this.apiKey = exchange.getExchangeSpecification().getApiKey();
+            BitstampAuthenticatedV2.class,ssluri,getClientConfig());
+//    this.apiKey = apiKey;
     this.nonceFactory = exchange.getNonceFactory();
     this.signatureCreator =
-        BitstampDigest.createInstance(
-            exchange.getExchangeSpecification().getSecretKey(),
-            exchange.getExchangeSpecification().getUserName(),
-            apiKey);
+        BitstampDigest.createInstance(secret,userid,apiKey);
   }
 
   public BitstampOrder[] getBitstampOpenOrders(CurrencyPair pair) throws IOException {
