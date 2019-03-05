@@ -22,7 +22,8 @@ import com.qidiancamp.modules.job.dao.ScheduleJobLogDao;
 import com.qidiancamp.modules.job.entity.ScheduleJobLogEntity;
 import com.qidiancamp.modules.job.service.ScheduleJobLogService;
 import java.util.Map;
-import org.apache.commons.lang.StringUtils;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 @Service("scheduleJobLogService")

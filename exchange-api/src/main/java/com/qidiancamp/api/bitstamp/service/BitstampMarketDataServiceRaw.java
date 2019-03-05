@@ -24,8 +24,7 @@ public class BitstampMarketDataServiceRaw extends BitstampBaseService {
 
 //    super(exchange);
     this.bitstampV2 =
-        RestProxyFactory.createProxy(
-            BitstampV2.class, ssluri, getClientConfig());
+        RestProxyFactory.createProxy(BitstampV2.class, ssluri, getClientConfig());
   }
 
 

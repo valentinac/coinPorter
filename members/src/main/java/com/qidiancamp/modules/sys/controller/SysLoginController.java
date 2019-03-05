@@ -19,7 +19,7 @@ import com.qidiancamp.common.utils.R;
 import com.qidiancamp.modules.sys.entity.SysUserEntity;
 import com.qidiancamp.modules.sys.service.SysUserService;
 import com.qidiancamp.modules.sys.shiro.ShiroUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;

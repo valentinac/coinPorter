@@ -22,7 +22,7 @@ public class GateioBaseService extends BaseExchangeService implements BaseServic
    */
   public GateioBaseService(Exchange exchange) {
 
-    super(exchange);
+//    super(exchange);
 
     this.bter =
         RestProxyFactory.createProxy(

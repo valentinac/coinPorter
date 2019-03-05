@@ -22,7 +22,8 @@ import com.qidiancamp.modules.sys.service.SysRoleDeptService;
 import com.qidiancamp.modules.sys.service.SysUserRoleService;
 import com.qidiancamp.modules.sys.shiro.ShiroUtils;
 import java.util.*;
-import org.apache.commons.lang.StringUtils;
+
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;

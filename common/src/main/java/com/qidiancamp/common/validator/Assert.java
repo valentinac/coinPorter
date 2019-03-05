@@ -14,7 +14,7 @@
 package com.qidiancamp.common.validator;
 
 import com.qidiancamp.common.exception.RRException;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * 数据校验

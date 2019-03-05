@@ -24,9 +24,9 @@ import com.qidiancamp.modules.sys.dao.SysUserDao;
 import com.qidiancamp.modules.sys.entity.SysUserEntity;
 import com.qidiancamp.modules.sys.service.SysUserService;
 import com.qidiancamp.modules.sys.shiro.ShiroUtils;
-import org.apache.commons.lang.RandomStringUtils;
-import org.apache.commons.lang.StringUtils;
 
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

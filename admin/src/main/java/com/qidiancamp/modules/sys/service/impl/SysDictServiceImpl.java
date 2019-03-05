@@ -22,7 +22,8 @@ import com.qidiancamp.modules.sys.dao.SysDictDao;
 import com.qidiancamp.modules.sys.entity.SysDictEntity;
 import com.qidiancamp.modules.sys.service.SysDictService;
 import java.util.Map;
-import org.apache.commons.lang.StringUtils;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 @Service("sysDictService")

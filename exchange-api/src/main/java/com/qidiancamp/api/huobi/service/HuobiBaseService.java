@@ -19,7 +19,7 @@ public class HuobiBaseService extends BaseExchangeService implements BaseService
   protected ParamsDigest signatureCreator;
 
   public HuobiBaseService(Exchange exchange) {
-    super(exchange);
+//    super(exchange);
     huobi =
         RestProxyFactory.createProxy(
             Huobi.class, exchange.getExchangeSpecification().getSslUri(), getClientConfig());

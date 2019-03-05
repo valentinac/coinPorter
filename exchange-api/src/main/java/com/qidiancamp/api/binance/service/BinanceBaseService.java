@@ -19,7 +19,7 @@ public class BinanceBaseService extends BaseExchangeService implements BaseServi
    * @param exchange
    */
   protected BinanceBaseService(Exchange exchange) {
-    super(exchange);
+//    super(exchange);
     this.binance =
         RestProxyFactory.createProxy(
             BinanceAuthenticated.class,

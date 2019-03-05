@@ -31,25 +31,27 @@ public class ServiceTest {
     @Autowired
     private BitstampAccountService bitstampAccountService;
 
-//    @Test
-//    public void accountInfo() throws IOException {
-//
+    @Test
+    public void accountInfo() throws IOException {
+
 //        List<CurrencyPair> currencyPairs =
 //                Stream.of(CurrencyPair.BTC_USD, CurrencyPair.ETH_USD, CurrencyPair.ETH_BTC)
 //                        .collect(Collectors.toList());
 //        BitstampBalance balance = new BitstampBalance();
 //        String formattedPairs = BitstampAdapters.adaptAccountInfo(currencyPairs);
 //        Assert.assertEquals("tBTCUSD,tETHUSD,tETHBTC", formattedPairs);
-//    }
 
-    @Test
-    public void tickerFetchTest() throws Exception {
-
-        Exchange exchange = ExchangeFactory.INSTANCE.createExchange(GateioExchange.class.getName());
-        MarketDataService marketDataService = exchange.getMarketDataService();
-        Ticker ticker = marketDataService.getTicker(new CurrencyPair("BTC", "USDT"));
-        System.out.println(ticker.toString());
-        assertThat(ticker).isNotNull();
+        bitstampAccountService.getAccountInfo();
     }
+
+//    @Test
+//    public void tickerFetchTest() throws Exception {
+//
+//        Exchange exchange = ExchangeFactory.INSTANCE.createExchange(GateioExchange.class.getName());
+//        MarketDataService marketDataService = exchange.getMarketDataService();
+//        Ticker ticker = marketDataService.getTicker(new CurrencyPair("BTC", "USDT"));
+//        System.out.println(ticker.toString());
+//        assertThat(ticker).isNotNull();
+//    }
 
 }

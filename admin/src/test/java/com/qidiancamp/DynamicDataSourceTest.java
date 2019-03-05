@@ -2,7 +2,7 @@ package com.qidiancamp;
 
 import com.qidiancamp.modules.sys.entity.SysUserEntity;
 import com.qidiancamp.service.DataSourceTestService;
-import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
