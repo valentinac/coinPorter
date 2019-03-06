@@ -3,6 +3,7 @@ package com.qidiancamp.test.bitstamp;
 import com.qidiancamp.Exchange;
 import com.qidiancamp.ExchangeFactory;
 import com.qidiancamp.api.bitstamp.BitstampAdapters;
+import com.qidiancamp.api.bitstamp.BitstampExchange;
 import com.qidiancamp.api.bitstamp.dto.account.BitstampBalance;
 import com.qidiancamp.api.bitstamp.dto.marketdata.BitstampTicker;
 import com.qidiancamp.api.bitstamp.service.BitstampAccountService;
@@ -28,8 +29,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 public class ServiceTest {
 
-    @Autowired
-    private BitstampAccountService bitstampAccountService;
+
+    private Exchange bitstampExchange = ExchangeFactory.INSTANCE.createExchange(BitstampExchange.class.getName());
+
+    private Exchange gateioExchange = ExchangeFactory.INSTANCE.createExchange(GateioExchange.class.getName());
 
     @Test
     public void accountInfo() throws IOException {
@@ -40,18 +43,22 @@ public class ServiceTest {
 //        BitstampBalance balance = new BitstampBalance();
 //        String formattedPairs = BitstampAdapters.adaptAccountInfo(currencyPairs);
 //        Assert.assertEquals("tBTCUSD,tETHUSD,tETHBTC", formattedPairs);
+        System.out.println(bitstampExchange);
 
-        bitstampAccountService.getAccountInfo();
+        System.out.println(bitstampExchange.getAccountService());
+        Exchange exchange = ExchangeFactory.INSTANCE.createExchange(BitstampExchange.class.getName());
+        System.out.println(exchange.getAccountService());
+        bitstampExchange.getAccountService().getAccountInfo();
     }
 
-//    @Test
-//    public void tickerFetchTest() throws Exception {
-//
-//        Exchange exchange = ExchangeFactory.INSTANCE.createExchange(GateioExchange.class.getName());
-//        MarketDataService marketDataService = exchange.getMarketDataService();
-//        Ticker ticker = marketDataService.getTicker(new CurrencyPair("BTC", "USDT"));
-//        System.out.println(ticker.toString());
-//        assertThat(ticker).isNotNull();
-//    }
+    @Test
+    public void tickerFetchTest() throws Exception {
+
+        Exchange exchange = ExchangeFactory.INSTANCE.createExchange(GateioExchange.class.getName());
+        MarketDataService marketDataService = exchange.getMarketDataService();
+        Ticker ticker = marketDataService.getTicker(new CurrencyPair("BTC", "USDT"));
+        System.out.println(ticker.toString());
+        assertThat(ticker).isNotNull();
+    }
 
 }

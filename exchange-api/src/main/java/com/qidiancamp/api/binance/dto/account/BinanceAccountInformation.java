@@ -1,6 +1,7 @@
 package com.qidiancamp.api.binance.dto.account;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.math.BigDecimal;
 import java.util.List;
 

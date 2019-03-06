@@ -1,6 +1,7 @@
 package com.qidiancamp.api.binance.dto.meta;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 
 public class BinanceTime {

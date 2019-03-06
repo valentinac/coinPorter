@@ -1,9 +1,11 @@
 package com.qidiancamp.api.binance.dto.trade;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.qidiancamp.dto.Order.IOrderFlags;
 
-public enum TimeInForce {
+public enum TimeInForce implements IOrderFlags {
   GTC,
+  FOK,
   IOC;
 
   @JsonCreator

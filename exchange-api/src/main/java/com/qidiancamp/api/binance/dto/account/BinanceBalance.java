@@ -1,20 +1,42 @@
 package com.qidiancamp.api.binance.dto.account;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.qidiancamp.currency.Currency;
+
 import java.math.BigDecimal;
 
 public final class BinanceBalance {
 
-  public final String asset;
-  public final BigDecimal free;
-  public final BigDecimal locked;
+  private final Currency currency;
+  private final BigDecimal free;
+  private final BigDecimal locked;
 
   public BinanceBalance(
       @JsonProperty("asset") String asset,
       @JsonProperty("free") BigDecimal free,
       @JsonProperty("locked") BigDecimal locked) {
-    this.asset = asset;
-    this.free = free;
+    this.currency = Currency.getInstance(asset);
     this.locked = locked;
+    this.free = free;
+  }
+
+  public Currency getCurrency() {
+    return currency;
+  }
+
+  public BigDecimal getTotal() {
+    return free.add(locked);
+  }
+
+  public BigDecimal getAvailable() {
+    return free;
+  }
+
+  public BigDecimal getLocked() {
+    return locked;
+  }
+
+  public String toString() {
+    return "[" + currency + ", free=" + free + ", locked=" + locked + "]";
   }
 }

@@ -1,12 +1,14 @@
 package com.qidiancamp.api.binance.service;
 
 import com.qidiancamp.Exchange;
+import com.qidiancamp.api.binance.BinanceAdapters;
 import com.qidiancamp.api.binance.dto.BinanceException;
 import com.qidiancamp.api.binance.dto.trade.*;
+import com.qidiancamp.currency.CurrencyPair;
+
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 public class BinanceTradeServiceRaw extends BinanceBaseService {
 
@@ -14,13 +16,23 @@ public class BinanceTradeServiceRaw extends BinanceBaseService {
     super(exchange);
   }
 
-  public List<BinanceOrder> openOrders(String symbol, Long recvWindow, long timestamp)
+  public List<BinanceOrder> openOrders(Long recvWindow, long timestamp)
       throws BinanceException, IOException {
-    return binance.openOrders(symbol, recvWindow, timestamp, super.apiKey, super.signatureCreator);
+    return binance.openOrders(null, recvWindow, timestamp, super.apiKey, super.signatureCreator);
+  }
+
+  public List<BinanceOrder> openOrders(CurrencyPair pair, Long recvWindow, long timestamp)
+      throws BinanceException, IOException {
+    return binance.openOrders(
+        BinanceAdapters.toSymbol(pair),
+        recvWindow,
+        timestamp,
+        super.apiKey,
+        super.signatureCreator);
   }
 
   public BinanceNewOrder newOrder(
-      String symbol,
+      CurrencyPair pair,
       OrderSide side,
       OrderType type,
       TimeInForce timeInForce,
@@ -33,7 +45,7 @@ public class BinanceTradeServiceRaw extends BinanceBaseService {
       long timestamp)
       throws IOException, BinanceException {
     return binance.newOrder(
-        symbol,
+        BinanceAdapters.toSymbol(pair),
         side,
         type,
         timeInForce,
@@ -49,7 +61,7 @@ public class BinanceTradeServiceRaw extends BinanceBaseService {
   }
 
   public void testNewOrder(
-      String symbol,
+      CurrencyPair pair,
       OrderSide side,
       OrderType type,
       TimeInForce timeInForce,
@@ -62,7 +74,7 @@ public class BinanceTradeServiceRaw extends BinanceBaseService {
       long timestamp)
       throws IOException, BinanceException {
     binance.testNewOrder(
-        symbol,
+        BinanceAdapters.toSymbol(pair),
         side,
         type,
         timeInForce,
@@ -78,10 +90,10 @@ public class BinanceTradeServiceRaw extends BinanceBaseService {
   }
 
   public BinanceOrder orderStatus(
-      String symbol, long orderId, String origClientOrderId, Long recvWindow, long timestamp)
+      CurrencyPair pair, long orderId, String origClientOrderId, Long recvWindow, long timestamp)
       throws IOException, BinanceException {
     return binance.orderStatus(
-        symbol,
+        BinanceAdapters.toSymbol(pair),
         orderId,
         origClientOrderId,
         recvWindow,
@@ -91,7 +103,7 @@ public class BinanceTradeServiceRaw extends BinanceBaseService {
   }
 
   public BinanceCancelledOrder cancelOrder(
-      String symbol,
+      CurrencyPair pair,
       long orderId,
       String origClientOrderId,
       String newClientOrderId,
@@ -99,7 +111,7 @@ public class BinanceTradeServiceRaw extends BinanceBaseService {
       long timestamp)
       throws IOException, BinanceException {
     return binance.cancelOrder(
-        symbol,
+        BinanceAdapters.toSymbol(pair),
         orderId,
         origClientOrderId,
         newClientOrderId,
@@ -110,28 +122,40 @@ public class BinanceTradeServiceRaw extends BinanceBaseService {
   }
 
   public List<BinanceOrder> allOrders(
-      String symbol, Long orderId, Integer limit, Long recvWindow, long timestamp)
+      CurrencyPair pair, Long orderId, Integer limit, Long recvWindow, long timestamp)
       throws BinanceException, IOException {
     return binance.allOrders(
-        symbol, orderId, limit, recvWindow, timestamp, super.apiKey, super.signatureCreator);
+        BinanceAdapters.toSymbol(pair),
+        orderId,
+        limit,
+        recvWindow,
+        timestamp,
+        super.apiKey,
+        super.signatureCreator);
   }
 
   public List<BinanceTrade> myTrades(
-      String symbol, Integer limit, Long fromId, Long recvWindow, long timestamp)
+      CurrencyPair pair, Integer limit, Long fromId, Long recvWindow, long timestamp)
       throws BinanceException, IOException {
     return binance.myTrades(
-        symbol, limit, fromId, recvWindow, timestamp, super.apiKey, super.signatureCreator);
+        BinanceAdapters.toSymbol(pair),
+        limit,
+        fromId,
+        recvWindow,
+        timestamp,
+        super.apiKey,
+        super.signatureCreator);
   }
 
   public BinanceListenKey startUserDataStream() throws IOException {
     return binance.startUserDataStream(apiKey);
   }
 
-  public Map keepAliveDataStream(String listenKey) throws IOException {
-    return binance.keepAliveUserDataStream(apiKey, listenKey);
+  public void keepAliveDataStream(String listenKey) throws IOException {
+    binance.keepAliveUserDataStream(apiKey, listenKey);
   }
 
-  public Map closeDataStream(String listenKey) throws IOException {
-    return binance.closeUserDataStream(apiKey, listenKey);
+  public void closeDataStream(String listenKey) throws IOException {
+    binance.closeUserDataStream(apiKey, listenKey);
   }
 }

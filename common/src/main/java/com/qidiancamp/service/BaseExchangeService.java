@@ -22,10 +22,10 @@ public abstract class BaseExchangeService {
   }
 
   /** Constructor */
-//  protected BaseExchangeService(Exchange exchange) {
-//
-//    this.exchange = exchange;
-//  }
+  protected BaseExchangeService(Exchange exchange) {
+
+    this.exchange = exchange;
+  }
 
   public void verifyOrder(LimitOrder limitOrder) {
 

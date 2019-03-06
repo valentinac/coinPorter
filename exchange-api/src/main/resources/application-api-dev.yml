@@ -1,0 +1,64 @@
+#spring:
+#    datasource:
+#        type: com.alibaba.druid.pool.DruidDataSource
+#        driverClassName: com.mysql.jdbc.Driver
+#        druid:
+#            first:  #数据源1
+#                url: jdbc:mysql://cutter.com:3306/code_cutter?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+#                username: wtraining
+#                password: IGj9;ff3y#GD
+#            second:  #数据源2
+#                url: jdbc:mysql://10.10.168.18:3306/renren_security?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+#                username: renren
+#                password: 123456
+#            initial-size: 10
+#            max-active: 100
+#            min-idle: 10
+#            max-wait: 60000
+#            pool-prepared-statements: true
+#            max-pool-prepared-statement-per-connection-size: 20
+#            time-between-eviction-runs-millis: 60000
+#            min-evictable-idle-time-millis: 300000
+#            validation-query: SELECT 1 FROM DUAL
+#            test-while-idle: true
+#            test-on-borrow: false
+#            test-on-return: false
+#            stat-view-servlet:
+#                enabled: true
+#                url-pattern: /druid/*
+#                #login-username: admin
+#                #login-password: admin
+#            filter:
+#                stat:
+#                    log-slow-sql: true
+#                    slow-sql-millis: 1000
+#                    merge-sql: true
+#                wall:
+#                    config:
+#                        multi-statement-allow: true
+exCoinfig:
+  gateio:
+    apikey: 2E507D68-8B7E-4861-B47B-F256E3FB6B00
+    secret: 8b204e7a2f750930f58ae64696d10a0e50aeb76dc44055ebacd240beade4235d
+  bianace:
+    apikey: UFyg0elVw4mBQKptheHLERc407118mi52xCkCY03UoUHW96efFj8uTMKnRoVX8RU
+    secret: BpPoHmikcIYW5KNCBTSP1YxGFXGVVI7Jo7tsGy3JonYC5luuJ1uYW9O5PQUwr9Ne
+  bitstamp:
+    apikey: 6mqM0HgDwODlETya0LW4OVrCL75mNkdA
+    secret: 6Eavk9qSCwlenOykePmXggAbkAxKBv8G
+    userid:
+    ssluri: https://www.bitstamp.net
+    host: www.bitstamp.net
+    port: 80
+    name: Bitstamp
+    discription: Bitstamp is a Bitcoin exchange registered in Slovenia.
+  bithumb:
+    apikey:
+    secret:
+  coinone:
+    apikey:
+    secret:
+  huobipro:
+    apikey:
+    secret:
+

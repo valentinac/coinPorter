@@ -2,47 +2,52 @@ package com.qidiancamp.api.binance;
 
 import com.qidiancamp.BaseExchange;
 import com.qidiancamp.ExchangeSpecification;
-import com.qidiancamp.api.binance.dto.marketdata.BinanceSymbolPrice;
+import com.qidiancamp.api.binance.dto.marketdata.BinancePrice;
+import com.qidiancamp.api.binance.dto.meta.exchangeinfo.BinanceExchangeInfo;
+import com.qidiancamp.api.binance.dto.meta.exchangeinfo.Filter;
+import com.qidiancamp.api.binance.dto.meta.exchangeinfo.Symbol;
 import com.qidiancamp.api.binance.service.BinanceAccountService;
 import com.qidiancamp.api.binance.service.BinanceMarketDataService;
 import com.qidiancamp.api.binance.service.BinanceTradeService;
+import com.qidiancamp.common.utils.AuthUtils;
+import com.qidiancamp.common.utils.nonce.AtomicLongCurrentTimeIncrementalNonceFactory;
 import com.qidiancamp.currency.Currency;
 import com.qidiancamp.currency.CurrencyPair;
 import com.qidiancamp.dto.meta.CurrencyMetaData;
 import com.qidiancamp.dto.meta.CurrencyPairMetaData;
-import com.qidiancamp.common.utils.jackson.CurrencyPairDeserializer;
-import com.qidiancamp.common.utils.nonce.AtomicLongCurrentTimeIncrementalNonceFactory;
-import java.math.BigDecimal;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import com.qidiancamp.exceptions.ExchangeException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import si.mazi.rescu.RestProxyFactory;
 import si.mazi.rescu.SynchronizedValueFactory;
+
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class BinanceExchange extends BaseExchange {
 
+  private static final Logger LOG = LoggerFactory.getLogger(BinanceExchange.class);
+
+  private static final int DEFAULT_PRECISION = 8;
+
   private SynchronizedValueFactory<Long> nonceFactory =
       new AtomicLongCurrentTimeIncrementalNonceFactory();
+  private BinanceExchangeInfo exchangeInfo;
+  private Long deltaServerTimeExpire;
+  private Long deltaServerTime;
 
-//  @Override
-//  protected void initServices() {
-//    this.marketDataService = new BinanceMarketDataService(this);
-//    this.tradeService = new BinanceTradeService(this);
-//    this.accountService = new BinanceAccountService(this);
-//  }
+  @Override
+  protected void initServices() {
 
-  @Autowired
-  public void setMarketDataServices(BinanceMarketDataService binanceMarketDataService){
-    super.marketDataService = binanceMarketDataService;
-  }
-  @Autowired
-  public void setTradeService(BinanceTradeService binanceTradeService){
-    super.tradeService = binanceTradeService;
+    this.marketDataService = new BinanceMarketDataService(this);
+    this.tradeService = new BinanceTradeService(this);
+    this.accountService = new BinanceAccountService(this);
   }
 
-  @Autowired
-  public void setAccountService(BinanceAccountService binanceAccountService){
-    super.accountService = binanceAccountService;
-  }
   @Override
   public SynchronizedValueFactory<Long> getNonceFactory() {
 
@@ -51,17 +56,25 @@ public class BinanceExchange extends BaseExchange {
 
   @Override
   public ExchangeSpecification getDefaultExchangeSpecification() {
+
     ExchangeSpecification spec = new ExchangeSpecification(this.getClass().getCanonicalName());
-    spec.setSslUri("https://www.binance.com");
+    spec.setSslUri("https://api.binance.com");
     spec.setHost("www.binance.com");
     spec.setPort(80);
     spec.setExchangeName("Binance");
     spec.setExchangeDescription("Binance Exchange.");
+    AuthUtils.setApiAndSecretKey(spec, "binance");
     return spec;
+  }
+
+  public BinanceExchangeInfo getExchangeInfo() {
+
+    return exchangeInfo;
   }
 
   @Override
   public void remoteInit() {
+
     try {
       // populate currency pair keys only, exchange does not provide any other metadata for download
       Map<CurrencyPair, CurrencyPairMetaData> currencyPairs = exchangeMetaData.getCurrencyPairs();
@@ -69,16 +82,102 @@ public class BinanceExchange extends BaseExchange {
 
       BinanceMarketDataService marketDataService =
           (BinanceMarketDataService) this.marketDataService;
-      for (BinanceSymbolPrice price : marketDataService.tickerAllPrices()) {
-        CurrencyPair pair = CurrencyPairDeserializer.getCurrencyPairFromString(price.symbol);
-        currencyPairs.put(
-            pair, new CurrencyPairMetaData(BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, 8));
+      exchangeInfo = marketDataService.getExchangeInfo();
+      Symbol[] symbols = exchangeInfo.getSymbols();
 
-        currencies.put(pair.base, new CurrencyMetaData(8, BigDecimal.ZERO));
-        currencies.put(pair.counter, new CurrencyMetaData(8, BigDecimal.ZERO));
+      for (BinancePrice price : marketDataService.tickerAllPrices()) {
+        CurrencyPair pair = price.getCurrencyPair();
+
+        for (Symbol symbol : symbols) {
+          if (symbol
+              .getSymbol()
+              .equals(pair.base.getCurrencyCode() + pair.counter.getCurrencyCode())) {
+
+            int basePrecision = Integer.parseInt(symbol.getBaseAssetPrecision());
+            int counterPrecision = Integer.parseInt(symbol.getQuotePrecision());
+            int pairPrecision = 8;
+            int amountPrecision = 8;
+
+            BigDecimal minQty = null;
+            BigDecimal maxQty = null;
+
+            Filter[] filters = symbol.getFilters();
+
+            for (Filter filter : filters) {
+              if (filter.getFilterType().equals("PRICE_FILTER")) {
+                pairPrecision = Math.min(pairPrecision, numberOfDecimals(filter.getTickSize()));
+              } else if (filter.getFilterType().equals("LOT_SIZE")) {
+                amountPrecision = Math.min(amountPrecision, numberOfDecimals(filter.getMinQty()));
+                minQty = new BigDecimal(filter.getMinQty()).stripTrailingZeros();
+                maxQty = new BigDecimal(filter.getMaxQty()).stripTrailingZeros();
+              }
+            }
+
+            currencyPairs.put(
+                price.getCurrencyPair(),
+                new CurrencyPairMetaData(
+                    new BigDecimal("0.1"), // Trading fee at Binance is 0.1 %
+                    minQty, // Min amount
+                    maxQty, // Max amount
+                    pairPrecision, // precision
+                    null /* TODO get fee tiers, although this is not necessary now
+                         because their API returns current fee directly */));
+            currencies.put(
+                pair.base,
+                new CurrencyMetaData(
+                    basePrecision,
+                    currencies.containsKey(pair.base)
+                        ? currencies.get(pair.base).getWithdrawalFee()
+                        : null));
+            currencies.put(
+                pair.counter,
+                new CurrencyMetaData(
+                    counterPrecision,
+                    currencies.containsKey(pair.counter)
+                        ? currencies.get(pair.counter).getWithdrawalFee()
+                        : null));
+          }
+        }
       }
     } catch (Exception e) {
-      logger.warn("An exception occurred while loading the metadata", e);
+      throw new ExchangeException("Failed to initialize: " + e.getMessage(), e);
     }
+  }
+
+  private int numberOfDecimals(String value) {
+
+    return new BigDecimal(value).stripTrailingZeros().scale();
+  }
+
+  public void clearDeltaServerTime() {
+
+    deltaServerTime = null;
+  }
+
+  public long deltaServerTime() throws IOException {
+
+    if (deltaServerTime == null || deltaServerTimeExpire <= System.currentTimeMillis()) {
+
+      // Do a little warm up
+      Binance binance =
+          RestProxyFactory.createProxy(Binance.class, getExchangeSpecification().getSslUri());
+      Date serverTime = new Date(binance.time().getServerTime().getTime());
+
+      // Assume that we are closer to the server time when we get the repose
+      Date systemTime = new Date(System.currentTimeMillis());
+
+      // Expire every 10min
+      deltaServerTimeExpire = systemTime.getTime() + TimeUnit.MINUTES.toMillis(10);
+      deltaServerTime = serverTime.getTime() - systemTime.getTime();
+
+      SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
+      LOG.trace(
+          "deltaServerTime: {} - {} => {}",
+          df.format(serverTime),
+          df.format(systemTime),
+          deltaServerTime);
+    }
+
+    return deltaServerTime;
   }
 }

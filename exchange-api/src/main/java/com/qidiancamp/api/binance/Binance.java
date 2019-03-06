@@ -3,13 +3,14 @@ package com.qidiancamp.api.binance;
 import com.qidiancamp.api.binance.dto.BinanceException;
 import com.qidiancamp.api.binance.dto.marketdata.*;
 import com.qidiancamp.api.binance.dto.meta.BinanceTime;
-import java.io.IOException;
-import java.util.List;
+import com.qidiancamp.api.binance.dto.meta.exchangeinfo.BinanceExchangeInfo;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import java.io.IOException;
+import java.util.List;
 
 @Path("")
 @Produces(MediaType.APPLICATION_JSON)
@@ -21,7 +22,7 @@ public interface Binance {
    * Test connectivity to the Rest API.
    *
    * @return
-   * @throws java.io.IOException
+   * @throws IOException
    */
   Object ping() throws IOException;
 
@@ -31,9 +32,19 @@ public interface Binance {
    * Test connectivity to the Rest API and get the current server time.
    *
    * @return
-   * @throws java.io.IOException
+   * @throws IOException
    */
   BinanceTime time() throws IOException;
+
+  @GET
+  @Path("api/v1/exchangeInfo")
+  /**
+   * Current exchange trading rules and symbol information.
+   *
+   * @return
+   * @throws IOException
+   */
+  BinanceExchangeInfo exchangeInfo() throws IOException;
 
   @GET
   @Path("api/v1/depth")
@@ -41,7 +52,7 @@ public interface Binance {
    * @param symbol
    * @param limit optional, default 100; max 100.
    * @return
-   * @throws java.io.IOException
+   * @throws IOException
    * @throws BinanceException
    */
   BinanceOrderbook depth(@QueryParam("symbol") String symbol, @QueryParam("limit") Integer limit)
@@ -63,15 +74,15 @@ public interface Binance {
    * @param endTime optional, Timestamp in ms to get aggregate trades until INCLUSIVE.
    * @param limit optional, Default 500; max 500.
    * @return
-   * @throws java.io.IOException
+   * @throws IOException
    * @throws BinanceException
    */
   List<BinanceAggTrades> aggTrades(
-      @QueryParam("symbol") String symbol,
-      @QueryParam("fromId") Long fromId,
-      @QueryParam("startTime") Long startTime,
-      @QueryParam("endTime") Long endTime,
-      @QueryParam("limit") Integer limit)
+          @QueryParam("symbol") String symbol,
+          @QueryParam("fromId") Long fromId,
+          @QueryParam("startTime") Long startTime,
+          @QueryParam("endTime") Long endTime,
+          @QueryParam("limit") Integer limit)
       throws IOException, BinanceException;
 
   @GET
@@ -86,16 +97,28 @@ public interface Binance {
    * @param startTime optional
    * @param endTime optional
    * @return
-   * @throws java.io.IOException
+   * @throws IOException
    * @throws BinanceException
    */
   List<Object[]> klines(
-      @QueryParam("symbol") String symbol,
-      @QueryParam("interval") KlineInterval interval,
-      @QueryParam("limit") Integer limit,
-      @QueryParam("startTime") Long startTime,
-      @QueryParam("endTime") Long endTime)
+          @QueryParam("symbol") String symbol,
+          @QueryParam("interval") String interval,
+          @QueryParam("limit") Integer limit,
+          @QueryParam("startTime") Long startTime,
+          @QueryParam("endTime") Long endTime)
       throws IOException, BinanceException;
+
+  @GET
+  @Path("api/v1/ticker/24hr")
+  /**
+   * 24 hour price change statistics for all symbols. - bee carreful this api call have a big
+   * weight, only about 4 call per minut can be without ban.
+   *
+   * @return
+   * @throws IOException
+   * @throws BinanceException
+   */
+  List<BinanceTicker24h> ticker24h() throws IOException, BinanceException;
 
   @GET
   @Path("api/v1/ticker/24hr")
@@ -104,7 +127,7 @@ public interface Binance {
    *
    * @param symbol
    * @return
-   * @throws java.io.IOException
+   * @throws IOException
    * @throws BinanceException
    */
   BinanceTicker24h ticker24h(@QueryParam("symbol") String symbol)
@@ -116,10 +139,10 @@ public interface Binance {
    * Latest price for all symbols.
    *
    * @return
-   * @throws java.io.IOException
+   * @throws IOException
    * @throws BinanceException
    */
-  List<BinanceSymbolPrice> tickerAllPrices() throws IOException, BinanceException;
+  List<BinancePrice> tickerAllPrices() throws IOException, BinanceException;
 
   @GET
   @Path("api/v1/ticker/allBookTickers")
@@ -127,7 +150,7 @@ public interface Binance {
    * Best price/qty on the order book for all symbols.
    *
    * @return
-   * @throws java.io.IOException
+   * @throws IOException
    * @throws BinanceException
    */
   List<BinancePriceQuantity> tickerAllBookTickers() throws IOException, BinanceException;

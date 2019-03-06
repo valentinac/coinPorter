@@ -35,12 +35,12 @@ public class HuobiExchange extends BaseExchange implements Exchange {
     super.accountService = huobiAccountService;
   }
 
-//  @Override
-//  protected void initServices() {
-//    this.marketDataService = new HuobiMarketDataService(this);
-//    this.tradeService = new HuobiTradeService(this);
-//    this.accountService = new HuobiAccountService(this);
-//  }
+  @Override
+  protected void initServices() {
+    this.marketDataService = new HuobiMarketDataService(this);
+    this.tradeService = new HuobiTradeService(this);
+    this.accountService = new HuobiAccountService(this);
+  }
 
   @Override
   public ExchangeSpecification getDefaultExchangeSpecification() {

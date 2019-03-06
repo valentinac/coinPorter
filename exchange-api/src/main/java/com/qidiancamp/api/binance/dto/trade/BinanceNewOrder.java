@@ -1,6 +1,7 @@
 package com.qidiancamp.api.binance.dto.trade;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.math.BigDecimal;
 
 public final class BinanceNewOrder {

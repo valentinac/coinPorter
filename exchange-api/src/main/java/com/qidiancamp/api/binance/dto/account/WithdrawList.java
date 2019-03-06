@@ -50,6 +50,7 @@ public final class WithdrawList extends WapiResponse<List<WithdrawList.BinanceWi
     public final String address;
     public final long successTime;
     public final String txId;
+    public final String id;
     public final String asset;
     public final long applyTime;
     /**
@@ -62,6 +63,7 @@ public final class WithdrawList extends WapiResponse<List<WithdrawList.BinanceWi
         @JsonProperty("address") String address,
         @JsonProperty("successTime") long successTime,
         @JsonProperty("txId") String txId,
+        @JsonProperty("id") String id,
         @JsonProperty("asset") String asset,
         @JsonProperty("applyTime") long applyTime,
         @JsonProperty("status") int status) {
@@ -70,6 +72,7 @@ public final class WithdrawList extends WapiResponse<List<WithdrawList.BinanceWi
       this.address = address;
       this.successTime = successTime;
       this.txId = txId;
+      this.id = id;
       this.asset = asset;
       this.applyTime = applyTime;
       this.status = status;
@@ -85,6 +88,8 @@ public final class WithdrawList extends WapiResponse<List<WithdrawList.BinanceWi
           + successTime
           + ", txId="
           + txId
+          + ", id="
+          + id
           + ", asset="
           + asset
           + ", applyTime="

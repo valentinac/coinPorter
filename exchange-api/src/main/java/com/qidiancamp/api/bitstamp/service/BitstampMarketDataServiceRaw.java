@@ -20,9 +20,9 @@ public class BitstampMarketDataServiceRaw extends BitstampBaseService {
   @Value("${coinfig.bitstamp.ssluri}")
   private String ssluri;
 
-  public BitstampMarketDataServiceRaw() {
+  public BitstampMarketDataServiceRaw(Exchange exchange) {
 
-//    super(exchange);
+    super(exchange);
     this.bitstampV2 =
         RestProxyFactory.createProxy(BitstampV2.class, ssluri, getClientConfig());
   }

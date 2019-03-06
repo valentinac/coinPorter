@@ -1,21 +1,18 @@
 package com.qidiancamp.api.binance.service;
 
 import com.qidiancamp.currency.Currency;
-import com.qidiancamp.dto.account.FundingRecord.Type;
+import com.qidiancamp.dto.account.FundingRecord;
 import com.qidiancamp.service.trade.params.HistoryParamsFundingType;
 import com.qidiancamp.service.trade.params.TradeHistoryParamCurrency;
-import com.qidiancamp.service.trade.params.TradeHistoryParams;
 import com.qidiancamp.service.trade.params.TradeHistoryParamsTimeSpan;
+
 import java.util.Date;
 
 public class BinanceFundingHistoryParams
-    implements TradeHistoryParams,
-        TradeHistoryParamCurrency,
-        TradeHistoryParamsTimeSpan,
-        HistoryParamsFundingType {
+    implements TradeHistoryParamCurrency, TradeHistoryParamsTimeSpan, HistoryParamsFundingType {
 
   private Currency currency;
-  private Type type;
+  private FundingRecord.Type type;
   private Date startTime;
   private Date endTime;
 
@@ -30,12 +27,12 @@ public class BinanceFundingHistoryParams
   }
 
   @Override
-  public Type getType() {
+  public FundingRecord.Type getType() {
     return type;
   }
 
   @Override
-  public void setType(Type type) {
+  public void setType(FundingRecord.Type type) {
     this.type = type;
   }
 

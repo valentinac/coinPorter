@@ -31,9 +31,9 @@ public class BitstampTradeServiceRaw extends BitstampBaseService {
   private String ssluri;
   private SynchronizedValueFactory<Long> nonceFactory;
 
-  public BitstampTradeServiceRaw() {
+  public BitstampTradeServiceRaw(Exchange exchange) {
 
-//    super(exchange);
+    super(exchange);
     this.bitstampAuthenticated =
         RestProxyFactory.createProxy(
             BitstampAuthenticated.class,ssluri,getClientConfig());

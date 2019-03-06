@@ -27,7 +27,7 @@ public abstract class BaseExchange implements Exchange {
   protected MarketDataService marketDataService;
   protected TradeService tradeService;
   protected AccountService accountService;
-//  protected abstract void initServices();
+  protected abstract void initServices();
 
   @Override
   public void applySpecification(ExchangeSpecification exchangeSpecification) {
@@ -106,7 +106,7 @@ public abstract class BaseExchange implements Exchange {
           "No \"exchange name\" found in the ExchangeSpecification. The name is used to load the meta data file from the classpath and may lead to unexpected results.");
     }
 
-//    initServices();
+    initServices();
 
     if (this.exchangeSpecification.isShouldLoadRemoteMetaData()) {
       try {

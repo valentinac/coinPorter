@@ -1,7 +1,9 @@
 package com.qidiancamp.service.trade.params.orders;
 
+
 import com.qidiancamp.Exchange;
 import com.qidiancamp.currency.CurrencyPair;
+
 import java.util.ArrayList;
 import java.util.List;
 

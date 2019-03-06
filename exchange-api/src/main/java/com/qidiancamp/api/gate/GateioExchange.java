@@ -21,12 +21,12 @@ public class GateioExchange extends BaseExchange implements Exchange {
   private SynchronizedValueFactory<Long> nonceFactory =
       new AtomicLongIncrementalTime2013NonceFactory();
 
-//  @Override
-//  protected void initServices() {
-//    this.marketDataService = new GateioMarketDataService(this);
-//    this.accountService = new GateioAccountService(this);
-//    this.tradeService = new GateioTradeService(this);
-//  }
+  @Override
+  protected void initServices() {
+    this.marketDataService = new GateioMarketDataService(this);
+    this.accountService = new GateioAccountService(this);
+    this.tradeService = new GateioTradeService(this);
+  }
   @Autowired
   public void setMarketDataServices(GateioMarketDataService gateioMarketDataService){
     super.marketDataService = gateioMarketDataService;

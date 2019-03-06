@@ -1,5 +1,6 @@
 package com.qidiancamp.api.binance.service;
 
+
 import com.qidiancamp.currency.CurrencyPair;
 import com.qidiancamp.service.trade.params.TradeHistoryParamCurrencyPair;
 import com.qidiancamp.service.trade.params.TradeHistoryParamLimit;
@@ -16,6 +17,12 @@ public class BinanceTradeHistoryParams
   private String startId;
   /** ignored */
   private String endId;
+
+  public BinanceTradeHistoryParams(CurrencyPair currencyPair) {
+    this.currencyPair = currencyPair;
+  }
+
+  public BinanceTradeHistoryParams() {}
 
   public CurrencyPair getCurrencyPair() {
     return currencyPair;

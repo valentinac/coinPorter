@@ -1,10 +1,11 @@
 package com.qidiancamp.dto.account;
 
 import com.qidiancamp.currency.Currency;
-import java.io.Serializable;
-import java.math.BigDecimal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * DTO representing a balance in a currency
@@ -415,6 +416,7 @@ public final class Balance implements Comparable<Balance>, Serializable {
 
       return new Builder()
           .currency(balance.getCurrency())
+          .total(balance.getTotal())
           .available(balance.getAvailable())
           .frozen(balance.getFrozen())
           .borrowed(balance.getBorrowed())

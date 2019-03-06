@@ -1,6 +1,7 @@
 package com.qidiancamp.api.binance.dto.account;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
@@ -40,6 +41,9 @@ public final class DepositList extends WapiResponse<List<DepositList.BinanceDepo
     public final long insertTime;
     public final BigDecimal amount;
     public final String asset;
+    public final String txId;
+    public final String address;
+
     /** (0:pending,1:success) */
     public final int status;
 
@@ -47,12 +51,16 @@ public final class DepositList extends WapiResponse<List<DepositList.BinanceDepo
         @JsonProperty("insertTime") long insertTime,
         @JsonProperty("amount") BigDecimal amount,
         @JsonProperty("asset") String asset,
+        @JsonProperty("txId") String txId,
+        @JsonProperty("address") String address,
         @JsonProperty("status") int status) {
       super();
       this.insertTime = insertTime;
       this.amount = amount;
       this.asset = asset;
       this.status = status;
+      this.txId = txId;
+      this.address = address;
     }
 
     @Override
@@ -63,6 +71,10 @@ public final class DepositList extends WapiResponse<List<DepositList.BinanceDepo
           + amount
           + ", asset="
           + asset
+          + ", txId="
+          + txId
+          + ", address="
+          + address
           + ", status="
           + status
           + "]";

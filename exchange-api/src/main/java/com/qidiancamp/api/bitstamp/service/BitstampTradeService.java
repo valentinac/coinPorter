@@ -35,12 +35,11 @@ import com.qidiancamp.service.trade.params.orders.OpenOrdersParams;
 import org.springframework.stereotype.Service;
 
 /** @author Matija Mazi */
-@Service
 public class BitstampTradeService extends BitstampTradeServiceRaw implements TradeService {
 
-//  public BitstampTradeService(Exchange exchange) {
-//    super(exchange);
-//  }
+  public BitstampTradeService(Exchange exchange) {
+    super(exchange);
+  }
 
   @Override
   public OpenOrders getOpenOrders() throws IOException, BitstampException {
