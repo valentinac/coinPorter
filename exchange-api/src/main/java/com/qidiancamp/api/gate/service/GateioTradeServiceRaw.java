@@ -1,8 +1,9 @@
 package com.qidiancamp.api.gate.service;
 
+
 import com.qidiancamp.Exchange;
-import com.qidiancamp.api.GateioBaseResponse;
 import com.qidiancamp.api.gate.GateioUtils;
+import com.qidiancamp.api.gate.dto.GateioBaseResponse;
 import com.qidiancamp.api.gate.dto.GateioOrderType;
 import com.qidiancamp.api.gate.dto.trade.GateioOpenOrders;
 import com.qidiancamp.api.gate.dto.trade.GateioOrderStatus;
@@ -11,6 +12,9 @@ import com.qidiancamp.api.gate.dto.trade.GateioTradeHistoryReturn;
 import com.qidiancamp.currency.CurrencyPair;
 import com.qidiancamp.dto.Order;
 import com.qidiancamp.dto.trade.LimitOrder;
+import com.qidiancamp.service.trade.params.CancelOrderByCurrencyPair;
+import com.qidiancamp.service.trade.params.CancelOrderByIdParams;
+
 import java.io.IOException;
 import java.math.BigDecimal;
 
@@ -38,7 +42,7 @@ public class GateioTradeServiceRaw extends GateioBaseService {
    *
    * @param limitOrder
    * @return String order id of submitted request.
-   * @throws java.io.IOException
+   * @throws IOException
    */
   public String placeGateioLimitOrder(LimitOrder limitOrder) throws IOException {
 
@@ -67,28 +71,28 @@ public class GateioTradeServiceRaw extends GateioBaseService {
    * @param rate
    * @param amount
    * @return String order id of submitted request.
-   * @throws java.io.IOException
+   * @throws IOException
    */
   public String placeGateioLimitOrder(
-      CurrencyPair currencyPair, GateioOrderType orderType, BigDecimal rate, BigDecimal amount)
+          CurrencyPair currencyPair, GateioOrderType orderType, BigDecimal rate, BigDecimal amount)
       throws IOException {
 
     String pair = formatCurrencyPair(currencyPair);
 
     GateioPlaceOrderReturn orderId;
     if (orderType.equals(GateioOrderType.BUY)) {
-      orderId = bter.buy(pair, rate, amount, apiKey, signatureCreator, exchange.getNonceFactory());
+      orderId = bter.buy(pair, rate, amount, apiKey, signatureCreator);
     } else {
-      orderId = bter.sell(pair, rate, amount, apiKey, signatureCreator, exchange.getNonceFactory());
+      orderId = bter.sell(pair, rate, amount, apiKey, signatureCreator);
     }
 
     return handleResponse(orderId).getOrderId();
   }
 
-  public boolean cancelOrder(String orderId) throws IOException {
+  public boolean cancelOrder(String orderId, CurrencyPair currencyPair) throws IOException {
 
     GateioBaseResponse cancelOrderResult =
-        bter.cancelOrder(orderId, apiKey, signatureCreator, exchange.getNonceFactory());
+        bter.cancelOrder(orderId, GateioUtils.toPairString(currencyPair), apiKey, signatureCreator);
 
     return handleResponse(cancelOrderResult).isResult();
   }
@@ -99,33 +103,26 @@ public class GateioTradeServiceRaw extends GateioBaseService {
    * @param type order type(0:sell,1:buy,-1:all)
    * @param currencyPair currency pair
    * @return
-   * @throws java.io.IOException
+   * @throws IOException
    */
   public boolean cancelAllOrders(String type, CurrencyPair currencyPair) throws IOException {
 
     GateioBaseResponse cancelAllOrdersResult =
-        bter.cancelAllOrders(
-            type,
-            formatCurrencyPair(currencyPair),
-            apiKey,
-            signatureCreator,
-            exchange.getNonceFactory());
+        bter.cancelAllOrders(type, formatCurrencyPair(currencyPair), apiKey, signatureCreator);
 
     return handleResponse(cancelAllOrdersResult).isResult();
   }
 
   public GateioOpenOrders getGateioOpenOrders() throws IOException {
 
-    GateioOpenOrders gateioOpenOrdersReturn =
-        bter.getOpenOrders(apiKey, signatureCreator, exchange.getNonceFactory());
+    GateioOpenOrders gateioOpenOrdersReturn = bter.getOpenOrders(apiKey, signatureCreator);
 
     return handleResponse(gateioOpenOrdersReturn);
   }
 
   public GateioOrderStatus getGateioOrderStatus(String orderId) throws IOException {
 
-    GateioOrderStatus orderStatus =
-        bter.getOrderStatus(orderId, apiKey, signatureCreator, exchange.getNonceFactory());
+    GateioOrderStatus orderStatus = bter.getOrderStatus(orderId, apiKey, signatureCreator);
 
     return handleResponse(orderStatus);
   }
@@ -134,11 +131,7 @@ public class GateioTradeServiceRaw extends GateioBaseService {
       throws IOException {
 
     GateioTradeHistoryReturn gateioTradeHistoryReturn =
-        bter.getUserTradeHistory(
-            apiKey,
-            signatureCreator,
-            exchange.getNonceFactory(),
-            GateioUtils.toPairString(currencyPair));
+        bter.getUserTradeHistory(apiKey, signatureCreator, GateioUtils.toPairString(currencyPair));
 
     return handleResponse(gateioTradeHistoryReturn);
   }
@@ -147,5 +140,26 @@ public class GateioTradeServiceRaw extends GateioBaseService {
     return String.format(
             "%s_%s", currencyPair.base.getCurrencyCode(), currencyPair.counter.getCurrencyCode())
         .toLowerCase();
+  }
+
+  public static class GateioCancelOrderParams
+      implements CancelOrderByIdParams, CancelOrderByCurrencyPair {
+    public final CurrencyPair currencyPair;
+    public final String orderId;
+
+    public GateioCancelOrderParams(CurrencyPair currencyPair, String orderId) {
+      this.currencyPair = currencyPair;
+      this.orderId = orderId;
+    }
+
+    @Override
+    public String getOrderId() {
+      return orderId;
+    }
+
+    @Override
+    public CurrencyPair getCurrencyPair() {
+      return currencyPair;
+    }
   }
 }

@@ -1,5 +1,6 @@
 package com.qidiancamp.api.gate.service;
 
+
 import com.qidiancamp.Exchange;
 import com.qidiancamp.api.gate.GateioAdapters;
 import com.qidiancamp.api.gate.dto.marketdata.GateioDepth;
@@ -10,9 +11,15 @@ import com.qidiancamp.dto.marketdata.OrderBook;
 import com.qidiancamp.dto.marketdata.Ticker;
 import com.qidiancamp.dto.marketdata.Trades;
 import com.qidiancamp.service.marketdata.MarketDataService;
+import com.qidiancamp.service.marketdata.params.CurrencyPairsParam;
+import com.qidiancamp.service.marketdata.params.Params;
+
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class GateioMarketDataService extends GateioMarketDataServiceRaw
     implements MarketDataService {
@@ -35,6 +42,18 @@ public class GateioMarketDataService extends GateioMarketDataServiceRaw
             currencyPair.base.getCurrencyCode(), currencyPair.counter.getCurrencyCode());
 
     return GateioAdapters.adaptTicker(currencyPair, ticker);
+  }
+
+  @Override
+  public List<Ticker> getTickers(Params params) throws IOException {
+    final List<CurrencyPair> currencyPairs = new ArrayList<>();
+    if (params instanceof CurrencyPairsParam) {
+      currencyPairs.addAll(((CurrencyPairsParam) params).getCurrencyPairs());
+    }
+    return getGateioTickers().values().stream()
+        .filter(
+            ticker -> currencyPairs.size() == 0 || currencyPairs.contains(ticker.getCurrencyPair()))
+        .collect(Collectors.toList());
   }
 
   @Override

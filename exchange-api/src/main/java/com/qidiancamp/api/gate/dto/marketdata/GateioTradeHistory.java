@@ -1,8 +1,9 @@
 package com.qidiancamp.api.gate.dto.marketdata;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.qidiancamp.api.GateioBaseResponse;
+import com.qidiancamp.api.gate.dto.GateioBaseResponse;
 import com.qidiancamp.api.gate.dto.GateioOrderType;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -46,13 +47,14 @@ public class GateioTradeHistory extends GateioBaseResponse {
     private final GateioOrderType type;
 
     private GateioPublicTrade(
-        @JsonProperty("date") long date,
-        @JsonProperty("price") BigDecimal price,
+        @JsonProperty("date") String date,
+        @JsonProperty("rate") BigDecimal price,
         @JsonProperty("amount") BigDecimal amount,
-        @JsonProperty("tid") String tradeId,
+        @JsonProperty("tradeID") String tradeId,
+        @JsonProperty("timestamp") long timestamp,
         @JsonProperty("type") GateioOrderType type) {
 
-      this.date = date;
+      this.date = timestamp;
       this.price = price;
       this.amount = amount;
       this.tradeId = tradeId;

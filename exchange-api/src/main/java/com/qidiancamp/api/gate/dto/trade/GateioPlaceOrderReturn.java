@@ -1,7 +1,7 @@
 package com.qidiancamp.api.gate.dto.trade;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.qidiancamp.api.GateioBaseResponse;
+import com.qidiancamp.api.gate.dto.GateioBaseResponse;
 
 public class GateioPlaceOrderReturn extends GateioBaseResponse {
 

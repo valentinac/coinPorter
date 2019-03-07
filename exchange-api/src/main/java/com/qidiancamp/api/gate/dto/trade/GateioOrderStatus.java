@@ -1,8 +1,8 @@
 package com.qidiancamp.api.gate.dto.trade;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.qidiancamp.api.GateioBaseResponse;
 import com.qidiancamp.api.gate.GateioAdapters;
+import com.qidiancamp.api.gate.dto.GateioBaseResponse;
 import com.qidiancamp.api.gate.dto.GateioOrderType;
 import com.qidiancamp.currency.CurrencyPair;
 import java.math.BigDecimal;

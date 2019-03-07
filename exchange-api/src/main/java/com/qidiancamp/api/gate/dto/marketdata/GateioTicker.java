@@ -1,7 +1,8 @@
 package com.qidiancamp.api.gate.dto.marketdata;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.qidiancamp.api.GateioBaseResponse;
+import com.qidiancamp.api.gate.dto.GateioBaseResponse;
+
 import java.math.BigDecimal;
 
 public class GateioTicker extends GateioBaseResponse {

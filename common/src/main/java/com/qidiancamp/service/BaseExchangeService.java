@@ -6,23 +6,21 @@ import com.qidiancamp.dto.meta.CurrencyPairMetaData;
 import com.qidiancamp.dto.meta.ExchangeMetaData;
 import com.qidiancamp.dto.trade.LimitOrder;
 import com.qidiancamp.dto.trade.MarketOrder;
-import java.math.BigDecimal;
 import si.mazi.rescu.ClientConfig;
 
+import java.math.BigDecimal;
+
 /** Top of the hierarchy abstract class for an "exchange service" */
-public abstract class BaseExchangeService {
+public abstract class BaseExchangeService<E extends Exchange> {
 
   /**
    * The base Exchange. Every service has access to the containing exchange class, which hold meta
    * data and the exchange specification
    */
-  protected Exchange exchange;
-
-  public BaseExchangeService() {
-  }
+  protected final E exchange;
 
   /** Constructor */
-  protected BaseExchangeService(Exchange exchange) {
+  protected BaseExchangeService(E exchange) {
 
     this.exchange = exchange;
   }

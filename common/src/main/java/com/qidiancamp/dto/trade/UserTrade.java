@@ -1,11 +1,10 @@
 package com.qidiancamp.dto.trade;
 
+
 import com.qidiancamp.currency.Currency;
 import com.qidiancamp.currency.CurrencyPair;
-import com.qidiancamp.dto.Order.OrderType;
 import com.qidiancamp.dto.marketdata.Trade;
-import com.qidiancamp.service.trade.TradeService;
-import com.qidiancamp.service.trade.params.TradeHistoryParams;
+import com.qidiancamp.dto.Order.OrderType;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Objects;

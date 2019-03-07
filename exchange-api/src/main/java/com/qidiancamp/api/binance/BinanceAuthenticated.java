@@ -43,7 +43,7 @@ public interface BinanceAuthenticated extends Binance {
   BinanceNewOrder newOrder(
           @FormParam("symbol") String symbol,
           @FormParam("side") OrderSide side,
-          @FormParam("type") Order.OrderType type,
+          @FormParam("type") OrderType type,
           @FormParam("timeInForce") TimeInForce timeInForce,
           @FormParam("quantity") BigDecimal quantity,
           @FormParam("price") BigDecimal price,

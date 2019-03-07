@@ -1,15 +1,17 @@
 package com.qidiancamp.api.binance;
 
 import com.qidiancamp.api.binance.dto.trade.BinanceOrder;
-import com.qidiancamp.api.binance.dto.trade.BinanceOrderFlags;
 import com.qidiancamp.api.binance.dto.trade.OrderSide;
+import com.qidiancamp.api.binance.dto.trade.OrderStatus;
+import com.qidiancamp.api.binance.service.BinanceTradeService.BinanceOrderFlags;
+import com.qidiancamp.dto.Order;
+import com.qidiancamp.dto.Order.OrderType;
+import com.qidiancamp.dto.Order.IOrderFlags;
 import com.qidiancamp.currency.Currency;
 import com.qidiancamp.currency.CurrencyPair;
-import com.qidiancamp.dto.Order;
 import com.qidiancamp.dto.trade.LimitOrder;
 import com.qidiancamp.dto.trade.MarketOrder;
 import com.qidiancamp.dto.trade.StopOrder;
-
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -33,18 +35,18 @@ public class BinanceAdapters {
     return currency.getSymbol();
   }
 
-  public static Order.OrderType convert(OrderSide side) {
+  public static OrderType convert(OrderSide side) {
     switch (side) {
       case BUY:
-        return Order.OrderType.BID;
+        return OrderType.BID;
       case SELL:
-        return Order.OrderType.ASK;
+        return OrderType.ASK;
       default:
         throw new RuntimeException("Not supported order side: " + side);
     }
   }
 
-  public static OrderSide convert(Order.OrderType type) {
+  public static OrderSide convert(OrderType type) {
     switch (type) {
       case ASK:
         return OrderSide.SELL;
@@ -74,7 +76,7 @@ public class BinanceAdapters {
     }
   }
 
-  public static Order.OrderStatus adaptOrderStatus(Order.OrderStatus orderStatus) {
+  public static Order.OrderStatus adaptOrderStatus(OrderStatus orderStatus) {
     switch (orderStatus) {
       case NEW:
         return Order.OrderStatus.NEW;
@@ -95,8 +97,8 @@ public class BinanceAdapters {
     }
   }
 
-  public static Order.OrderType convertType(boolean isBuyer) {
-    return isBuyer ? Order.OrderType.BID : Order.OrderType.ASK;
+  public static OrderType convertType(boolean isBuyer) {
+    return isBuyer ? OrderType.BID : OrderType.ASK;
   }
 
   public static CurrencyPair adaptSymbol(String symbol) {
@@ -110,7 +112,7 @@ public class BinanceAdapters {
   }
 
   public static Order adaptOrder(BinanceOrder order) {
-    Order.OrderType type = convert(order.side);
+    OrderType type = convert(order.side);
     CurrencyPair currencyPair = adaptSymbol(order.symbol);
 
     Order.OrderStatus orderStatus = adaptOrderStatus(order.status);
@@ -162,7 +164,7 @@ public class BinanceAdapters {
               order.executedQty,
               orderStatus);
     }
-    Set<Order.IOrderFlags> flags = new HashSet<>();
+    Set<IOrderFlags> flags = new HashSet<>();
     if (order.clientOrderId != null) {
       flags.add(
           new BinanceOrderFlags() {

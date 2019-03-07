@@ -1,13 +1,14 @@
 package com.qidiancamp.service;
 
+import si.mazi.rescu.ParamsDigest;
+
+import javax.crypto.Mac;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
-import javax.crypto.Mac;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
-import si.mazi.rescu.ParamsDigest;
 
 public abstract class BaseParamsDigest implements ParamsDigest {
 

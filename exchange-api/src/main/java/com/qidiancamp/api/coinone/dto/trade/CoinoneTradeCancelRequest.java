@@ -1,10 +1,9 @@
 package com.qidiancamp.api.coinone.dto.trade;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.knowm.xchange.dto.Order;
-import org.knowm.xchange.dto.trade.LimitOrder;
-import org.knowm.xchange.service.trade.params.CancelOrderParams;
-
+import com.qidiancamp.dto.Order;
+import com.qidiancamp.dto.trade.LimitOrder;
+import com.qidiancamp.service.trade.params.CancelOrderParams;
 import java.math.BigDecimal;
 import java.util.Currency;
 

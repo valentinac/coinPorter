@@ -35,7 +35,7 @@ public class GateioMarketDataServiceRaw extends GateioBaseService {
     return bterMarketInfo.getMarketInfoMap();
   }
 
-  public Map<CurrencyPair, Ticker> getBTERTickers() throws IOException {
+  public Map<CurrencyPair, Ticker> getGateioTickers() throws IOException {
 
     Map<String, GateioTicker> gateioTickers = bter.getTickers();
     Map<CurrencyPair, Ticker> adaptedTickers = new HashMap<>(gateioTickers.size());
@@ -44,8 +44,8 @@ public class GateioMarketDataServiceRaw extends GateioBaseService {
           String[] currencyPairStringSplit = currencyPairString.split("_");
           CurrencyPair currencyPair =
               new CurrencyPair(
-                  new Currency(currencyPairStringSplit[0].toUpperCase()),
-                  new Currency(currencyPairStringSplit[1].toUpperCase()));
+                  Currency.getInstance(currencyPairStringSplit[0].toUpperCase()),
+                  Currency.getInstance(currencyPairStringSplit[1].toUpperCase()));
           adaptedTickers.put(currencyPair, GateioAdapters.adaptTicker(currencyPair, gateioTicker));
         });
 
@@ -60,8 +60,8 @@ public class GateioMarketDataServiceRaw extends GateioBaseService {
           String[] currencyPairStringSplit = currencyPairString.split("_");
           CurrencyPair currencyPair =
               new CurrencyPair(
-                  new Currency(currencyPairStringSplit[0].toUpperCase()),
-                  new Currency(currencyPairStringSplit[1].toUpperCase()));
+                  Currency.getInstance(currencyPairStringSplit[0].toUpperCase()),
+                  Currency.getInstance(currencyPairStringSplit[1].toUpperCase()));
           adaptedDepths.put(currencyPair, gateioDepth);
         });
     return adaptedDepths;

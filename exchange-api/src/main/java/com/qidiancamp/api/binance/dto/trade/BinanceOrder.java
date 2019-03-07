@@ -1,8 +1,6 @@
 package com.qidiancamp.api.binance.dto.trade;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.qidiancamp.dto.Order;
-
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -14,7 +12,7 @@ public final class BinanceOrder {
   public final BigDecimal price;
   public final BigDecimal origQty;
   public final BigDecimal executedQty;
-  public final Order.OrderStatus status;
+  public final OrderStatus status;
   public final TimeInForce timeInForce;
   public final OrderType type;
   public final OrderSide side;

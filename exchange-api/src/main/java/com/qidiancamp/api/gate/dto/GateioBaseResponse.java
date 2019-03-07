@@ -1,9 +1,9 @@
-package com.qidiancamp.api;
+package com.qidiancamp.api.gate.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Created by Administrator on 2018/2/22. */
 public class GateioBaseResponse {
+
   private final boolean result;
   private final String message;
 

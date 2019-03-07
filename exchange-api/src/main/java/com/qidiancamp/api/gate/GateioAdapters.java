@@ -1,15 +1,21 @@
 package com.qidiancamp.api.gate;
 
+
 import com.qidiancamp.api.gate.dto.GateioOrderType;
+import com.qidiancamp.api.gate.dto.account.GateioDepositsWithdrawals;
 import com.qidiancamp.api.gate.dto.account.GateioFunds;
-import com.qidiancamp.api.gate.dto.marketdata.*;
+import com.qidiancamp.api.gate.dto.marketdata.GateioDepth;
+import com.qidiancamp.api.gate.dto.marketdata.GateioPublicOrder;
+import com.qidiancamp.api.gate.dto.marketdata.GateioTicker;
+import com.qidiancamp.api.gate.dto.marketdata.GateioTradeHistory;
 import com.qidiancamp.api.gate.dto.trade.GateioOpenOrder;
 import com.qidiancamp.api.gate.dto.trade.GateioOpenOrders;
 import com.qidiancamp.api.gate.dto.trade.GateioTrade;
+import com.qidiancamp.common.utils.DateUtils;
 import com.qidiancamp.currency.Currency;
 import com.qidiancamp.currency.CurrencyPair;
-import com.qidiancamp.dto.Order;
 import com.qidiancamp.dto.account.Balance;
+import com.qidiancamp.dto.account.FundingRecord;
 import com.qidiancamp.dto.account.Wallet;
 import com.qidiancamp.dto.marketdata.OrderBook;
 import com.qidiancamp.dto.marketdata.Ticker;
@@ -18,10 +24,12 @@ import com.qidiancamp.dto.marketdata.Trades;
 import com.qidiancamp.dto.meta.CurrencyPairMetaData;
 import com.qidiancamp.dto.meta.ExchangeMetaData;
 import com.qidiancamp.dto.trade.LimitOrder;
+import com.qidiancamp.dto.Order.OrderType;
 import com.qidiancamp.dto.trade.OpenOrders;
 import com.qidiancamp.dto.trade.UserTrade;
 import com.qidiancamp.dto.trade.UserTrades;
-import com.qidiancamp.common.utils.DateUtils;
+import com.qidiancamp.dto.marketdata.Trades.TradeSortType;
+import com.qidiancamp.api.gate.dto.marketdata.GateioMarketInfoWrapper;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.Map.Entry;
@@ -62,13 +70,13 @@ public final class GateioAdapters {
   }
 
   public static LimitOrder adaptOrder(
-      GateioPublicOrder order, CurrencyPair currencyPair, Order.OrderType orderType) {
+          GateioPublicOrder order, CurrencyPair currencyPair, OrderType orderType) {
 
     return new LimitOrder(orderType, order.getAmount(), currencyPair, "", null, order.getPrice());
   }
 
   public static List<LimitOrder> adaptOrders(
-      List<GateioPublicOrder> orders, CurrencyPair currencyPair, Order.OrderType orderType) {
+      List<GateioPublicOrder> orders, CurrencyPair currencyPair, OrderType orderType) {
 
     List<LimitOrder> limitOrders = new ArrayList<>();
 
@@ -82,21 +90,21 @@ public final class GateioAdapters {
   public static OrderBook adaptOrderBook(GateioDepth depth, CurrencyPair currencyPair) {
 
     List<LimitOrder> asks =
-        GateioAdapters.adaptOrders(depth.getAsks(), currencyPair, Order.OrderType.ASK);
+        GateioAdapters.adaptOrders(depth.getAsks(), currencyPair, OrderType.ASK);
     Collections.reverse(asks);
     List<LimitOrder> bids =
-        GateioAdapters.adaptOrders(depth.getBids(), currencyPair, Order.OrderType.BID);
+        GateioAdapters.adaptOrders(depth.getBids(), currencyPair, OrderType.BID);
 
     return new OrderBook(null, asks, bids);
   }
 
   public static LimitOrder adaptOrder(
-      GateioOpenOrder order, Collection<CurrencyPair> currencyPairs) {
+          GateioOpenOrder order, Collection<CurrencyPair> currencyPairs) {
 
     String[] currencyPairSplit = order.getCurrencyPair().split("_");
     CurrencyPair currencyPair = new CurrencyPair(currencyPairSplit[0], currencyPairSplit[1]);
     return new LimitOrder(
-        order.getType().equals("sell") ? Order.OrderType.ASK : Order.OrderType.BID,
+        order.getType().equals("sell") ? OrderType.ASK : OrderType.BID,
         order.getAmount(),
         currencyPair,
         order.getOrderNumber(),
@@ -105,7 +113,7 @@ public final class GateioAdapters {
   }
 
   public static OpenOrders adaptOpenOrders(
-      GateioOpenOrders openOrders, Collection<CurrencyPair> currencyPairs) {
+          GateioOpenOrders openOrders, Collection<CurrencyPair> currencyPairs) {
 
     List<LimitOrder> adaptedOrders = new ArrayList<>();
     for (GateioOpenOrder openOrder : openOrders.getOrders()) {
@@ -115,17 +123,15 @@ public final class GateioAdapters {
     return new OpenOrders(adaptedOrders);
   }
 
-  public static Order.OrderType adaptOrderType(GateioOrderType cryptoTradeOrderType) {
+  public static OrderType adaptOrderType(GateioOrderType cryptoTradeOrderType) {
 
-    return (cryptoTradeOrderType.equals(GateioOrderType.BUY))
-        ? Order.OrderType.BID
-        : Order.OrderType.ASK;
+    return (cryptoTradeOrderType.equals(GateioOrderType.BUY)) ? OrderType.BID : OrderType.ASK;
   }
 
   public static Trade adaptTrade(
-      GateioTradeHistory.GateioPublicTrade trade, CurrencyPair currencyPair) {
+          GateioTradeHistory.GateioPublicTrade trade, CurrencyPair currencyPair) {
 
-    Order.OrderType orderType = adaptOrderType(trade.getType());
+    OrderType orderType = adaptOrderType(trade.getType());
     Date timestamp = DateUtils.fromMillisUtc(trade.getDate() * 1000);
 
     return new Trade(
@@ -153,7 +159,7 @@ public final class GateioAdapters {
       tradeList.add(adaptedTrade);
     }
 
-    return new Trades(tradeList, lastTradeId, Trades.TradeSortType.SortByTimestamp);
+    return new Trades(tradeList, lastTradeId, TradeSortType.SortByTimestamp);
   }
 
   public static Wallet adaptWallet(GateioFunds bterAccountInfo) {
@@ -184,12 +190,12 @@ public final class GateioAdapters {
       trades.add(adaptUserTrade(userTrade));
     }
 
-    return new UserTrades(trades, Trades.TradeSortType.SortByTimestamp);
+    return new UserTrades(trades, TradeSortType.SortByTimestamp);
   }
 
   public static UserTrade adaptUserTrade(GateioTrade gateioTrade) {
 
-    Order.OrderType orderType = adaptOrderType(gateioTrade.getType());
+    OrderType orderType = adaptOrderType(gateioTrade.getType());
     Date timestamp = DateUtils.fromMillisUtc(gateioTrade.getTimeUnix() * 1000);
     CurrencyPair currencyPair = adaptCurrencyPair(gateioTrade.getPair());
 
@@ -199,8 +205,8 @@ public final class GateioAdapters {
         currencyPair,
         gateioTrade.getRate(),
         timestamp,
-        gateioTrade.getId(),
-        null,
+        gateioTrade.getTradeID(),
+        gateioTrade.getOrderNumber(),
         null,
         (Currency) null);
   }
@@ -210,8 +216,7 @@ public final class GateioAdapters {
 
     Map<CurrencyPair, CurrencyPairMetaData> currencyPairs = new HashMap<>();
 
-    for (Entry<CurrencyPair, GateioMarketInfoWrapper.GateioMarketInfo> entry :
-        currencyPair2BTERMarketInfoMap.entrySet()) {
+    for (Entry<CurrencyPair, GateioMarketInfoWrapper.GateioMarketInfo> entry : currencyPair2BTERMarketInfoMap.entrySet()) {
 
       CurrencyPair currencyPair = entry.getKey();
       GateioMarketInfoWrapper.GateioMarketInfo btermarketInfo = entry.getValue();
@@ -221,12 +226,68 @@ public final class GateioAdapters {
               btermarketInfo.getFee(),
               btermarketInfo.getMinAmount(),
               null,
-              btermarketInfo.getDecimalPlaces());
+              btermarketInfo.getDecimalPlaces(),
+              null);
       currencyPairs.put(currencyPair, currencyPairMetaData);
     }
 
     ExchangeMetaData exchangeMetaData = new ExchangeMetaData(currencyPairs, null, null, null, null);
 
     return exchangeMetaData;
+  }
+
+  public static List<FundingRecord> adaptDepositsWithdrawals(
+      GateioDepositsWithdrawals depositsWithdrawals) {
+    List<FundingRecord> result = new ArrayList<>();
+
+    depositsWithdrawals
+        .getDeposits()
+        .forEach(
+            d -> {
+              FundingRecord r =
+                  new FundingRecord(
+                      d.address,
+                      d.getTimestamp(),
+                      Currency.getInstance(d.currency),
+                      d.amount,
+                      d.id,
+                      d.txid,
+                      FundingRecord.Type.DEPOSIT,
+                      status(d.status),
+                      null,
+                      null,
+                      null);
+              result.add(r);
+            });
+    depositsWithdrawals
+        .getWithdraws()
+        .forEach(
+            w -> {
+              FundingRecord r =
+                  new FundingRecord(
+                      w.address,
+                      w.getTimestamp(),
+                      Currency.getInstance(w.currency),
+                      w.amount,
+                      w.id,
+                      w.txid,
+                      FundingRecord.Type.WITHDRAWAL,
+                      status(w.status),
+                      null,
+                      null,
+                      null);
+              result.add(r);
+            });
+
+    return result;
+  }
+
+  private static FundingRecord.Status status(String gateioStatus) {
+    switch (gateioStatus) {
+      case "DONE":
+        return FundingRecord.Status.COMPLETE;
+      default:
+        return FundingRecord.Status.PROCESSING; // @TODO which statusses are possible at gate.io?
+    }
   }
 }

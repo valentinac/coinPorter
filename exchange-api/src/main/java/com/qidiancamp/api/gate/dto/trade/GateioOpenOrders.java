@@ -1,7 +1,8 @@
 package com.qidiancamp.api.gate.dto.trade;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.qidiancamp.api.GateioBaseResponse;
+import com.qidiancamp.api.gate.dto.GateioBaseResponse;
+
 import java.util.List;
 
 /** Created by David Henry on 2/19/14. */

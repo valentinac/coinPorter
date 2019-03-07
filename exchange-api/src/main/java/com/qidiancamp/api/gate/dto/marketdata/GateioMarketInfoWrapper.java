@@ -8,8 +8,10 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.qidiancamp.api.gate.GateioAdapters;
+import com.qidiancamp.api.gate.dto.marketdata.GateioMarketInfoWrapper.BTERMarketInfoWrapperDeserializer;
 import com.qidiancamp.currency.CurrencyPair;
 import com.qidiancamp.exceptions.ExchangeException;
+
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -17,7 +19,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-@JsonDeserialize(using = GateioMarketInfoWrapper.BTERMarketInfoWrapperDeserializer.class)
+@JsonDeserialize(using = BTERMarketInfoWrapperDeserializer.class)
 public class GateioMarketInfoWrapper {
 
   private final Map<CurrencyPair, GateioMarketInfo> marketInfoMap;

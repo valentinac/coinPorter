@@ -1,7 +1,8 @@
 package com.qidiancamp.api.gate.dto.account;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.qidiancamp.api.GateioBaseResponse;
+import com.qidiancamp.api.gate.dto.GateioBaseResponse;
+
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;

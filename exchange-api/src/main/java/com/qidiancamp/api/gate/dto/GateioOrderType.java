@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.qidiancamp.api.gate.dto.GateioOrderType.BTEROrderTypeDeserializer;
+
 import java.io.IOException;
 
 @JsonDeserialize(using = BTEROrderTypeDeserializer.class)

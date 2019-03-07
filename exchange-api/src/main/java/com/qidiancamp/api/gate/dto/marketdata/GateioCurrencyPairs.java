@@ -8,13 +8,14 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.qidiancamp.api.gate.GateioAdapters;
+import com.qidiancamp.api.gate.dto.marketdata.GateioCurrencyPairs.BTERCurrencyPairsDeserializer;
 import com.qidiancamp.currency.CurrencyPair;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-@JsonDeserialize(using = GateioCurrencyPairs.BTERCurrencyPairsDeserializer.class)
+@JsonDeserialize(using = BTERCurrencyPairsDeserializer.class)
 public class GateioCurrencyPairs {
 
   private final Set<CurrencyPair> pairs;

@@ -1,8 +1,8 @@
 package com.qidiancamp.api.gate.service;
 
 import com.qidiancamp.Exchange;
-import com.qidiancamp.api.GateioBaseResponse;
 import com.qidiancamp.api.gate.GateioAuthenticated;
+import com.qidiancamp.api.gate.dto.GateioBaseResponse;
 import com.qidiancamp.exceptions.ExchangeException;
 import com.qidiancamp.service.BaseExchangeService;
 import com.qidiancamp.service.BaseService;
@@ -22,7 +22,7 @@ public class GateioBaseService extends BaseExchangeService implements BaseServic
    */
   public GateioBaseService(Exchange exchange) {
 
-//    super(exchange);
+    super(exchange);
 
     this.bter =
         RestProxyFactory.createProxy(

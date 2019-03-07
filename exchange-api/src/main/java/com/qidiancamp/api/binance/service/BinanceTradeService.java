@@ -6,6 +6,7 @@ import com.qidiancamp.api.binance.BinanceErrorAdapter;
 import com.qidiancamp.api.binance.dto.BinanceException;
 import com.qidiancamp.api.binance.dto.trade.*;
 import com.qidiancamp.common.utils.Assert;
+import com.qidiancamp.currency.Currency;
 import com.qidiancamp.currency.CurrencyPair;
 import com.qidiancamp.dto.Order;
 import com.qidiancamp.dto.marketdata.Trades;
@@ -15,7 +16,6 @@ import com.qidiancamp.exceptions.NotAvailableFromExchangeException;
 import com.qidiancamp.service.trade.TradeService;
 import com.qidiancamp.service.trade.params.*;
 import com.qidiancamp.service.trade.params.orders.*;
-
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.*;

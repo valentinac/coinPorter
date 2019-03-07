@@ -7,10 +7,12 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.qidiancamp.api.gate.dto.marketdata.GateioPublicOrder.GateioPublicOrderDeserializer;
+
 import java.io.IOException;
 import java.math.BigDecimal;
 
-@JsonDeserialize(using = GateioPublicOrder.GateioPublicOrderDeserializer.class)
+@JsonDeserialize(using = GateioPublicOrderDeserializer.class)
 public class GateioPublicOrder {
 
   private final BigDecimal price;

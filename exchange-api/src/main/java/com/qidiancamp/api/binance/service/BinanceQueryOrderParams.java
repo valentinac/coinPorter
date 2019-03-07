@@ -1,7 +1,7 @@
 package com.qidiancamp.api.binance.service;
 
-import org.knowm.xchange.currency.CurrencyPair;
-import org.knowm.xchange.service.trade.params.orders.OrderQueryParamCurrencyPair;
+import com.qidiancamp.currency.CurrencyPair;
+import com.qidiancamp.service.trade.params.orders.OrderQueryParamCurrencyPair;
 
 public class BinanceQueryOrderParams implements OrderQueryParamCurrencyPair {
   private String orderId;

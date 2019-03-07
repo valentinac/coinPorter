@@ -1,7 +1,8 @@
 package com.qidiancamp.api.gate.dto.marketdata;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.qidiancamp.api.GateioBaseResponse;
+import com.qidiancamp.api.gate.dto.GateioBaseResponse;
+
 import java.util.List;
 
 /** Data object representing depth from Bter */

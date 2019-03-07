@@ -5,17 +5,19 @@ import com.qidiancamp.api.gate.GateioAdapters;
 import com.qidiancamp.api.gate.dto.trade.GateioOpenOrders;
 import com.qidiancamp.api.gate.dto.trade.GateioTrade;
 import com.qidiancamp.currency.CurrencyPair;
-import com.qidiancamp.dto.Order;
 import com.qidiancamp.dto.trade.LimitOrder;
 import com.qidiancamp.dto.trade.MarketOrder;
 import com.qidiancamp.dto.trade.OpenOrders;
 import com.qidiancamp.dto.trade.UserTrades;
 import com.qidiancamp.exceptions.ExchangeException;
 import com.qidiancamp.exceptions.NotAvailableFromExchangeException;
-import com.qidiancamp.exceptions.NotYetImplementedForExchangeException;
 import com.qidiancamp.service.trade.TradeService;
-import com.qidiancamp.service.trade.params.*;
+import com.qidiancamp.service.trade.params.CancelOrderParams;
+import com.qidiancamp.service.trade.params.DefaultTradeHistoryParamCurrencyPair;
+import com.qidiancamp.service.trade.params.TradeHistoryParamCurrencyPair;
+import com.qidiancamp.service.trade.params.TradeHistoryParams;
 import com.qidiancamp.service.trade.params.orders.OpenOrdersParams;
+
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
@@ -72,14 +74,15 @@ public class GateioTradeService extends GateioTradeServiceRaw implements TradeSe
 
   @Override
   public boolean cancelOrder(String orderId) throws IOException {
-
-    return super.cancelOrder(orderId);
+    throw new NotAvailableFromExchangeException();
   }
 
   @Override
   public boolean cancelOrder(CancelOrderParams orderParams) throws IOException {
-    if (orderParams instanceof CancelOrderByIdParams) {
-      return cancelOrder(((CancelOrderByIdParams) orderParams).getOrderId());
+    if (orderParams instanceof GateioCancelOrderParams) {
+      return cancelOrder(
+          ((GateioCancelOrderParams) orderParams).getOrderId(),
+          ((GateioCancelOrderParams) orderParams).getCurrencyPair());
     } else {
       return false;
     }
@@ -105,10 +108,5 @@ public class GateioTradeService extends GateioTradeServiceRaw implements TradeSe
   @Override
   public OpenOrdersParams createOpenOrdersParams() {
     return null;
-  }
-
-  @Override
-  public Collection<Order> getOrder(String... orderIds) throws IOException {
-    throw new NotYetImplementedForExchangeException();
   }
 }
